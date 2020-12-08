@@ -143,10 +143,10 @@
         "version": "d68f8547236a8e4fc42bdcec247f7389ac8781248b368f9f4386ea0cbaff7a8a",
         "warmup_time": -1
     },
-    "benchmarks.TimeBinaryOp.time_binary_op": {
-        "code": "class TimeBinaryOp:\n    def time_binary_op(self, data_type, data_size, binary_op, axis):\n        self.op(self.df2, axis=axis)\n\n    def setup(self, data_type, data_size, binary_op, axis):\n        # shape for generate_dataframe: first - ncols, second - nrows\n        self.df1 = generate_dataframe(\n            \"modin\", data_type, data_size[1], data_size[0], RAND_LOW, RAND_HIGH\n        )\n        self.df2 = generate_dataframe(\n            \"modin\", data_type, data_size[3], data_size[2], RAND_LOW, RAND_HIGH\n        )\n        self.op = getattr(self.df1, binary_op)",
+    "benchmarks.TimeBinaryOp.time_concat": {
+        "code": "class TimeBinaryOp:\n    def time_concat(self, data_type, data_size, binary_op, axis):\n        self.op(self.df2, axis=axis)\n\n    def setup(self, data_type, data_size, binary_op, axis):\n        # shape for generate_dataframe: first - ncols, second - nrows\n        self.df1 = generate_dataframe(\n            \"modin\", data_type, data_size[1], data_size[0], RAND_LOW, RAND_HIGH\n        )\n        self.df2 = generate_dataframe(\n            \"modin\", data_type, data_size[3], data_size[2], RAND_LOW, RAND_HIGH\n        )\n        self.op = getattr(self.df1, binary_op)",
         "min_run_count": 2,
-        "name": "benchmarks.TimeBinaryOp.time_binary_op",
+        "name": "benchmarks.TimeBinaryOp.time_concat",
         "number": 0,
         "param_names": [
             "data_type",
@@ -175,7 +175,7 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "b35b2035f28456ea602e23738321dfc336204725e7cf00810f76cf51b917cabc",
+        "version": "7952a5c1ec0ea821b0862f6d7aac146c09f571265c02867eb47f34a61ffffa13",
         "warmup_time": -1
     },
     "benchmarks.TimeConcat.time_concat": {
