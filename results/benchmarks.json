@@ -306,6 +306,88 @@
         "version": "f6b2d152cedd8c344aa45abe514e99b22bfcb537b4c6fd0d08a1063831fe4a68",
         "warmup_time": -1
     },
+    "benchmarks.TimeInsert.time_insert_qc": {
+        "code": "class TimeInsert:\n    def time_insert_qc(self, *args, **kwargs):\n        self.df.insert(loc=self.iloc, column=random_string(), value=self.item)\n        self.trigger_execution()\n\nclass BaseTimeSetItem:\n    def setup(self, data_type, data_size, item_length, loc, is_equal_indices):\n        self.df = generate_dataframe(\n            \"modin\", data_type, data_size[1], data_size[0], RAND_LOW, RAND_HIGH\n        ).copy()\n        self.loc, self.iloc = self.get_loc(\n            self.df, loc, item_length=item_length, axis=1\n        )\n    \n        self.item = self.df[self.loc] + 1\n        self.item_raw = self.item.to_numpy()\n        if not is_equal_indices:\n            self.item.index = reversed(self.item.index)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeInsert.time_insert_qc",
+        "number": 0,
+        "param_names": [
+            "data_type",
+            "data_size",
+            "item_length",
+            "loc",
+            "is_equal_indices"
+        ],
+        "params": [
+            [
+                "'int'"
+            ],
+            [
+                "(10000, 128)"
+            ],
+            [
+                "1"
+            ],
+            [
+                "'zero'",
+                "'middle'",
+                "'last'"
+            ],
+            [
+                "True",
+                "False"
+            ]
+        ],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "35ff93e87efbb9be790814c54e57ab13ba12f59c4c01eac68e3ad85b69ecb3b4",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeInsert.time_insert_raw": {
+        "code": "class TimeInsert:\n    def time_insert_raw(self, *args, **kwargs):\n        self.df.insert(loc=self.iloc, column=random_string(), value=self.item_raw)\n        self.trigger_execution()\n\nclass BaseTimeSetItem:\n    def setup(self, data_type, data_size, item_length, loc, is_equal_indices):\n        self.df = generate_dataframe(\n            \"modin\", data_type, data_size[1], data_size[0], RAND_LOW, RAND_HIGH\n        ).copy()\n        self.loc, self.iloc = self.get_loc(\n            self.df, loc, item_length=item_length, axis=1\n        )\n    \n        self.item = self.df[self.loc] + 1\n        self.item_raw = self.item.to_numpy()\n        if not is_equal_indices:\n            self.item.index = reversed(self.item.index)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeInsert.time_insert_raw",
+        "number": 0,
+        "param_names": [
+            "data_type",
+            "data_size",
+            "item_length",
+            "loc",
+            "is_equal_indices"
+        ],
+        "params": [
+            [
+                "'int'"
+            ],
+            [
+                "(10000, 128)"
+            ],
+            [
+                "1"
+            ],
+            [
+                "'zero'",
+                "'middle'",
+                "'last'"
+            ],
+            [
+                "True",
+                "False"
+            ]
+        ],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "d1852949f49860c539a482bd6481efd01c8416129ec990eac71da0ca84c3df6d",
+        "warmup_time": -1
+    },
     "benchmarks.TimeJoin.time_join": {
         "code": "class TimeJoin:\n    def time_join(self, impl, data_type, data_size, how, sort):\n        self.df1.join(\n            self.df2, on=self.df1.columns[0], how=how, lsuffix=\"left_\", sort=sort\n        )\n\n    def setup(self, impl, data_type, data_size, how, sort):\n        self.df1 = generate_dataframe(\n            impl, data_type, data_size[0], data_size[1], RAND_LOW, RAND_HIGH\n        )\n        self.df2 = generate_dataframe(\n            impl, data_type, data_size[2], data_size[3], RAND_LOW, RAND_HIGH\n        )",
         "min_run_count": 2,
@@ -390,6 +472,88 @@
         "type": "time",
         "unit": "seconds",
         "version": "4e07a06905444f38bd987d0530f18d1232b1d387be4d687b6a7b4d6c864c184c",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeSetItem.time_setitem_qc": {
+        "code": "class TimeSetItem:\n    def time_setitem_qc(self, *args, **kwargs):\n        self.df[self.loc] = self.item\n        self.trigger_execution()\n\nclass BaseTimeSetItem:\n    def setup(self, data_type, data_size, item_length, loc, is_equal_indices):\n        self.df = generate_dataframe(\n            \"modin\", data_type, data_size[1], data_size[0], RAND_LOW, RAND_HIGH\n        ).copy()\n        self.loc, self.iloc = self.get_loc(\n            self.df, loc, item_length=item_length, axis=1\n        )\n    \n        self.item = self.df[self.loc] + 1\n        self.item_raw = self.item.to_numpy()\n        if not is_equal_indices:\n            self.item.index = reversed(self.item.index)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeSetItem.time_setitem_qc",
+        "number": 0,
+        "param_names": [
+            "data_type",
+            "data_size",
+            "item_length",
+            "loc",
+            "is_equal_indices"
+        ],
+        "params": [
+            [
+                "'int'"
+            ],
+            [
+                "(10000, 128)"
+            ],
+            [
+                "1"
+            ],
+            [
+                "'zero'",
+                "'middle'",
+                "'last'"
+            ],
+            [
+                "True",
+                "False"
+            ]
+        ],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "0df77d5761551a6b62b75127dd2893f4d8c60d629a0b6fa47af5f2e674d3818c",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeSetItem.time_setitem_raw": {
+        "code": "class TimeSetItem:\n    def time_setitem_raw(self, *args, **kwargs):\n        self.df[self.loc] = self.item_raw\n        self.trigger_execution()\n\nclass BaseTimeSetItem:\n    def setup(self, data_type, data_size, item_length, loc, is_equal_indices):\n        self.df = generate_dataframe(\n            \"modin\", data_type, data_size[1], data_size[0], RAND_LOW, RAND_HIGH\n        ).copy()\n        self.loc, self.iloc = self.get_loc(\n            self.df, loc, item_length=item_length, axis=1\n        )\n    \n        self.item = self.df[self.loc] + 1\n        self.item_raw = self.item.to_numpy()\n        if not is_equal_indices:\n            self.item.index = reversed(self.item.index)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeSetItem.time_setitem_raw",
+        "number": 0,
+        "param_names": [
+            "data_type",
+            "data_size",
+            "item_length",
+            "loc",
+            "is_equal_indices"
+        ],
+        "params": [
+            [
+                "'int'"
+            ],
+            [
+                "(10000, 128)"
+            ],
+            [
+                "1"
+            ],
+            [
+                "'zero'",
+                "'middle'",
+                "'last'"
+            ],
+            [
+                "True",
+                "False"
+            ]
+        ],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "4fac7501a34fea71ea5bde95e28c12f8d79dd78407a5ee48bdc60b84c1b52238",
         "warmup_time": -1
     },
     "version": 2
