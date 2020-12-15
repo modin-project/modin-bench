@@ -37,6 +37,44 @@
         "version": "125ec85f9dca42d30578c2ea0a61e865b60a929f73213d23a03ac03054fd7b10",
         "warmup_time": -1
     },
+    "benchmarks.TimeArithmetic.time_mean": {
+        "code": "class TimeArithmetic:\n    def time_mean(self, impl, data_type, data_size, axis):\n        self.df.mean(axis=axis)\n\n    def setup(self, impl, data_type, data_size, axis):\n        self.df = generate_dataframe(\n            impl, data_type, data_size[0], data_size[1], RAND_LOW, RAND_HIGH\n        )",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeArithmetic.time_mean",
+        "number": 0,
+        "param_names": [
+            "impl",
+            "data_type",
+            "data_size",
+            "axis"
+        ],
+        "params": [
+            [
+                "'modin'",
+                "'pandas'"
+            ],
+            [
+                "'int'"
+            ],
+            [
+                "(5000, 5000)",
+                "(10, 1000000)",
+                "(1000000, 10)"
+            ],
+            [
+                "0",
+                "1"
+            ]
+        ],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "068995248f5f87f1086147794694c4c70d70ad7d510d4d94997497a1e72d1af7",
+        "warmup_time": -1
+    },
     "benchmarks.TimeArithmetic.time_median": {
         "code": "class TimeArithmetic:\n    def time_median(self, impl, data_type, data_size, axis):\n        self.df.median(axis=axis)\n\n    def setup(self, impl, data_type, data_size, axis):\n        self.df = generate_dataframe(\n            impl, data_type, data_size[0], data_size[1], RAND_LOW, RAND_HIGH\n        )",
         "min_run_count": 2,
