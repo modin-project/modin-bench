@@ -1,26 +1,16 @@
 {
     "benchmarks.TimeArithmetic.time_apply": {
-        "code": "class TimeArithmetic:\n    def time_apply(self, impl, data_type, data_size, axis):\n        self.df.apply(lambda df: df.sum(), axis=axis)\n\n    def setup(self, impl, data_type, data_size, axis):\n        self.df = generate_dataframe(\n            impl, data_type, data_size[0], data_size[1], RAND_LOW, RAND_HIGH\n        )",
+        "code": "class <locals>:\n    def real_executor(*arg, **kwargs):\n        return func(*arg, **kwargs).shape\n\nclass TimeArithmetic:\n    def setup(self, data_size, axis):\n        self.df = generate_dataframe(\n            ASV_USE_IMPL, \"int\", data_size[1], data_size[0], RAND_LOW, RAND_HIGH\n        )",
         "min_run_count": 2,
         "name": "benchmarks.TimeArithmetic.time_apply",
         "number": 0,
         "param_names": [
-            "impl",
-            "data_type",
             "data_size",
             "axis"
         ],
         "params": [
             [
-                "'modin'",
-                "'pandas'"
-            ],
-            [
-                "'int'"
-            ],
-            [
                 "(5000, 5000)",
-                "(10, 1000000)",
                 "(1000000, 10)"
             ],
             [
@@ -34,31 +24,21 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "125ec85f9dca42d30578c2ea0a61e865b60a929f73213d23a03ac03054fd7b10",
+        "version": "43b4c72e5c1c3632693e56077e4293f02f0315bf7533dc84201074bf0e7d699f",
         "warmup_time": -1
     },
     "benchmarks.TimeArithmetic.time_mean": {
-        "code": "class TimeArithmetic:\n    def time_mean(self, impl, data_type, data_size, axis):\n        self.df.mean(axis=axis)\n\n    def setup(self, impl, data_type, data_size, axis):\n        self.df = generate_dataframe(\n            impl, data_type, data_size[0], data_size[1], RAND_LOW, RAND_HIGH\n        )",
+        "code": "class <locals>:\n    def real_executor(*arg, **kwargs):\n        return func(*arg, **kwargs).shape\n\nclass TimeArithmetic:\n    def setup(self, data_size, axis):\n        self.df = generate_dataframe(\n            ASV_USE_IMPL, \"int\", data_size[1], data_size[0], RAND_LOW, RAND_HIGH\n        )",
         "min_run_count": 2,
         "name": "benchmarks.TimeArithmetic.time_mean",
         "number": 0,
         "param_names": [
-            "impl",
-            "data_type",
             "data_size",
             "axis"
         ],
         "params": [
             [
-                "'modin'",
-                "'pandas'"
-            ],
-            [
-                "'int'"
-            ],
-            [
                 "(5000, 5000)",
-                "(10, 1000000)",
                 "(1000000, 10)"
             ],
             [
@@ -72,31 +52,21 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "068995248f5f87f1086147794694c4c70d70ad7d510d4d94997497a1e72d1af7",
+        "version": "43b4c72e5c1c3632693e56077e4293f02f0315bf7533dc84201074bf0e7d699f",
         "warmup_time": -1
     },
     "benchmarks.TimeArithmetic.time_median": {
-        "code": "class TimeArithmetic:\n    def time_median(self, impl, data_type, data_size, axis):\n        self.df.median(axis=axis)\n\n    def setup(self, impl, data_type, data_size, axis):\n        self.df = generate_dataframe(\n            impl, data_type, data_size[0], data_size[1], RAND_LOW, RAND_HIGH\n        )",
+        "code": "class <locals>:\n    def real_executor(*arg, **kwargs):\n        return func(*arg, **kwargs).shape\n\nclass TimeArithmetic:\n    def setup(self, data_size, axis):\n        self.df = generate_dataframe(\n            ASV_USE_IMPL, \"int\", data_size[1], data_size[0], RAND_LOW, RAND_HIGH\n        )",
         "min_run_count": 2,
         "name": "benchmarks.TimeArithmetic.time_median",
         "number": 0,
         "param_names": [
-            "impl",
-            "data_type",
             "data_size",
             "axis"
         ],
         "params": [
             [
-                "'modin'",
-                "'pandas'"
-            ],
-            [
-                "'int'"
-            ],
-            [
                 "(5000, 5000)",
-                "(10, 1000000)",
                 "(1000000, 10)"
             ],
             [
@@ -110,31 +80,21 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "228aba9897daf979d80378ead60e8bd3f70fc7a6c0d7092c7042797c676d5951",
+        "version": "43b4c72e5c1c3632693e56077e4293f02f0315bf7533dc84201074bf0e7d699f",
         "warmup_time": -1
     },
     "benchmarks.TimeArithmetic.time_nunique": {
-        "code": "class TimeArithmetic:\n    def time_nunique(self, impl, data_type, data_size, axis):\n        self.df.nunique(axis=axis)\n\n    def setup(self, impl, data_type, data_size, axis):\n        self.df = generate_dataframe(\n            impl, data_type, data_size[0], data_size[1], RAND_LOW, RAND_HIGH\n        )",
+        "code": "class <locals>:\n    def real_executor(*arg, **kwargs):\n        return func(*arg, **kwargs).shape\n\nclass TimeArithmetic:\n    def setup(self, data_size, axis):\n        self.df = generate_dataframe(\n            ASV_USE_IMPL, \"int\", data_size[1], data_size[0], RAND_LOW, RAND_HIGH\n        )",
         "min_run_count": 2,
         "name": "benchmarks.TimeArithmetic.time_nunique",
         "number": 0,
         "param_names": [
-            "impl",
-            "data_type",
             "data_size",
             "axis"
         ],
         "params": [
             [
-                "'modin'",
-                "'pandas'"
-            ],
-            [
-                "'int'"
-            ],
-            [
                 "(5000, 5000)",
-                "(10, 1000000)",
                 "(1000000, 10)"
             ],
             [
@@ -148,31 +108,21 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "668fc4fe0bd2551aa7e577b5cd1d51ef457786f2ddf0c95d3ca05b0ad12db380",
+        "version": "43b4c72e5c1c3632693e56077e4293f02f0315bf7533dc84201074bf0e7d699f",
         "warmup_time": -1
     },
     "benchmarks.TimeArithmetic.time_sum": {
-        "code": "class TimeArithmetic:\n    def time_sum(self, impl, data_type, data_size, axis):\n        self.df.sum(axis=axis)\n\n    def setup(self, impl, data_type, data_size, axis):\n        self.df = generate_dataframe(\n            impl, data_type, data_size[0], data_size[1], RAND_LOW, RAND_HIGH\n        )",
+        "code": "class <locals>:\n    def real_executor(*arg, **kwargs):\n        return func(*arg, **kwargs).shape\n\nclass TimeArithmetic:\n    def setup(self, data_size, axis):\n        self.df = generate_dataframe(\n            ASV_USE_IMPL, \"int\", data_size[1], data_size[0], RAND_LOW, RAND_HIGH\n        )",
         "min_run_count": 2,
         "name": "benchmarks.TimeArithmetic.time_sum",
         "number": 0,
         "param_names": [
-            "impl",
-            "data_type",
             "data_size",
             "axis"
         ],
         "params": [
             [
-                "'modin'",
-                "'pandas'"
-            ],
-            [
-                "'int'"
-            ],
-            [
                 "(5000, 5000)",
-                "(10, 1000000)",
                 "(1000000, 10)"
             ],
             [
@@ -186,26 +136,23 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "d68f8547236a8e4fc42bdcec247f7389ac8781248b368f9f4386ea0cbaff7a8a",
+        "version": "43b4c72e5c1c3632693e56077e4293f02f0315bf7533dc84201074bf0e7d699f",
         "warmup_time": -1
     },
-    "benchmarks.TimeBinaryOp.time_concat": {
-        "code": "class TimeBinaryOp:\n    def time_concat(self, data_type, data_size, binary_op, axis):\n        self.op(self.df2, axis=axis)\n\n    def setup(self, data_type, data_size, binary_op, axis):\n        # shape for generate_dataframe: first - ncols, second - nrows\n        self.df1 = generate_dataframe(\n            \"modin\", data_type, data_size[1], data_size[0], RAND_LOW, RAND_HIGH\n        )\n        self.df2 = generate_dataframe(\n            \"modin\", data_type, data_size[3], data_size[2], RAND_LOW, RAND_HIGH\n        )\n        self.op = getattr(self.df1, binary_op)",
+    "benchmarks.TimeBinaryOp.time_binary_op": {
+        "code": "class <locals>:\n    def real_executor(*arg, **kwargs):\n        return func(*arg, **kwargs).shape\n\nclass TimeBinaryOp:\n    def setup(self, data_size, binary_op, axis):\n        # shape for generate_dataframe: first - ncols, second - nrows\n        self.df1 = generate_dataframe(\n            ASV_USE_IMPL, \"int\", data_size[1], data_size[0], RAND_LOW, RAND_HIGH\n        )\n        self.df2 = generate_dataframe(\n            ASV_USE_IMPL, \"int\", data_size[3], data_size[2], RAND_LOW, RAND_HIGH\n        )\n        self.op = getattr(self.df1, binary_op)",
         "min_run_count": 2,
-        "name": "benchmarks.TimeBinaryOp.time_concat",
+        "name": "benchmarks.TimeBinaryOp.time_binary_op",
         "number": 0,
         "param_names": [
-            "data_type",
             "data_size",
             "binary_op",
             "axis"
         ],
         "params": [
             [
-                "'int'"
-            ],
-            [
-                "(10128, 100, 10000, 128)"
+                "(5000, 5000, 5000, 5000)",
+                "(500000, 20, 1000000, 10)"
             ],
             [
                 "'mul'"
@@ -221,26 +168,23 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "7952a5c1ec0ea821b0862f6d7aac146c09f571265c02867eb47f34a61ffffa13",
+        "version": "3f19ec8d893657c61163dc5261c643085d0dde1c4187b43a15db5eba595992e0",
         "warmup_time": -1
     },
     "benchmarks.TimeConcat.time_concat": {
-        "code": "class TimeConcat:\n    def time_concat(self, data_type, data_size, how, axis):\n        pd.concat([self.df1, self.df2], axis=axis, join=how)\n\n    def setup(self, data_type, data_size, how, axis):\n        # shape for generate_dataframe: first - ncols, second - nrows\n        self.df1 = generate_dataframe(\n            \"modin\", data_type, data_size[1], data_size[0], RAND_LOW, RAND_HIGH\n        )\n        self.df2 = generate_dataframe(\n            \"modin\", data_type, data_size[3], data_size[2], RAND_LOW, RAND_HIGH\n        )",
+        "code": "class <locals>:\n    def real_executor(*arg, **kwargs):\n        return func(*arg, **kwargs).shape\n\nclass TimeConcat:\n    def setup(self, data_size, how, axis):\n        # shape for generate_dataframe: first - ncols, second - nrows\n        self.df1 = generate_dataframe(\n            ASV_USE_IMPL, \"int\", data_size[1], data_size[0], RAND_LOW, RAND_HIGH\n        )\n        self.df2 = generate_dataframe(\n            ASV_USE_IMPL, \"int\", data_size[3], data_size[2], RAND_LOW, RAND_HIGH\n        )",
         "min_run_count": 2,
         "name": "benchmarks.TimeConcat.time_concat",
         "number": 0,
         "param_names": [
-            "data_type",
             "data_size",
             "how",
             "axis"
         ],
         "params": [
             [
-                "'int'"
-            ],
-            [
-                "(10128, 100, 10000, 128)"
+                "(5000, 5000, 5000, 5000)",
+                "(500000, 20, 1000000, 10)"
             ],
             [
                 "'inner'"
@@ -256,30 +200,20 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "6b69a79684a591313b84d7a990ae2beca47e5a791cfcee26644bc203152bc7f1",
+        "version": "96b48dfc8903b0c4aec84b7e1fff8b21e17a2b0ad1bd79d5d2de13afb37bf71b",
         "warmup_time": -1
     },
-    "benchmarks.TimeGroupBy.time_groupby_count": {
-        "code": "class TimeGroupBy:\n    def time_groupby_count(self, impl, data_type, data_size):\n        self.df.groupby(by=self.df.columns[0]).count()\n\n    def setup(self, impl, data_type, data_size):\n        self.df = generate_dataframe(\n            impl, data_type, data_size[0], data_size[1], RAND_LOW, RAND_HIGH\n        )",
+    "benchmarks.TimeGroupByDefaultAggregations.time_groupby_count": {
+        "code": "class <locals>:\n    def real_executor(*arg, **kwargs):\n        return func(*arg, **kwargs).shape\n\nclass TimeGroupByDefaultAggregations:\n    def setup(self, data_size):\n        self.df = generate_dataframe(\n            ASV_USE_IMPL, \"int\", data_size[1], data_size[0], RAND_LOW, RAND_HIGH\n        )\n        self.groupby_column = self.df.columns[0]",
         "min_run_count": 2,
-        "name": "benchmarks.TimeGroupBy.time_groupby_count",
+        "name": "benchmarks.TimeGroupByDefaultAggregations.time_groupby_count",
         "number": 0,
         "param_names": [
-            "impl",
-            "data_type",
             "data_size"
         ],
         "params": [
             [
-                "'modin'",
-                "'pandas'"
-            ],
-            [
-                "'int'"
-            ],
-            [
                 "(5000, 5000)",
-                "(10, 1000000)",
                 "(1000000, 10)"
             ]
         ],
@@ -289,30 +223,20 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "0d34a960748fd6de8f815df199a9caeb5c68b8d97961440a631fe91193c5b027",
+        "version": "1e301cb86cc10c2bbc8963d576eee093bf4ce41fa95d6c9ce3b6a964624cd957",
         "warmup_time": -1
     },
-    "benchmarks.TimeGroupBy.time_groupby_mean": {
-        "code": "class TimeGroupBy:\n    def time_groupby_mean(self, impl, data_type, data_size):\n        self.df.groupby(by=self.df.columns[0]).mean()\n\n    def setup(self, impl, data_type, data_size):\n        self.df = generate_dataframe(\n            impl, data_type, data_size[0], data_size[1], RAND_LOW, RAND_HIGH\n        )",
+    "benchmarks.TimeGroupByDefaultAggregations.time_groupby_mean": {
+        "code": "class <locals>:\n    def real_executor(*arg, **kwargs):\n        return func(*arg, **kwargs).shape\n\nclass TimeGroupByDefaultAggregations:\n    def setup(self, data_size):\n        self.df = generate_dataframe(\n            ASV_USE_IMPL, \"int\", data_size[1], data_size[0], RAND_LOW, RAND_HIGH\n        )\n        self.groupby_column = self.df.columns[0]",
         "min_run_count": 2,
-        "name": "benchmarks.TimeGroupBy.time_groupby_mean",
+        "name": "benchmarks.TimeGroupByDefaultAggregations.time_groupby_mean",
         "number": 0,
         "param_names": [
-            "impl",
-            "data_type",
             "data_size"
         ],
         "params": [
             [
-                "'modin'",
-                "'pandas'"
-            ],
-            [
-                "'int'"
-            ],
-            [
                 "(5000, 5000)",
-                "(10, 1000000)",
                 "(1000000, 10)"
             ]
         ],
@@ -322,30 +246,20 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "51c7772a616cf72e00c3e5e139af5aa8562efda1cc59fbebc68c5555f79b6347",
+        "version": "1e301cb86cc10c2bbc8963d576eee093bf4ce41fa95d6c9ce3b6a964624cd957",
         "warmup_time": -1
     },
-    "benchmarks.TimeGroupBy.time_groupby_sum": {
-        "code": "class TimeGroupBy:\n    def time_groupby_sum(self, impl, data_type, data_size):\n        self.df.groupby(by=self.df.columns[0]).sum()\n\n    def setup(self, impl, data_type, data_size):\n        self.df = generate_dataframe(\n            impl, data_type, data_size[0], data_size[1], RAND_LOW, RAND_HIGH\n        )",
+    "benchmarks.TimeGroupByDefaultAggregations.time_groupby_size": {
+        "code": "class <locals>:\n    def real_executor(*arg, **kwargs):\n        return func(*arg, **kwargs).shape\n\nclass TimeGroupByDefaultAggregations:\n    def setup(self, data_size):\n        self.df = generate_dataframe(\n            ASV_USE_IMPL, \"int\", data_size[1], data_size[0], RAND_LOW, RAND_HIGH\n        )\n        self.groupby_column = self.df.columns[0]",
         "min_run_count": 2,
-        "name": "benchmarks.TimeGroupBy.time_groupby_sum",
+        "name": "benchmarks.TimeGroupByDefaultAggregations.time_groupby_size",
         "number": 0,
         "param_names": [
-            "impl",
-            "data_type",
             "data_size"
         ],
         "params": [
             [
-                "'modin'",
-                "'pandas'"
-            ],
-            [
-                "'int'"
-            ],
-            [
                 "(5000, 5000)",
-                "(10, 1000000)",
                 "(1000000, 10)"
             ]
         ],
@@ -355,16 +269,38 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "f6b2d152cedd8c344aa45abe514e99b22bfcb537b4c6fd0d08a1063831fe4a68",
+        "version": "1e301cb86cc10c2bbc8963d576eee093bf4ce41fa95d6c9ce3b6a964624cd957",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeGroupByDefaultAggregations.time_groupby_sum": {
+        "code": "class <locals>:\n    def real_executor(*arg, **kwargs):\n        return func(*arg, **kwargs).shape\n\nclass TimeGroupByDefaultAggregations:\n    def setup(self, data_size):\n        self.df = generate_dataframe(\n            ASV_USE_IMPL, \"int\", data_size[1], data_size[0], RAND_LOW, RAND_HIGH\n        )\n        self.groupby_column = self.df.columns[0]",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeGroupByDefaultAggregations.time_groupby_sum",
+        "number": 0,
+        "param_names": [
+            "data_size"
+        ],
+        "params": [
+            [
+                "(5000, 5000)",
+                "(1000000, 10)"
+            ]
+        ],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "1e301cb86cc10c2bbc8963d576eee093bf4ce41fa95d6c9ce3b6a964624cd957",
         "warmup_time": -1
     },
     "benchmarks.TimeInsert.time_insert_qc": {
-        "code": "class TimeInsert:\n    def time_insert_qc(self, *args, **kwargs):\n        self.df.insert(loc=self.iloc, column=random_string(), value=self.item)\n        self.trigger_execution()\n\nclass BaseTimeSetItem:\n    def setup(self, data_type, data_size, item_length, loc, is_equal_indices):\n        self.df = generate_dataframe(\n            \"modin\", data_type, data_size[1], data_size[0], RAND_LOW, RAND_HIGH\n        ).copy()\n        self.loc, self.iloc = self.get_loc(\n            self.df, loc, item_length=item_length, axis=1\n        )\n    \n        self.item = self.df[self.loc] + 1\n        self.item_raw = self.item.to_numpy()\n        if not is_equal_indices:\n            self.item.index = reversed(self.item.index)",
+        "code": "class <locals>:\n    def real_executor(*arg, **kwargs):\n        return func(*arg, **kwargs).shape\n\nclass BaseTimeSetItem:\n    def setup(self, data_size, item_length, loc, is_equal_indices):\n        self.df = generate_dataframe(\n            ASV_USE_IMPL, \"int\", data_size[1], data_size[0], RAND_LOW, RAND_HIGH\n        ).copy()\n        self.loc, self.iloc = self.get_loc(\n            self.df, loc, item_length=item_length, axis=1\n        )\n    \n        self.item = self.df[self.loc] + 1\n        self.item_raw = self.item.to_numpy()\n        if not is_equal_indices:\n            self.item.index = reversed(self.item.index)",
         "min_run_count": 2,
         "name": "benchmarks.TimeInsert.time_insert_qc",
         "number": 0,
         "param_names": [
-            "data_type",
             "data_size",
             "item_length",
             "loc",
@@ -372,10 +308,8 @@
         ],
         "params": [
             [
-                "'int'"
-            ],
-            [
-                "(50000, 128)"
+                "(5000, 5000)",
+                "(1000000, 10)"
             ],
             [
                 "1"
@@ -396,16 +330,15 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "35ff93e87efbb9be790814c54e57ab13ba12f59c4c01eac68e3ad85b69ecb3b4",
+        "version": "e8fa27b21067aab4c51cf903c6ee03ba1bb8e8a61f363e4de1cf736ccfbc49eb",
         "warmup_time": -1
     },
     "benchmarks.TimeInsert.time_insert_raw": {
-        "code": "class TimeInsert:\n    def time_insert_raw(self, *args, **kwargs):\n        self.df.insert(loc=self.iloc, column=random_string(), value=self.item_raw)\n        self.trigger_execution()\n\nclass BaseTimeSetItem:\n    def setup(self, data_type, data_size, item_length, loc, is_equal_indices):\n        self.df = generate_dataframe(\n            \"modin\", data_type, data_size[1], data_size[0], RAND_LOW, RAND_HIGH\n        ).copy()\n        self.loc, self.iloc = self.get_loc(\n            self.df, loc, item_length=item_length, axis=1\n        )\n    \n        self.item = self.df[self.loc] + 1\n        self.item_raw = self.item.to_numpy()\n        if not is_equal_indices:\n            self.item.index = reversed(self.item.index)",
+        "code": "class <locals>:\n    def real_executor(*arg, **kwargs):\n        return func(*arg, **kwargs).shape\n\nclass BaseTimeSetItem:\n    def setup(self, data_size, item_length, loc, is_equal_indices):\n        self.df = generate_dataframe(\n            ASV_USE_IMPL, \"int\", data_size[1], data_size[0], RAND_LOW, RAND_HIGH\n        ).copy()\n        self.loc, self.iloc = self.get_loc(\n            self.df, loc, item_length=item_length, axis=1\n        )\n    \n        self.item = self.df[self.loc] + 1\n        self.item_raw = self.item.to_numpy()\n        if not is_equal_indices:\n            self.item.index = reversed(self.item.index)",
         "min_run_count": 2,
         "name": "benchmarks.TimeInsert.time_insert_raw",
         "number": 0,
         "param_names": [
-            "data_type",
             "data_size",
             "item_length",
             "loc",
@@ -413,10 +346,8 @@
         ],
         "params": [
             [
-                "'int'"
-            ],
-            [
-                "(50000, 128)"
+                "(5000, 5000)",
+                "(1000000, 10)"
             ],
             [
                 "1"
@@ -437,43 +368,30 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "d1852949f49860c539a482bd6481efd01c8416129ec990eac71da0ca84c3df6d",
+        "version": "e8fa27b21067aab4c51cf903c6ee03ba1bb8e8a61f363e4de1cf736ccfbc49eb",
         "warmup_time": -1
     },
     "benchmarks.TimeJoin.time_join": {
-        "code": "class TimeJoin:\n    def time_join(self, impl, data_type, data_size, how, sort):\n        self.df1.join(\n            self.df2, on=self.df1.columns[0], how=how, lsuffix=\"left_\", sort=sort\n        )\n\n    def setup(self, impl, data_type, data_size, how, sort):\n        self.df1 = generate_dataframe(\n            impl, data_type, data_size[0], data_size[1], RAND_LOW, RAND_HIGH\n        )\n        self.df2 = generate_dataframe(\n            impl, data_type, data_size[2], data_size[3], RAND_LOW, RAND_HIGH\n        )",
+        "code": "class <locals>:\n    def real_executor(*arg, **kwargs):\n        return func(*arg, **kwargs).shape\n\nclass TimeJoin:\n    def setup(self, data_size, how, sort):\n        self.df1 = generate_dataframe(\n            ASV_USE_IMPL, \"int\", data_size[1], data_size[0], RAND_LOW, RAND_HIGH\n        )\n        self.df2 = generate_dataframe(\n            ASV_USE_IMPL, \"int\", data_size[3], data_size[2], RAND_LOW, RAND_HIGH\n        )",
         "min_run_count": 2,
         "name": "benchmarks.TimeJoin.time_join",
         "number": 0,
         "param_names": [
-            "impl",
-            "data_type",
             "data_size",
             "how",
             "sort"
         ],
         "params": [
             [
-                "'modin'",
-                "'pandas'"
-            ],
-            [
-                "'int'"
-            ],
-            [
                 "(5000, 5000, 5000, 5000)",
-                "(10, 1000000, 10, 1000000)",
-                "(1000000, 10, 1000000, 10)"
+                "(500000, 20, 1000000, 10)"
             ],
             [
                 "'left'",
-                "'right'",
-                "'outer'",
                 "'inner'"
             ],
             [
-                "False",
-                "True"
+                "False"
             ]
         ],
         "processes": 2,
@@ -482,43 +400,30 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "39cc203941b3912bc186bbee45ea93cb333ddc504233be3321cb174cf88855ef",
+        "version": "927528b006d5bd008cf049f1d78e4a9c9513d203f29a314e28339b1f760bbe63",
         "warmup_time": -1
     },
     "benchmarks.TimeMerge.time_merge": {
-        "code": "class TimeMerge:\n    def time_merge(self, impl, data_type, data_size, how, sort):\n        self.df1.merge(self.df2, on=self.df1.columns[0], how=how, sort=sort)\n\n    def setup(self, impl, data_type, data_size, how, sort):\n        self.df1 = generate_dataframe(\n            impl, data_type, data_size[0], data_size[1], RAND_LOW, RAND_HIGH\n        )\n        self.df2 = generate_dataframe(\n            impl, data_type, data_size[2], data_size[3], RAND_LOW, RAND_HIGH\n        )",
+        "code": "class <locals>:\n    def real_executor(*arg, **kwargs):\n        return func(*arg, **kwargs).shape\n\nclass TimeMerge:\n    def setup(self, data_size, how, sort):\n        self.df1 = generate_dataframe(\n            ASV_USE_IMPL, \"int\", data_size[1], data_size[0], RAND_LOW, RAND_HIGH\n        )\n        self.df2 = generate_dataframe(\n            ASV_USE_IMPL, \"int\", data_size[3], data_size[2], RAND_LOW, RAND_HIGH\n        )",
         "min_run_count": 2,
         "name": "benchmarks.TimeMerge.time_merge",
         "number": 0,
         "param_names": [
-            "impl",
-            "data_type",
             "data_size",
             "how",
             "sort"
         ],
         "params": [
             [
-                "'modin'",
-                "'pandas'"
-            ],
-            [
-                "'int'"
-            ],
-            [
                 "(5000, 5000, 5000, 5000)",
-                "(10, 1000000, 10, 1000000)",
-                "(1000000, 10, 1000000, 10)"
+                "(500000, 20, 1000000, 10)"
             ],
             [
                 "'left'",
-                "'right'",
-                "'outer'",
                 "'inner'"
             ],
             [
-                "False",
-                "True"
+                "False"
             ]
         ],
         "processes": 2,
@@ -527,16 +432,69 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "4e07a06905444f38bd987d0530f18d1232b1d387be4d687b6a7b4d6c864c184c",
+        "version": "868cd019ef2cc92d03561118ff8a01e6b094f83ac2cc34014adc5b5985cfc209",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeMultiColumnGroupby.time_groupby_agg_mean": {
+        "code": "class <locals>:\n    def real_executor(*arg, **kwargs):\n        return func(*arg, **kwargs).shape\n\nclass TimeMultiColumnGroupby:\n    def setup(self, data_size, count_columns):\n        self.df = generate_dataframe(\n            ASV_USE_IMPL, \"int\", data_size[1], data_size[0], RAND_LOW, RAND_HIGH\n        )\n        self.groupby_columns = [col for col in self.df.columns[:count_columns]]",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeMultiColumnGroupby.time_groupby_agg_mean",
+        "number": 0,
+        "param_names": [
+            "data_size",
+            "count_columns"
+        ],
+        "params": [
+            [
+                "(5000, 5000)",
+                "(1000000, 10)"
+            ],
+            [
+                "6"
+            ]
+        ],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "349c0df77cb7dfb53b75a79acd5a6be58c9124bfceab14f2ae19d8848b7ff3e9",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeMultiColumnGroupby.time_groupby_agg_quan": {
+        "code": "class <locals>:\n    def real_executor(*arg, **kwargs):\n        return func(*arg, **kwargs).shape\n\nclass TimeMultiColumnGroupby:\n    def setup(self, data_size, count_columns):\n        self.df = generate_dataframe(\n            ASV_USE_IMPL, \"int\", data_size[1], data_size[0], RAND_LOW, RAND_HIGH\n        )\n        self.groupby_columns = [col for col in self.df.columns[:count_columns]]",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeMultiColumnGroupby.time_groupby_agg_quan",
+        "number": 0,
+        "param_names": [
+            "data_size",
+            "count_columns"
+        ],
+        "params": [
+            [
+                "(5000, 5000)",
+                "(1000000, 10)"
+            ],
+            [
+                "6"
+            ]
+        ],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "349c0df77cb7dfb53b75a79acd5a6be58c9124bfceab14f2ae19d8848b7ff3e9",
         "warmup_time": -1
     },
     "benchmarks.TimeSetItem.time_setitem_qc": {
-        "code": "class TimeSetItem:\n    def time_setitem_qc(self, *args, **kwargs):\n        self.df[self.loc] = self.item\n        self.trigger_execution()\n\nclass BaseTimeSetItem:\n    def setup(self, data_type, data_size, item_length, loc, is_equal_indices):\n        self.df = generate_dataframe(\n            \"modin\", data_type, data_size[1], data_size[0], RAND_LOW, RAND_HIGH\n        ).copy()\n        self.loc, self.iloc = self.get_loc(\n            self.df, loc, item_length=item_length, axis=1\n        )\n    \n        self.item = self.df[self.loc] + 1\n        self.item_raw = self.item.to_numpy()\n        if not is_equal_indices:\n            self.item.index = reversed(self.item.index)",
+        "code": "class <locals>:\n    def real_executor(*arg, **kwargs):\n        return func(*arg, **kwargs).shape\n\nclass BaseTimeSetItem:\n    def setup(self, data_size, item_length, loc, is_equal_indices):\n        self.df = generate_dataframe(\n            ASV_USE_IMPL, \"int\", data_size[1], data_size[0], RAND_LOW, RAND_HIGH\n        ).copy()\n        self.loc, self.iloc = self.get_loc(\n            self.df, loc, item_length=item_length, axis=1\n        )\n    \n        self.item = self.df[self.loc] + 1\n        self.item_raw = self.item.to_numpy()\n        if not is_equal_indices:\n            self.item.index = reversed(self.item.index)",
         "min_run_count": 2,
         "name": "benchmarks.TimeSetItem.time_setitem_qc",
         "number": 0,
         "param_names": [
-            "data_type",
             "data_size",
             "item_length",
             "loc",
@@ -544,10 +502,8 @@
         ],
         "params": [
             [
-                "'int'"
-            ],
-            [
-                "(50000, 128)"
+                "(5000, 5000)",
+                "(1000000, 10)"
             ],
             [
                 "1"
@@ -568,16 +524,15 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "0df77d5761551a6b62b75127dd2893f4d8c60d629a0b6fa47af5f2e674d3818c",
+        "version": "e8fa27b21067aab4c51cf903c6ee03ba1bb8e8a61f363e4de1cf736ccfbc49eb",
         "warmup_time": -1
     },
     "benchmarks.TimeSetItem.time_setitem_raw": {
-        "code": "class TimeSetItem:\n    def time_setitem_raw(self, *args, **kwargs):\n        self.df[self.loc] = self.item_raw\n        self.trigger_execution()\n\nclass BaseTimeSetItem:\n    def setup(self, data_type, data_size, item_length, loc, is_equal_indices):\n        self.df = generate_dataframe(\n            \"modin\", data_type, data_size[1], data_size[0], RAND_LOW, RAND_HIGH\n        ).copy()\n        self.loc, self.iloc = self.get_loc(\n            self.df, loc, item_length=item_length, axis=1\n        )\n    \n        self.item = self.df[self.loc] + 1\n        self.item_raw = self.item.to_numpy()\n        if not is_equal_indices:\n            self.item.index = reversed(self.item.index)",
+        "code": "class <locals>:\n    def real_executor(*arg, **kwargs):\n        return func(*arg, **kwargs).shape\n\nclass BaseTimeSetItem:\n    def setup(self, data_size, item_length, loc, is_equal_indices):\n        self.df = generate_dataframe(\n            ASV_USE_IMPL, \"int\", data_size[1], data_size[0], RAND_LOW, RAND_HIGH\n        ).copy()\n        self.loc, self.iloc = self.get_loc(\n            self.df, loc, item_length=item_length, axis=1\n        )\n    \n        self.item = self.df[self.loc] + 1\n        self.item_raw = self.item.to_numpy()\n        if not is_equal_indices:\n            self.item.index = reversed(self.item.index)",
         "min_run_count": 2,
         "name": "benchmarks.TimeSetItem.time_setitem_raw",
         "number": 0,
         "param_names": [
-            "data_type",
             "data_size",
             "item_length",
             "loc",
@@ -585,10 +540,8 @@
         ],
         "params": [
             [
-                "'int'"
-            ],
-            [
-                "(50000, 128)"
+                "(5000, 5000)",
+                "(1000000, 10)"
             ],
             [
                 "1"
@@ -609,7 +562,7 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "4fac7501a34fea71ea5bde95e28c12f8d79dd78407a5ee48bdc60b84c1b52238",
+        "version": "e8fa27b21067aab4c51cf903c6ee03ba1bb8e8a61f363e4de1cf736ccfbc49eb",
         "warmup_time": -1
     },
     "version": 2
