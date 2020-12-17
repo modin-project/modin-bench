@@ -204,7 +204,7 @@
         "warmup_time": -1
     },
     "benchmarks.TimeGroupByDefaultAggregations.time_groupby_count": {
-        "code": "class TimeGroupByDefaultAggregations:\n    def time_groupby_count(self, data_size):\n        execute(self.df.groupby(by=self.groupby_column).count())\n\n    def setup(self, data_size):\n        self.df = generate_dataframe(\n            ASV_USE_IMPL, \"int\", data_size[1], data_size[0], RAND_LOW, RAND_HIGH\n        )\n        self.groupby_column = self.df.columns[0]",
+        "code": "class TimeGroupByDefaultAggregations:\n    def time_groupby_count(self, data_size):\n        execute(self.df.groupby(by=self.groupby_columns).count())\n\nclass BaseTimeGroupBy:\n    def setup(self, data_size, ncols=1):\n        self.df = generate_dataframe(\n            ASV_USE_IMPL, \"int\", data_size[1], data_size[0], RAND_LOW, RAND_HIGH\n        )\n        self.groupby_columns = self.df.columns[:ncols].tolist()",
         "min_run_count": 2,
         "name": "benchmarks.TimeGroupByDefaultAggregations.time_groupby_count",
         "number": 0,
@@ -223,11 +223,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "5ec76ec704c91f0f49d4fdf2e6c65822b945d8177936e2a2b866e86b54745bcc",
+        "version": "e0243f7e1e6665ad448a0879deb0eae6ec778ca464dc914f6b795168ef153e1c",
         "warmup_time": -1
     },
     "benchmarks.TimeGroupByDefaultAggregations.time_groupby_mean": {
-        "code": "class TimeGroupByDefaultAggregations:\n    def time_groupby_mean(self, data_size):\n        execute(self.df.groupby(by=self.groupby_column).mean())\n\n    def setup(self, data_size):\n        self.df = generate_dataframe(\n            ASV_USE_IMPL, \"int\", data_size[1], data_size[0], RAND_LOW, RAND_HIGH\n        )\n        self.groupby_column = self.df.columns[0]",
+        "code": "class TimeGroupByDefaultAggregations:\n    def time_groupby_mean(self, data_size):\n        execute(self.df.groupby(by=self.groupby_columns).mean())\n\nclass BaseTimeGroupBy:\n    def setup(self, data_size, ncols=1):\n        self.df = generate_dataframe(\n            ASV_USE_IMPL, \"int\", data_size[1], data_size[0], RAND_LOW, RAND_HIGH\n        )\n        self.groupby_columns = self.df.columns[:ncols].tolist()",
         "min_run_count": 2,
         "name": "benchmarks.TimeGroupByDefaultAggregations.time_groupby_mean",
         "number": 0,
@@ -246,11 +246,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "60fb6490021a687c57a068311dada401a253b1a6b4b3298122d3c684b7972069",
+        "version": "633e985ae996fb71e28a5fbb1752ddfe277a3b6a96c990f2c603860fec37803a",
         "warmup_time": -1
     },
     "benchmarks.TimeGroupByDefaultAggregations.time_groupby_size": {
-        "code": "class TimeGroupByDefaultAggregations:\n    def time_groupby_size(self, data_size):\n        execute(self.df.groupby(by=self.groupby_column).size())\n\n    def setup(self, data_size):\n        self.df = generate_dataframe(\n            ASV_USE_IMPL, \"int\", data_size[1], data_size[0], RAND_LOW, RAND_HIGH\n        )\n        self.groupby_column = self.df.columns[0]",
+        "code": "class TimeGroupByDefaultAggregations:\n    def time_groupby_size(self, data_size):\n        execute(self.df.groupby(by=self.groupby_columns).size())\n\nclass BaseTimeGroupBy:\n    def setup(self, data_size, ncols=1):\n        self.df = generate_dataframe(\n            ASV_USE_IMPL, \"int\", data_size[1], data_size[0], RAND_LOW, RAND_HIGH\n        )\n        self.groupby_columns = self.df.columns[:ncols].tolist()",
         "min_run_count": 2,
         "name": "benchmarks.TimeGroupByDefaultAggregations.time_groupby_size",
         "number": 0,
@@ -269,11 +269,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "6309b6e80f98e8e37b75e5da573f4c7f5d2b4b757c5f8f15f81021cd54dbe7b1",
+        "version": "e9972036b7bb022f63437849815fe185c1f45b7e8cb58165f7ca73bbb9583ed5",
         "warmup_time": -1
     },
     "benchmarks.TimeGroupByDefaultAggregations.time_groupby_sum": {
-        "code": "class TimeGroupByDefaultAggregations:\n    def time_groupby_sum(self, data_size):\n        execute(self.df.groupby(by=self.groupby_column).sum())\n\n    def setup(self, data_size):\n        self.df = generate_dataframe(\n            ASV_USE_IMPL, \"int\", data_size[1], data_size[0], RAND_LOW, RAND_HIGH\n        )\n        self.groupby_column = self.df.columns[0]",
+        "code": "class TimeGroupByDefaultAggregations:\n    def time_groupby_sum(self, data_size):\n        execute(self.df.groupby(by=self.groupby_columns).sum())\n\nclass BaseTimeGroupBy:\n    def setup(self, data_size, ncols=1):\n        self.df = generate_dataframe(\n            ASV_USE_IMPL, \"int\", data_size[1], data_size[0], RAND_LOW, RAND_HIGH\n        )\n        self.groupby_columns = self.df.columns[:ncols].tolist()",
         "min_run_count": 2,
         "name": "benchmarks.TimeGroupByDefaultAggregations.time_groupby_sum",
         "number": 0,
@@ -292,7 +292,35 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "3620fad5398ff509a8983e5403879733849d583e65636372f8da3db1a4c7cb28",
+        "version": "9c1ef1d80847ca5c97cab3597fa3d43ebd19f4f35897bde334383bc523f08fdb",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeGroupByDictionaryAggregation.time_groupby_dict_agg": {
+        "code": "class TimeGroupByDictionaryAggregation:\n    def time_groupby_dict_agg(self, data_size, operation_type):\n        execute(self.df.groupby(by=self.groupby_columns).agg(self.agg_dict))\n\n    def setup(self, data_size, operation_type):\n        super().setup(data_size)\n        self.cols_to_agg = self.df.columns[1:4]\n        operations = self.operations[operation_type]\n        self.agg_dict = {\n            c: operations[i % len(operations)] for i, c in enumerate(self.cols_to_agg)\n        }",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeGroupByDictionaryAggregation.time_groupby_dict_agg",
+        "number": 0,
+        "param_names": [
+            "data_size",
+            "operation_type"
+        ],
+        "params": [
+            [
+                "(5000, 5000)",
+                "(1000000, 10)"
+            ],
+            [
+                "'reduction'",
+                "'aggregation'"
+            ]
+        ],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "a42c04248c6eb3850a3499f0dbf2edf2703e1aeb776f84aeb64dd36367b38a72",
         "warmup_time": -1
     },
     "benchmarks.TimeInsert.time_insert_qc": {
@@ -436,13 +464,13 @@
         "warmup_time": -1
     },
     "benchmarks.TimeMultiColumnGroupby.time_groupby_agg_mean": {
-        "code": "class TimeMultiColumnGroupby:\n    def time_groupby_agg_mean(self, data_size, count_columns):\n        execute(self.df.groupby(by=self.groupby_columns).apply(lambda df: df.mean()))\n\n    def setup(self, data_size, count_columns):\n        self.df = generate_dataframe(\n            ASV_USE_IMPL, \"int\", data_size[1], data_size[0], RAND_LOW, RAND_HIGH\n        )\n        self.groupby_columns = [col for col in self.df.columns[:count_columns]]",
+        "code": "class TimeMultiColumnGroupby:\n    def time_groupby_agg_mean(self, data_size, ncols):\n        execute(self.df.groupby(by=self.groupby_columns).apply(lambda df: df.mean()))\n\nclass BaseTimeGroupBy:\n    def setup(self, data_size, ncols=1):\n        self.df = generate_dataframe(\n            ASV_USE_IMPL, \"int\", data_size[1], data_size[0], RAND_LOW, RAND_HIGH\n        )\n        self.groupby_columns = self.df.columns[:ncols].tolist()",
         "min_run_count": 2,
         "name": "benchmarks.TimeMultiColumnGroupby.time_groupby_agg_mean",
         "number": 0,
         "param_names": [
             "data_size",
-            "count_columns"
+            "ncols"
         ],
         "params": [
             [
@@ -459,17 +487,17 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "f6e8c5743a59fbb7ab9daa14403e5ffb6c1cd756b98ea18739bfe03ea4dd3457",
+        "version": "eaf9c2bfd97377fd89938b0d56a9b10e7e1cc5a7584f07203c40ef725199c5c7",
         "warmup_time": -1
     },
     "benchmarks.TimeMultiColumnGroupby.time_groupby_agg_quan": {
-        "code": "class TimeMultiColumnGroupby:\n    def time_groupby_agg_quan(self, data_size, count_columns):\n        execute(self.df.groupby(by=self.groupby_columns).agg(\"quantile\"))\n\n    def setup(self, data_size, count_columns):\n        self.df = generate_dataframe(\n            ASV_USE_IMPL, \"int\", data_size[1], data_size[0], RAND_LOW, RAND_HIGH\n        )\n        self.groupby_columns = [col for col in self.df.columns[:count_columns]]",
+        "code": "class TimeMultiColumnGroupby:\n    def time_groupby_agg_quan(self, data_size, ncols):\n        execute(self.df.groupby(by=self.groupby_columns).agg(\"quantile\"))\n\nclass BaseTimeGroupBy:\n    def setup(self, data_size, ncols=1):\n        self.df = generate_dataframe(\n            ASV_USE_IMPL, \"int\", data_size[1], data_size[0], RAND_LOW, RAND_HIGH\n        )\n        self.groupby_columns = self.df.columns[:ncols].tolist()",
         "min_run_count": 2,
         "name": "benchmarks.TimeMultiColumnGroupby.time_groupby_agg_quan",
         "number": 0,
         "param_names": [
             "data_size",
-            "count_columns"
+            "ncols"
         ],
         "params": [
             [
@@ -486,7 +514,7 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "691577593b3eb51c5223713651ab9c028d88240ff7ecb7d7d35fdbf8ffd6d8d2",
+        "version": "55cf6d11d7dc3d294265e52edad0703dad30db505eba7c78d892d946f18130c3",
         "warmup_time": -1
     },
     "benchmarks.TimeSetItem.time_setitem_qc": {
