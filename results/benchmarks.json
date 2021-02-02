@@ -593,5 +593,40 @@
         "version": "ddce9ffcb112bece4426fe804e07ca30d08a83580fd4f9366fb8ed87c10de67f",
         "warmup_time": -1
     },
+    "benchmarks.TimeSortValues.time_sort_values": {
+        "code": "class TimeSortValues:\n    def time_sort_values(self, data_size, columns_number, ascending_list):\n        execute(self.df.sort_values(self.columns, ascending=self.ascending))\n\n    def setup(self, data_size, columns_number, ascending_list):\n        self.df = generate_dataframe(\n            ASV_USE_IMPL, \"int\", data_size[1], data_size[0], RAND_LOW, RAND_HIGH\n        )\n        self.columns = random_columns(self.df.columns, columns_number)\n        self.ascending = (\n            random_booleans(columns_number)\n            if ascending_list\n            else bool(random_booleans(1)[0])\n        )",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeSortValues.time_sort_values",
+        "number": 0,
+        "param_names": [
+            "data_size",
+            "columns_number",
+            "ascending_list"
+        ],
+        "params": [
+            [
+                "(5000, 5000)",
+                "(1000000, 10)"
+            ],
+            [
+                "1",
+                "2",
+                "10",
+                "100"
+            ],
+            [
+                "False",
+                "True"
+            ]
+        ],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "4825067949244f1abe1998dbe710e3014052245c403746003cae3d1b89b51bb3",
+        "warmup_time": -1
+    },
     "version": 2
 }
