@@ -172,7 +172,7 @@
         "warmup_time": -1
     },
     "benchmarks.TimeConcat.time_concat": {
-        "code": "class TimeConcat:\n    def time_concat(self, shapes, how, axis):\n        if ASV_USE_IMPL == \"modin\":\n            execute(pd.concat([self.df1, self.df2], axis=axis, join=how))\n        elif ASV_USE_IMPL == \"pandas\":\n            execute(pandas.concat([self.df1, self.df2], axis=axis, join=how))\n        else:\n            raise NotImplementedError\n\n    def setup(self, shapes, how, axis):\n        self.df1 = generate_dataframe(\n            ASV_USE_IMPL, \"int\", *shapes[0], RAND_LOW, RAND_HIGH\n        )\n        self.df2 = generate_dataframe(\n            ASV_USE_IMPL, \"int\", *shapes[1], RAND_LOW, RAND_HIGH\n        )",
+        "code": "class TimeConcat:\n    def time_concat(self, shapes, how, axis):\n        execute(IMPL[ASV_USE_IMPL].concat([self.df1, self.df2], axis=axis, join=how))\n\n    def setup(self, shapes, how, axis):\n        self.df1 = generate_dataframe(\n            ASV_USE_IMPL, \"int\", *shapes[0], RAND_LOW, RAND_HIGH\n        )\n        self.df2 = generate_dataframe(\n            ASV_USE_IMPL, \"int\", *shapes[1], RAND_LOW, RAND_HIGH\n        )",
         "min_run_count": 2,
         "name": "benchmarks.TimeConcat.time_concat",
         "number": 0,
@@ -200,7 +200,40 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "0bb77ec9b4a9f48afd45c34a53001a5479f053a3fb2e72eec201f0df5628227e",
+        "version": "718c07f0450388e6f586cf10e7466f364cc94e4a6909380b7f50d8213c45205c",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeFillna.time_fillna": {
+        "code": "class TimeFillna:\n    def time_fillna(self, shape, limit, inplace):\n        kw = {\"value\": 0.0, \"limit\": self.limit, \"inplace\": inplace}\n        if inplace:\n            self.df.fillna(**kw)\n            execute(self.df)\n        else:\n            execute(self.df.fillna(**kw))\n\n    def setup(self, shape, limit, inplace):\n        pd = IMPL[ASV_USE_IMPL]\n        columns = [f\"col{x}\" for x in range(shape[1])]\n        self.df = pd.DataFrame(np.nan, index=pd.RangeIndex(shape[0]), columns=columns)\n        self.limit = int(limit * shape[0]) if limit else None",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeFillna.time_fillna",
+        "number": 0,
+        "param_names": [
+            "shape",
+            "limit",
+            "inplace"
+        ],
+        "params": [
+            [
+                "(5000, 5000)",
+                "(1000000, 10)"
+            ],
+            [
+                "None",
+                "0.8"
+            ],
+            [
+                "False",
+                "True"
+            ]
+        ],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "24a895ac6bb572daba78946e1a36fa6506faf99ff85b15a830e08a44b46e7384",
         "warmup_time": -1
     },
     "benchmarks.TimeGroupByDefaultAggregations.time_groupby_count": {
