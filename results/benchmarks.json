@@ -203,6 +203,39 @@
         "version": "718c07f0450388e6f586cf10e7466f364cc94e4a6909380b7f50d8213c45205c",
         "warmup_time": -1
     },
+    "benchmarks.TimeDrop.time_drop": {
+        "code": "class TimeDrop:\n    def time_drop(self, shape, axis, drop_ncols):\n        execute(self.df.drop(self.labels, axis))\n\n    def setup(self, shape, axis, drop_ncols):\n        self.df = generate_dataframe(ASV_USE_IMPL, \"int\", *shape, RAND_LOW, RAND_HIGH)\n        drop_count = (\n            int(len(self.df.axes[axis]) * drop_ncols)\n            if isinstance(drop_ncols, float)\n            else drop_ncols\n        )\n        self.labels = self.df.axes[axis][:drop_count]",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeDrop.time_drop",
+        "number": 0,
+        "param_names": [
+            "shape",
+            "axis",
+            "drop_ncols"
+        ],
+        "params": [
+            [
+                "(5000, 5000)",
+                "(1000000, 10)"
+            ],
+            [
+                "0",
+                "1"
+            ],
+            [
+                "1",
+                "0.8"
+            ]
+        ],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "cbeb16adcb3fadd00159e6c9922ccbfaac0eb086cd953d0eebb36b89c3e6e266",
+        "warmup_time": -1
+    },
     "benchmarks.TimeFillna.time_fillna": {
         "code": "class TimeFillna:\n    def time_fillna(self, shape, limit, inplace):\n        kw = {\"value\": 0.0, \"limit\": self.limit, \"inplace\": inplace}\n        if inplace:\n            self.df.fillna(**kw)\n            execute(self.df)\n        else:\n            execute(self.df.fillna(**kw))\n\n    def setup(self, shape, limit, inplace):\n        pd = IMPL[ASV_USE_IMPL]\n        columns = [f\"col{x}\" for x in range(shape[1])]\n        self.df = pd.DataFrame(np.nan, index=pd.RangeIndex(shape[0]), columns=columns)\n        self.limit = int(limit * shape[0]) if limit else None",
         "min_run_count": 2,
