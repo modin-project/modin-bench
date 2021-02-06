@@ -389,10 +389,10 @@
         "version": "bfe072e5b8c498522ed86edb0579516bdf90e3161c5fcff67d7f651e39d50621",
         "warmup_time": -1
     },
-    "benchmarks.TimeMultiColumnGroupby.time_groupby_agg_mean": {
+    "benchmarks.TimeGroupByMultiColumn.time_groupby_agg_mean": {
         "code": "class TimeGroupByMultiColumn:\n    def time_groupby_agg_mean(self, shape, groupby_ncols):\n        execute(self.df.groupby(by=self.groupby_columns).apply(lambda df: df.mean()))\n\nclass BaseTimeGroupBy:\n    def setup(self, shape, groupby_ncols=1):\n        self.df, self.groupby_columns = generate_dataframe(\n            ASV_USE_IMPL,\n            \"int\",\n            *shape,\n            RAND_LOW,\n            RAND_HIGH,\n            groupby_ncols,\n            count_groups=GROUPBY_NGROUPS[ASV_DATASET_SIZE],\n        )",
         "min_run_count": 2,
-        "name": "benchmarks.TimeMultiColumnGroupby.time_groupby_agg_mean",
+        "name": "benchmarks.TimeGroupByMultiColumn.time_groupby_agg_mean",
         "number": 0,
         "param_names": [
             "shape",
@@ -416,10 +416,10 @@
         "version": "3e815833a6351379ccb5aea91fe3ab9164b167dfd54d3b0452881aa540aec272",
         "warmup_time": -1
     },
-    "benchmarks.TimeMultiColumnGroupby.time_groupby_agg_quan": {
+    "benchmarks.TimeGroupByMultiColumn.time_groupby_agg_quan": {
         "code": "class TimeGroupByMultiColumn:\n    def time_groupby_agg_quan(self, shape, groupby_ncols):\n        execute(self.df.groupby(by=self.groupby_columns).agg(\"quantile\"))\n\nclass BaseTimeGroupBy:\n    def setup(self, shape, groupby_ncols=1):\n        self.df, self.groupby_columns = generate_dataframe(\n            ASV_USE_IMPL,\n            \"int\",\n            *shape,\n            RAND_LOW,\n            RAND_HIGH,\n            groupby_ncols,\n            count_groups=GROUPBY_NGROUPS[ASV_DATASET_SIZE],\n        )",
         "min_run_count": 2,
-        "name": "benchmarks.TimeMultiColumnGroupby.time_groupby_agg_quan",
+        "name": "benchmarks.TimeGroupByMultiColumn.time_groupby_agg_quan",
         "number": 0,
         "param_names": [
             "shape",
