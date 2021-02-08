@@ -1,4 +1,32 @@
 {
+    "benchmarks.TimeAppend.time_append": {
+        "code": "class TimeAppend:\n    def time_append(self, shapes, sort):\n        execute(self.df1.append(self.df2, sort=sort))\n\n    def setup(self, shapes, sort):\n        self.df1 = generate_dataframe(\n            ASV_USE_IMPL, \"int\", *shapes[0], RAND_LOW, RAND_HIGH\n        )\n        self.df2 = generate_dataframe(\n            ASV_USE_IMPL, \"int\", *shapes[1], RAND_LOW, RAND_HIGH\n        )\n        if sort:\n            self.df1.columns = self.df1.columns[::-1]",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeAppend.time_append",
+        "number": 0,
+        "param_names": [
+            "shapes",
+            "sort"
+        ],
+        "params": [
+            [
+                "((5000, 5000), (5000, 5000))",
+                "((500000, 20), (1000000, 10))"
+            ],
+            [
+                "False",
+                "True"
+            ]
+        ],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "c2d89eb99a9d7965ff21009a90377a267577d695e1baeeedba0a97d62f2f8030",
+        "warmup_time": -1
+    },
     "benchmarks.TimeArithmetic.time_apply": {
         "code": "class TimeArithmetic:\n    def time_apply(self, shape, axis):\n        execute(self.df.apply(lambda df: df.sum(), axis=axis))\n\n    def setup(self, shape, axis):\n        self.df = generate_dataframe(ASV_USE_IMPL, \"int\", *shape, RAND_LOW, RAND_HIGH)",
         "min_run_count": 2,
