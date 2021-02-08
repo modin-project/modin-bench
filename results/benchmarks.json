@@ -471,6 +471,34 @@
         "version": "e04e9eabadbfd613113f2edaf3310a272948984b1be874fb9281e9777f26d34f",
         "warmup_time": -1
     },
+    "benchmarks.TimeHead.time_head": {
+        "code": "class TimeHead:\n    def time_head(self, shape, head_count):\n        execute(self.df.head(self.head_count))\n\n    def setup(self, shape, head_count):\n        self.df = generate_dataframe(ASV_USE_IMPL, \"int\", *shape, RAND_LOW, RAND_HIGH)\n        self.head_count = (\n            int(head_count * len(self.df.index))\n            if isinstance(head_count, float)\n            else head_count\n        )",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeHead.time_head",
+        "number": 0,
+        "param_names": [
+            "shape",
+            "head_count"
+        ],
+        "params": [
+            [
+                "(5000, 5000)",
+                "(1000000, 10)"
+            ],
+            [
+                "5",
+                "0.8"
+            ]
+        ],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "0ab97d453eb88717822a7fbc0a43910d61e597489b0d1c49eec882656edd2dcf",
+        "warmup_time": -1
+    },
     "benchmarks.TimeInsert.time_insert_qc": {
         "code": "class TimeInsert:\n    def time_insert_qc(self, *args, **kwargs):\n        self.df.insert(loc=self.iloc, column=random_string(), value=self.item)\n        execute(self.df)\n\nclass BaseTimeSetItem:\n    def setup(self, shape, item_length, loc, is_equal_indices):\n        self.df = generate_dataframe(\n            ASV_USE_IMPL, \"int\", *shape, RAND_LOW, RAND_HIGH\n        ).copy()\n        self.loc, self.iloc = self.get_loc(\n            self.df, loc, item_length=item_length, axis=1\n        )\n    \n        self.item = self.df[self.loc] + 1\n        self.item_raw = self.item.to_numpy()\n        if not is_equal_indices:\n            self.item.index = reversed(self.item.index)",
         "min_run_count": 2,
