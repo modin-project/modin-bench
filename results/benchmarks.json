@@ -750,5 +750,61 @@
         "version": "5cf2258ccb3d7833acd5e9765b8023fdbf0d27fd70e540f457f576be26c37ec9",
         "warmup_time": -1
     },
+    "benchmarks.TimeValueCountsFrame.time_value_counts": {
+        "code": "class TimeValueCountsFrame:\n    def time_value_counts(self, *args, **kwargs):\n        execute(self.df.value_counts(subset=self.subset))\n\nclass BaseTimeValueCounts:\n    def setup(self, shape, subset=\"all\"):\n        try:\n            subset = self.subset_params[subset]\n        except KeyError:\n            raise KeyError(\n                f\"Invalid value for 'subset={subset}'. Allowed: {list(self.subset_params.keys())}\"\n            )\n        ncols = subset(shape)\n        self.df, _ = generate_dataframe(\n            ASV_USE_IMPL,\n            \"int\",\n            *shape,\n            RAND_LOW,\n            RAND_HIGH,\n            groupby_ncols=ncols,\n            count_groups=GROUPBY_NGROUPS[ASV_DATASET_SIZE],\n        )\n        self.subset = self.df.columns[:ncols].tolist()",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeValueCountsFrame.time_value_counts",
+        "number": 0,
+        "param_names": [
+            "shape",
+            "subset"
+        ],
+        "params": [
+            [
+                "(5000, 5000)",
+                "(1000000, 10)"
+            ],
+            [
+                "'all'",
+                "'half'"
+            ]
+        ],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "89dd1743863ba9c2f3ce2862ad193f5739b637f7822f8ac5efef2e04c3713876",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeValueCountsSeries.time_value_counts": {
+        "code": "class TimeValueCountsSeries:\n    def time_value_counts(self, shape, bins):\n        execute(self.df.value_counts(bins=bins))\n\n    def setup(self, shape, bins):\n        super().setup(shape=shape)\n        self.df = self.df.iloc[:, 0]",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeValueCountsSeries.time_value_counts",
+        "number": 0,
+        "param_names": [
+            "shape",
+            "bins"
+        ],
+        "params": [
+            [
+                "(5000, 5000)",
+                "(1000000, 10)"
+            ],
+            [
+                "None",
+                "3"
+            ]
+        ],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "ef45b122b624e202df153ad6e6cb0e2d046d30a8a2aac06dc497c6ed6ed5d7af",
+        "warmup_time": -1
+    },
     "version": 2
 }
