@@ -167,6 +167,39 @@
         "version": "3ade96bfe969295a9d3c99d61bc88dedda36a799925710d5620e5fb30438d074",
         "warmup_time": -1
     },
+    "benchmarks.TimeAstype.time_astype": {
+        "code": "class TimeAstype:\n    def time_astype(self, shape, dtype, astype_ncolumns):\n        execute(self.df.astype(self.astype_arg))\n\n    def setup(self, shape, dtype, astype_ncolumns):\n        self.df = generate_dataframe(ASV_USE_IMPL, \"int\", *shape, RAND_LOW, RAND_HIGH)\n        if astype_ncolumns == \"all\":\n            self.astype_arg = dtype\n        elif astype_ncolumns == \"one\":\n            self.astype_arg = {\"col1\": dtype}\n        else:\n            raise ValueError(\"astype_ncolumns: {astype_ncolumns} isn't supported\")",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeAstype.time_astype",
+        "number": 0,
+        "param_names": [
+            "shape",
+            "dtype",
+            "astype_ncolumns"
+        ],
+        "params": [
+            [
+                "(5000, 5000)",
+                "(1000000, 10)"
+            ],
+            [
+                "'float64'",
+                "'category'"
+            ],
+            [
+                "'one'",
+                "'all'"
+            ]
+        ],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "e0815604b1644fa44789102d06d841ad6e2d03792cc5d694a40c0838ae3275f3",
+        "warmup_time": -1
+    },
     "benchmarks.TimeBinaryOp.time_binary_op": {
         "code": "class TimeBinaryOp:\n    def time_binary_op(self, shapes, binary_op, axis):\n        execute(self.op(self.df2, axis=axis))\n\n    def setup(self, shapes, binary_op, axis):\n        self.df1 = generate_dataframe(\n            ASV_USE_IMPL, \"int\", *shapes[0], RAND_LOW, RAND_HIGH\n        )\n        self.df2 = generate_dataframe(\n            ASV_USE_IMPL, \"int\", *shapes[1], RAND_LOW, RAND_HIGH\n        )\n        self.op = getattr(self.df1, binary_op)",
         "min_run_count": 2,
@@ -229,6 +262,29 @@
         "type": "time",
         "unit": "seconds",
         "version": "718c07f0450388e6f586cf10e7466f364cc94e4a6909380b7f50d8213c45205c",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeDescribe.time_describe": {
+        "code": "class TimeDescribe:\n    def time_describe(self, shape):\n        execute(self.df.describe())\n\n    def setup(self, shape):\n        self.df = generate_dataframe(ASV_USE_IMPL, \"int\", *shape, RAND_LOW, RAND_HIGH)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeDescribe.time_describe",
+        "number": 0,
+        "param_names": [
+            "shape"
+        ],
+        "params": [
+            [
+                "(5000, 5000)",
+                "(1000000, 10)"
+            ]
+        ],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "b06d1af039ee49fcea92c1e11a041c293d33b86c73874976592036d57e966eb8",
         "warmup_time": -1
     },
     "benchmarks.TimeDrop.time_drop": {
@@ -499,6 +555,68 @@
         "version": "0ab97d453eb88717822a7fbc0a43910d61e597489b0d1c49eec882656edd2dcf",
         "warmup_time": -1
     },
+    "benchmarks.TimeIndexing.time_iloc": {
+        "code": "class TimeIndexing:\n    def time_iloc(self, shape, indexer_type):\n        execute(self.df.iloc[self.indexer])\n\n    def setup(self, shape, indexer_type):\n        self.df = generate_dataframe(ASV_USE_IMPL, \"int\", *shape, RAND_LOW, RAND_HIGH)\n        if indexer_type == \"bool\":\n            self.indexer = [False, True] * (shape[0] // 2)\n        elif indexer_type == \"scalar\":\n            self.indexer = shape[0] // 2\n        elif indexer_type == \"slice\":\n            self.indexer = slice(0, shape[0], 2)\n        elif indexer_type == \"list\":\n            self.indexer = [x for x in range(shape[0])]\n        elif indexer_type == \"function\":\n            self.indexer = lambda df: df.index[::-2]",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeIndexing.time_iloc",
+        "number": 0,
+        "param_names": [
+            "shape",
+            "indexer_type"
+        ],
+        "params": [
+            [
+                "(5000, 5000)",
+                "(1000000, 10)"
+            ],
+            [
+                "'scalar'",
+                "'bool'",
+                "'slice'",
+                "'list'",
+                "'function'"
+            ]
+        ],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "4e7262aec0ddddcf2cf6befd225168aa1e9f52e0ebe945dc373d7bab9c5e494c",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeIndexing.time_loc": {
+        "code": "class TimeIndexing:\n    def time_loc(self, shape, indexer_type):\n        execute(self.df.loc[self.indexer])\n\n    def setup(self, shape, indexer_type):\n        self.df = generate_dataframe(ASV_USE_IMPL, \"int\", *shape, RAND_LOW, RAND_HIGH)\n        if indexer_type == \"bool\":\n            self.indexer = [False, True] * (shape[0] // 2)\n        elif indexer_type == \"scalar\":\n            self.indexer = shape[0] // 2\n        elif indexer_type == \"slice\":\n            self.indexer = slice(0, shape[0], 2)\n        elif indexer_type == \"list\":\n            self.indexer = [x for x in range(shape[0])]\n        elif indexer_type == \"function\":\n            self.indexer = lambda df: df.index[::-2]",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeIndexing.time_loc",
+        "number": 0,
+        "param_names": [
+            "shape",
+            "indexer_type"
+        ],
+        "params": [
+            [
+                "(5000, 5000)",
+                "(1000000, 10)"
+            ],
+            [
+                "'scalar'",
+                "'bool'",
+                "'slice'",
+                "'list'",
+                "'function'"
+            ]
+        ],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "7b6fd37f862f1a881d3f8e46bfd517d56f952ee9725a393f5c66ef88ba8a3a38",
+        "warmup_time": -1
+    },
     "benchmarks.TimeInsert.time_insert_qc": {
         "code": "class TimeInsert:\n    def time_insert_qc(self, *args, **kwargs):\n        self.df.insert(loc=self.iloc, column=random_string(), value=self.item)\n        execute(self.df)\n\nclass BaseTimeSetItem:\n    def setup(self, shape, item_length, loc, is_equal_indices):\n        self.df = generate_dataframe(\n            ASV_USE_IMPL, \"int\", *shape, RAND_LOW, RAND_HIGH\n        ).copy()\n        self.loc, self.iloc = self.get_loc(\n            self.df, loc, item_length=item_length, axis=1\n        )\n    \n        self.item = self.df[self.loc] + 1\n        self.item_raw = self.item.to_numpy()\n        if not is_equal_indices:\n            self.item.index = reversed(self.item.index)",
         "min_run_count": 2,
@@ -637,6 +755,29 @@
         "type": "time",
         "unit": "seconds",
         "version": "5dd956fb7db1d5b0a96e59375c5e98318f9f43faa97b9b6562cf41d9445c9d9a",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeMultiIndexing.time_multiindex_loc": {
+        "code": "class TimeMultiIndexing:\n    def time_multiindex_loc(self, shape):\n        execute(\n            self.df.loc[\n                self.df.index[2] : self.df.index[-2],\n                self.df.columns[2] : self.df.columns[-2],\n            ]\n        )\n\n    def setup(self, shape):\n        df = generate_dataframe(ASV_USE_IMPL, \"int\", *shape, RAND_LOW, RAND_HIGH)\n    \n        index = pd.MultiIndex.from_product([df.index[: shape[0] // 2], [\"bar\", \"foo\"]])\n        columns = pd.MultiIndex.from_product(\n            [df.columns[: shape[1] // 2], [\"buz\", \"fuz\"]]\n        )\n    \n        df.index = index\n        df.columns = columns\n    \n        self.df = df.sort_index(axis=1)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeMultiIndexing.time_multiindex_loc",
+        "number": 0,
+        "param_names": [
+            "shape"
+        ],
+        "params": [
+            [
+                "(5000, 5000)",
+                "(1000000, 10)"
+            ]
+        ],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "80e00dd183fe0c4a8126be25f72361ee20f99910b9769b7b35381e106e45dc4f",
         "warmup_time": -1
     },
     "benchmarks.TimeSetItem.time_setitem_qc": {
