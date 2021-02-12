@@ -780,6 +780,75 @@
         "version": "80e00dd183fe0c4a8126be25f72361ee20f99910b9769b7b35381e106e45dc4f",
         "warmup_time": -1
     },
+    "benchmarks.TimeProperties.time_columns": {
+        "code": "class TimeProperties:\n    def time_columns(self, shape):\n        return self.df.columns\n\n    def setup(self, shape):\n        self.df = generate_dataframe(ASV_USE_IMPL, \"int\", *shape, RAND_LOW, RAND_HIGH)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeProperties.time_columns",
+        "number": 0,
+        "param_names": [
+            "shape"
+        ],
+        "params": [
+            [
+                "(5000, 5000)",
+                "(1000000, 10)"
+            ]
+        ],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "effb7b0976e7b3b0ee005ca8318ad48fb5588e1836d8ec6535810367e46725a8",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeProperties.time_index": {
+        "code": "class TimeProperties:\n    def time_index(self, shape):\n        return self.df.index\n\n    def setup(self, shape):\n        self.df = generate_dataframe(ASV_USE_IMPL, \"int\", *shape, RAND_LOW, RAND_HIGH)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeProperties.time_index",
+        "number": 0,
+        "param_names": [
+            "shape"
+        ],
+        "params": [
+            [
+                "(5000, 5000)",
+                "(1000000, 10)"
+            ]
+        ],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "487a3dbef05f696142e0534475d8373a9075dd28d31de0cf3449ca7a95ffb7b2",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeProperties.time_shape": {
+        "code": "class TimeProperties:\n    def time_shape(self, shape):\n        return self.df.shape\n\n    def setup(self, shape):\n        self.df = generate_dataframe(ASV_USE_IMPL, \"int\", *shape, RAND_LOW, RAND_HIGH)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeProperties.time_shape",
+        "number": 0,
+        "param_names": [
+            "shape"
+        ],
+        "params": [
+            [
+                "(5000, 5000)",
+                "(1000000, 10)"
+            ]
+        ],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "b8ce432425cc9aa74975357694dfa8cb95a0553d19b8daf97522757a0a607904",
+        "warmup_time": -1
+    },
     "benchmarks.TimeSetItem.time_setitem_qc": {
         "code": "class TimeSetItem:\n    def time_setitem_qc(self, *args, **kwargs):\n        self.df[self.loc] = self.item\n        execute(self.df)\n\nclass BaseTimeSetItem:\n    def setup(self, shape, item_length, loc, is_equal_indices):\n        self.df = generate_dataframe(\n            ASV_USE_IMPL, \"int\", *shape, RAND_LOW, RAND_HIGH\n        ).copy()\n        self.loc, self.iloc = self.get_loc(\n            self.df, loc, item_length=item_length, axis=1\n        )\n    \n        self.item = self.df[self.loc] + 1\n        self.item_raw = self.item.to_numpy()\n        if not is_equal_indices:\n            self.item.index = reversed(self.item.index)",
         "min_run_count": 2,
