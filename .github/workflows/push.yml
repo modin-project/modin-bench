@@ -1,0 +1,25 @@
+name: master
+on: pull_request
+jobs:
+  deploy-gh-pages:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v2
+        with:
+          python-version: "3.7.x"
+          architecture: "x64"
+      - name: test
+        run: |
+          pip install asv
+          # workaround
+          sed -i 's/".asv\/results"/".\/results"/g' asv.conf.json
+          sed -i 's/"\.\."/"\."/g' asv.conf.json
+          git branch -a
+          git branch master origin/master
+          git branch -a
+          asv gh-pages --rewrite --no-push
