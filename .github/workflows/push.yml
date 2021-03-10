@@ -3,23 +3,34 @@ on: pull_request
 jobs:
   deploy-gh-pages:
     runs-on: ubuntu-latest
-    env:
-      GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout Modin
+        uses: actions/checkout@v2
+        with:
+          repository: modin-project/modin
+          fetch-depth: 0
+      - name: Checkout Modin-bench
+        uses: actions/checkout@v2
         with:
           fetch-depth: 0
+          path: modin-bench
       - uses: actions/setup-python@v2
         with:
           python-version: "3.7.x"
           architecture: "x64"
-      - name: test
+      - name: install asv
+        run: pip install asv
+      - name: emulate the desired behavior
         run: |
-          pip install asv
-          # workaround
-          sed -i 's/".asv\/results"/".\/results"/g' asv.conf.json
-          sed -i 's/"\.\."/"\."/g' asv.conf.json
-          git branch -a
-          git branch master origin/master
-          git branch -a
-          asv gh-pages --rewrite --no-push
+          mkdir asv_bench/.asv
+          cp -r modin-bench/results/ asv_bench/.asv/
+
+      - name: deploy gh-pages
+        run: |
+          git config --global user.name github-actions
+          git config --global user.email github-actions@github.com
+          cd asv_bench
+          git remote rename origin modin-main
+          git remote add origin https://github.com/modin-project/modin-bench.git
+          git remote -v
+          asv gh-pages --rewrite
