@@ -20,17 +20,18 @@ jobs:
           architecture: "x64"
       - name: install asv
         run: pip install asv
+      - name: setup git user
+        run: |
+          git config --global user.name github-actions
+          git config --global user.email github-actions@github.com
       - name: emulate the desired behavior
         run: |
           mkdir asv_bench/.asv
           cp -r modin-bench/results/ asv_bench/.asv/
-
-      - name: deploy gh-pages
-        run: |
-          git config --global user.name github-actions
-          git config --global user.email github-actions@github.com
-          cd asv_bench
           git remote rename origin modin-main
           git remote add origin https://github.com/modin-project/modin-bench.git
           git remote -v
+      - name: deploy gh-pages
+        run: |
+          cd asv_bench
           asv gh-pages --rewrite
