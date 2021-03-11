@@ -1,0 +1,40 @@
+name: deploy github-pages
+on:
+  push:
+    branches:
+      - master
+jobs:
+  deploy-gh-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Modin
+        uses: actions/checkout@v2
+        with:
+          repository: modin-project/modin
+          fetch-depth: 0
+      - name: Checkout Modin-bench
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          path: modin-bench
+      - uses: actions/setup-python@v2
+        with:
+          python-version: "3.7.x"
+          architecture: "x64"
+      - name: install asv
+        run: pip install asv
+      - name: setup git user
+        run: |
+          git config --global user.name github-actions
+          git config --global user.email github-actions@github.com
+      - name: emulate the desired behavior
+        run: |
+          mkdir asv_bench/.asv
+          cp -r modin-bench/results/ asv_bench/.asv/
+          git remote rename origin modin-main
+          git remote add origin https://github.com/modin-project/modin-bench.git
+          git remote -v
+      - name: deploy gh-pages
+        run: |
+          cd asv_bench
+          asv gh-pages --rewrite
