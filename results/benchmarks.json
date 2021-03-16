@@ -1029,7 +1029,7 @@
         "warmup_time": -1
     },
     "benchmarks.TimeValueCountsFrame.time_value_counts": {
-        "code": "class TimeValueCountsFrame:\n    def time_value_counts(self, *args, **kwargs):\n        execute(self.df.value_counts(subset=self.subset))\n\nclass BaseTimeValueCounts:\n    def setup(self, shape, ngroups=5, subset=\"all\"):\n        try:\n            subset = self.subset_params[subset]\n        except KeyError:\n            raise KeyError(\n                f\"Invalid value for 'subset={subset}'. Allowed: {list(self.subset_params.keys())}\"\n            )\n        ncols = subset(shape)\n        ngroups = translator_groupby_ngroups(ngroups, shape)\n        self.df, _ = generate_dataframe(\n            ASV_USE_IMPL,\n            \"int\",\n            *shape,\n            RAND_LOW,\n            RAND_HIGH,\n            groupby_ncols=ncols,\n            count_groups=ngroups,\n        )\n        self.subset = self.df.columns[:ncols].tolist()",
+        "code": "class TimeValueCountsFrame:\n    def time_value_counts(self, *args, **kwargs):\n        execute(self.df.value_counts(subset=self.subset))\n\nclass BaseTimeValueCounts:\n    def setup(self, shape, ngroups=5, subset=1):\n        ngroups = translator_groupby_ngroups(ngroups, shape)\n        self.df, self.subset = generate_dataframe(\n            ASV_USE_IMPL,\n            \"int\",\n            *shape,\n            RAND_LOW,\n            RAND_HIGH,\n            groupby_ncols=subset,\n            count_groups=ngroups,\n        )",
         "min_run_count": 2,
         "name": "benchmarks.TimeValueCountsFrame.time_value_counts",
         "number": 0,
@@ -1048,8 +1048,8 @@
                 "'huge_amount_groups'"
             ],
             [
-                "'all'",
-                "'half'"
+                "2",
+                "10"
             ]
         ],
         "processes": 2,
@@ -1058,11 +1058,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "43e7bef1902e796ff3c180b27ae21d257541256bd187e7b8f59ed9b8dca07cd4",
+        "version": "488013b792c8a1214b90fe24d1b8841b79b064073eec3c9c83d6c8132499b600",
         "warmup_time": -1
     },
     "benchmarks.TimeValueCountsSeries.time_value_counts": {
-        "code": "class TimeValueCountsSeries:\n    def time_value_counts(self, shape, ngroups, bins):\n        execute(self.df.value_counts(bins=bins))\n\n    def setup(self, shape, ngroups, bins):\n        super().setup(ngroups=ngroups, shape=shape)\n        self.df = self.df.iloc[:, 0]",
+        "code": "class TimeValueCountsSeries:\n    def time_value_counts(self, shape, ngroups, bins):\n        execute(self.df.value_counts(bins=bins))\n\n    def setup(self, shape, ngroups, bins):\n        super().setup(ngroups=ngroups, shape=shape)\n        self.df = self.df[self.subset[0]]",
         "min_run_count": 2,
         "name": "benchmarks.TimeValueCountsSeries.time_value_counts",
         "number": 0,
@@ -1091,7 +1091,7 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "cd8cd69d559c36bd90b816fcb0fb67588091a5ba8715a620666d07ace8e7c519",
+        "version": "161a0ca50c23d2aadc9c3fc29d46e3cd4699d4354b8a8b752b6d17f67e924a85",
         "warmup_time": -1
     },
     "io.csv.TimeReadCsvNamesDtype.time_read_csv_names_dtype": {
