@@ -1107,7 +1107,7 @@
         "warmup_time": -1
     },
     "io.csv.TimeReadCsvNamesDtype.time_read_csv_names_dtype": {
-        "code": "class TimeReadCsvNamesDtype:\n    def time_read_csv_names_dtype(self, cache, shape, names, dtype):\n        execute(\n            IMPL[ASV_USE_IMPL].read_csv(\n                self.filename,\n                names=self.names,\n                header=0,\n                dtype=self.dtype,\n                parse_dates=self.parse_dates,\n            )\n        )\n\n    def setup(self, cache, shape, names, dtype):\n        file_id = self._get_file_id(shape, dtype)\n        self.filename, self.names, self.dtype = cache[file_id]\n    \n        self.parse_dates = None\n        if dtype == \"Int64_Timestamp\":\n            # cached version of dtype should not change\n            self.dtype = self.dtype.copy()\n            for col in self._timestamp_columns:\n                del self.dtype[col]\n            self.parse_dates = self._timestamp_columns\n\n    def setup_cache(self, test_filename=\"io_test_file_csv_names_dtype\"):\n        # filenames with a metadata of saved dataframes\n        cache = {}\n        for shape in UNARY_OP_DATA_SIZE[ASV_DATASET_SIZE]:\n            for dtype in self._dtypes_params:\n                df = generate_dataframe(\"pandas\", \"int\", *shape, RAND_LOW, RAND_HIGH)\n                if dtype == \"Int64_Timestamp\":\n                    df = self._add_timestamp_columns(df)\n    \n                file_id = self._get_file_id(shape, dtype)\n                cache[file_id] = (\n                    f\"{test_filename}_{file_id}.csv\",\n                    df.columns.to_list(),\n                    df.dtypes.to_dict(),\n                )\n                df.to_csv(cache[file_id][0], index=False)\n        return cache",
+        "code": "class TimeReadCsvNamesDtype:\n    def time_read_csv_names_dtype(self, cache, shape, names, dtype):\n        execute(\n            IMPL[ASV_USE_IMPL].read_csv(\n                self.filename,\n                names=self.names,\n                header=0,\n                dtype=self.dtype,\n                parse_dates=self.parse_dates,\n            )\n        )\n\n    def setup(self, cache, shape, names, dtype):\n        # ray init\n        if ASV_USE_IMPL == \"modin\":\n            pd.DataFrame([])\n        file_id = self._get_file_id(shape, dtype)\n        self.filename, self.names, self.dtype = cache[file_id]\n    \n        self.parse_dates = None\n        if dtype == \"Int64_Timestamp\":\n            # cached version of dtype should not change\n            self.dtype = self.dtype.copy()\n            for col in self._timestamp_columns:\n                del self.dtype[col]\n            self.parse_dates = self._timestamp_columns\n\n    def setup_cache(self, test_filename=\"io_test_file_csv_names_dtype\"):\n        # filenames with a metadata of saved dataframes\n        cache = {}\n        for shape in UNARY_OP_DATA_SIZE[ASV_DATASET_SIZE]:\n            for dtype in self._dtypes_params:\n                df = generate_dataframe(\"pandas\", \"int\", *shape, RAND_LOW, RAND_HIGH)\n                if dtype == \"Int64_Timestamp\":\n                    df = self._add_timestamp_columns(df)\n    \n                file_id = self._get_file_id(shape, dtype)\n                cache[file_id] = (\n                    f\"{test_filename}_{file_id}.csv\",\n                    df.columns.to_list(),\n                    df.dtypes.to_dict(),\n                )\n                df.to_csv(cache[file_id][0], index=False)\n        return cache",
         "min_run_count": 2,
         "name": "io.csv.TimeReadCsvNamesDtype.time_read_csv_names_dtype",
         "number": 0,
@@ -1132,11 +1132,11 @@
         "processes": 2,
         "repeat": 0,
         "sample_time": 0.01,
-        "setup_cache_key": "/modin/asv_bench/benchmarks/io/csv.py:105",
+        "setup_cache_key": "/modin/asv_bench/benchmarks/io/csv.py:104",
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "6d9fdff5f8961d02d0843ec80266028f57a32a5aa14c55979377594b2641bf5e",
+        "version": "c87f3f28049f8c07a090a44814aaade5b9ba1c744cd56bf20efec79b2f1dfd83",
         "warmup_time": -1
     },
     "io.csv.TimeReadCsvSkiprows.time_skiprows": {
@@ -1163,7 +1163,7 @@
         "processes": 2,
         "repeat": 0,
         "sample_time": 0.01,
-        "setup_cache_key": "/modin/asv_bench/benchmarks/io/csv.py:36",
+        "setup_cache_key": "/modin/asv_bench/benchmarks/io/csv.py:32",
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
