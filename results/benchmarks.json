@@ -18,8 +18,8 @@
                 "True"
             ]
         ],
-        "processes": 2,
         "repeat": 0,
+        "rounds": 2,
         "sample_time": 0.01,
         "timeout": 60.0,
         "type": "time",
@@ -46,8 +46,8 @@
                 "1"
             ]
         ],
-        "processes": 2,
         "repeat": 0,
+        "rounds": 2,
         "sample_time": 0.01,
         "timeout": 60.0,
         "type": "time",
@@ -74,8 +74,8 @@
                 "1"
             ]
         ],
-        "processes": 2,
         "repeat": 0,
+        "rounds": 2,
         "sample_time": 0.01,
         "timeout": 60.0,
         "type": "time",
@@ -102,8 +102,8 @@
                 "1"
             ]
         ],
-        "processes": 2,
         "repeat": 0,
+        "rounds": 2,
         "sample_time": 0.01,
         "timeout": 60.0,
         "type": "time",
@@ -130,8 +130,8 @@
                 "1"
             ]
         ],
-        "processes": 2,
         "repeat": 0,
+        "rounds": 2,
         "sample_time": 0.01,
         "timeout": 60.0,
         "type": "time",
@@ -158,8 +158,8 @@
                 "1"
             ]
         ],
-        "processes": 2,
         "repeat": 0,
+        "rounds": 2,
         "sample_time": 0.01,
         "timeout": 60.0,
         "type": "time",
@@ -191,8 +191,8 @@
                 "'all'"
             ]
         ],
-        "processes": 2,
         "repeat": 0,
+        "rounds": 2,
         "sample_time": 0.01,
         "timeout": 60.0,
         "type": "time",
@@ -223,8 +223,8 @@
                 "1"
             ]
         ],
-        "processes": 2,
         "repeat": 0,
+        "rounds": 2,
         "sample_time": 0.01,
         "timeout": 60.0,
         "type": "time",
@@ -255,8 +255,8 @@
                 "1"
             ]
         ],
-        "processes": 2,
         "repeat": 0,
+        "rounds": 2,
         "sample_time": 0.01,
         "timeout": 60.0,
         "type": "time",
@@ -278,8 +278,8 @@
                 "(1000000, 10)"
             ]
         ],
-        "processes": 2,
         "repeat": 0,
+        "rounds": 2,
         "sample_time": 0.01,
         "timeout": 60.0,
         "type": "time",
@@ -311,8 +311,8 @@
                 "0.8"
             ]
         ],
-        "processes": 2,
         "repeat": 0,
+        "rounds": 2,
         "sample_time": 0.01,
         "timeout": 60.0,
         "type": "time",
@@ -356,8 +356,8 @@
                 "True"
             ]
         ],
-        "processes": 2,
         "repeat": 0,
+        "rounds": 2,
         "sample_time": 0.01,
         "timeout": 60.0,
         "type": "time",
@@ -384,8 +384,8 @@
                 "'huge_amount_groups'"
             ]
         ],
-        "processes": 2,
         "repeat": 0,
+        "rounds": 2,
         "sample_time": 0.01,
         "timeout": 60.0,
         "type": "time",
@@ -412,8 +412,8 @@
                 "'huge_amount_groups'"
             ]
         ],
-        "processes": 2,
         "repeat": 0,
+        "rounds": 2,
         "sample_time": 0.01,
         "timeout": 60.0,
         "type": "time",
@@ -440,8 +440,8 @@
                 "'huge_amount_groups'"
             ]
         ],
-        "processes": 2,
         "repeat": 0,
+        "rounds": 2,
         "sample_time": 0.01,
         "timeout": 60.0,
         "type": "time",
@@ -468,8 +468,8 @@
                 "'huge_amount_groups'"
             ]
         ],
-        "processes": 2,
         "repeat": 0,
+        "rounds": 2,
         "sample_time": 0.01,
         "timeout": 60.0,
         "type": "time",
@@ -501,8 +501,8 @@
                 "'aggregation'"
             ]
         ],
-        "processes": 2,
         "repeat": 0,
+        "rounds": 2,
         "sample_time": 0.01,
         "timeout": 60.0,
         "type": "time",
@@ -533,8 +533,8 @@
                 "6"
             ]
         ],
-        "processes": 2,
         "repeat": 0,
+        "rounds": 2,
         "sample_time": 0.01,
         "timeout": 60.0,
         "type": "time",
@@ -565,8 +565,8 @@
                 "6"
             ]
         ],
-        "processes": 2,
         "repeat": 0,
+        "rounds": 2,
         "sample_time": 0.01,
         "timeout": 60.0,
         "type": "time",
@@ -593,8 +593,8 @@
                 "0.8"
             ]
         ],
-        "processes": 2,
         "repeat": 0,
+        "rounds": 2,
         "sample_time": 0.01,
         "timeout": 60.0,
         "type": "time",
@@ -624,8 +624,8 @@
                 "'function'"
             ]
         ],
-        "processes": 2,
         "repeat": 0,
+        "rounds": 2,
         "sample_time": 0.01,
         "timeout": 60.0,
         "type": "time",
@@ -655,8 +655,8 @@
                 "'function'"
             ]
         ],
-        "processes": 2,
         "repeat": 0,
+        "rounds": 2,
         "sample_time": 0.01,
         "timeout": 60.0,
         "type": "time",
@@ -693,8 +693,8 @@
                 "False"
             ]
         ],
-        "processes": 2,
         "repeat": 0,
+        "rounds": 2,
         "sample_time": 0.01,
         "timeout": 60.0,
         "type": "time",
@@ -731,8 +731,8 @@
                 "False"
             ]
         ],
-        "processes": 2,
         "repeat": 0,
+        "rounds": 2,
         "sample_time": 0.01,
         "timeout": 60.0,
         "type": "time",
@@ -763,8 +763,8 @@
                 "False"
             ]
         ],
-        "processes": 2,
         "repeat": 0,
+        "rounds": 2,
         "sample_time": 0.01,
         "timeout": 60.0,
         "type": "time",
@@ -795,8 +795,8 @@
                 "False"
             ]
         ],
-        "processes": 2,
         "repeat": 0,
+        "rounds": 2,
         "sample_time": 0.01,
         "timeout": 60.0,
         "type": "time",
@@ -818,8 +818,8 @@
                 "(1000000, 10)"
             ]
         ],
-        "processes": 2,
         "repeat": 0,
+        "rounds": 2,
         "sample_time": 0.01,
         "timeout": 60.0,
         "type": "time",
@@ -841,8 +841,8 @@
                 "(1000000, 10)"
             ]
         ],
-        "processes": 2,
         "repeat": 0,
+        "rounds": 2,
         "sample_time": 0.01,
         "timeout": 60.0,
         "type": "time",
@@ -864,8 +864,8 @@
                 "(1000000, 10)"
             ]
         ],
-        "processes": 2,
         "repeat": 0,
+        "rounds": 2,
         "sample_time": 0.01,
         "timeout": 60.0,
         "type": "time",
@@ -887,8 +887,8 @@
                 "(1000000, 10)"
             ]
         ],
-        "processes": 2,
         "repeat": 0,
+        "rounds": 2,
         "sample_time": 0.01,
         "timeout": 60.0,
         "type": "time",
@@ -920,8 +920,8 @@
                 "'level_1'"
             ]
         ],
-        "processes": 2,
         "repeat": 0,
+        "rounds": 2,
         "sample_time": 0.01,
         "timeout": 60.0,
         "type": "time",
@@ -958,8 +958,8 @@
                 "False"
             ]
         ],
-        "processes": 2,
         "repeat": 0,
+        "rounds": 2,
         "sample_time": 0.01,
         "timeout": 60.0,
         "type": "time",
@@ -996,8 +996,8 @@
                 "False"
             ]
         ],
-        "processes": 2,
         "repeat": 0,
+        "rounds": 2,
         "sample_time": 0.01,
         "timeout": 60.0,
         "type": "time",
@@ -1031,8 +1031,8 @@
                 "True"
             ]
         ],
-        "processes": 2,
         "repeat": 0,
+        "rounds": 2,
         "sample_time": 0.01,
         "timeout": 60.0,
         "type": "time",
@@ -1064,8 +1064,8 @@
                 "10"
             ]
         ],
-        "processes": 2,
         "repeat": 0,
+        "rounds": 2,
         "sample_time": 0.01,
         "timeout": 60.0,
         "type": "time",
@@ -1097,8 +1097,8 @@
                 "3"
             ]
         ],
-        "processes": 2,
         "repeat": 0,
+        "rounds": 2,
         "sample_time": 0.01,
         "timeout": 60.0,
         "type": "time",
@@ -1129,10 +1129,10 @@
                 "'Int64_Timestamp'"
             ]
         ],
-        "processes": 2,
         "repeat": 0,
+        "rounds": 2,
         "sample_time": 0.01,
-        "setup_cache_key": "/modin/asv_bench/benchmarks/io/csv.py:104",
+        "setup_cache_key": "io.csv:104",
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
@@ -1160,10 +1160,10 @@
                 "'range_step2'"
             ]
         ],
-        "processes": 2,
         "repeat": 0,
+        "rounds": 2,
         "sample_time": 0.01,
-        "setup_cache_key": "/modin/asv_bench/benchmarks/io/csv.py:32",
+        "setup_cache_key": "io.csv:32",
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
@@ -1190,8 +1190,8 @@
                 "32"
             ]
         ],
-        "processes": 2,
         "repeat": 0,
+        "rounds": 2,
         "sample_time": 0.01,
         "timeout": 60.0,
         "type": "time",
@@ -1219,8 +1219,8 @@
                 "32"
             ]
         ],
-        "processes": 2,
         "repeat": 0,
+        "rounds": 2,
         "sample_time": 0.01,
         "timeout": 60.0,
         "type": "time",
