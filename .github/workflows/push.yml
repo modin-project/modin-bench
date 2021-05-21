@@ -22,7 +22,7 @@ jobs:
           python-version: "3.7.x"
           architecture: "x64"
       - name: install asv
-        run: git+https://github.com/airspeed-velocity/asv.git@ef016e233cb9a0b19d517135104f49e0a3c380e9
+        run: pip install git+https://github.com/airspeed-velocity/asv.git@ef016e233cb9a0b19d517135104f49e0a3c380e9
       - name: setup git user
         run: |
           git config --global user.name github-actions
