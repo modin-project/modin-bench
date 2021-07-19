@@ -1461,7 +1461,7 @@
         "warmup_time": -1
     },
     "omnisci.benchmarks.TimeFillna.time_fillna": {
-        "code": "class TimeFillna:\n    def time_fillna(self, value_type, shape, limit):\n        execute(self.df.fillna(**self.kw))\n\n    def setup(self, value_type, shape, limit):\n        pd = IMPL[ASV_USE_IMPL]\n        columns = [f\"col{x}\" for x in range(shape[1])]\n        self.df = pd.DataFrame(np.nan, index=pd.RangeIndex(shape[0]), columns=columns)\n        trigger_import(self.df)\n    \n        value = self.create_fillna_value(value_type, shape)\n        limit = int(limit * shape[0]) if limit else None\n        self.kw = {\"value\": value, \"limit\": limit}",
+        "code": "class TimeFillna:\n    def time_fillna(self, value_type, shape, limit):\n        execute(self.df.fillna(**self.kw))\n\n    def setup(self, value_type, shape, limit):\n        pd = IMPL[ASV_USE_IMPL]\n        columns = [f\"col{x}\" for x in range(shape[1])]\n        self.df = pd.DataFrame(np.nan, index=pd.RangeIndex(shape[0]), columns=columns)\n        trigger_import(self.df)\n    \n        value = self.create_fillna_value(value_type, columns)\n        limit = int(limit * shape[0]) if limit else None\n        self.kw = {\"value\": value, \"limit\": limit}",
         "min_run_count": 2,
         "name": "omnisci.benchmarks.TimeFillna.time_fillna",
         "number": 0,
@@ -1488,7 +1488,7 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "23f4fea1cb36fc29e621a74c4efdcabaa48d11f332e6c2d60fbe19a698ec5089",
+        "version": "43ffd190b73a4c15e625970d4b8df0ce1b585fcadbf53a9c526f72470e6fc9c8",
         "warmup_time": -1
     },
     "omnisci.benchmarks.TimeGroupByDefaultAggregations.time_groupby_count": {
