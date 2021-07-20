@@ -1132,7 +1132,7 @@
         "repeat": 0,
         "rounds": 2,
         "sample_time": 0.01,
-        "setup_cache_key": "io.csv:104",
+        "setup_cache_key": "io.csv:126",
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
@@ -1140,7 +1140,7 @@
         "warmup_time": -1
     },
     "io.csv.TimeReadCsvSkiprows.time_skiprows": {
-        "code": "class TimeReadCsvSkiprows:\n    def time_skiprows(self, test_filenames, shape, skiprows):\n        execute(\n            IMPL[ASV_USE_IMPL].read_csv(\n                test_filenames[self.shape_id], skiprows=self.skiprows\n            )\n        )\n\n    def setup(self, test_filenames, shape, skiprows):\n        super().setup(test_filenames, shape, skiprows)\n        self.skiprows = self.skiprows_mapping[skiprows] if skiprows else None\n\nclass BaseReadCsv:\n    def setup_cache(self, test_filename=\"io_test_file\"):\n        test_filenames = {}\n        for shape in UNARY_OP_DATA_SIZE[ASV_DATASET_SIZE]:\n            shape_id = get_shape_id(shape)\n            test_filenames[shape_id] = f\"{test_filename}_{shape_id}.csv\"\n            df = generate_dataframe(\"pandas\", \"str_int\", *shape, RAND_LOW, RAND_HIGH)\n            df.to_csv(test_filenames[shape_id], index=False)\n    \n        return test_filenames",
+        "code": "class TimeReadCsvSkiprows:\n    def time_skiprows(self, test_filenames, shape, skiprows):\n        execute(\n            IMPL[ASV_USE_IMPL].read_csv(\n                test_filenames[self.shape_id], skiprows=self.skiprows\n            )\n        )\n\n    def setup(self, test_filenames, shape, skiprows):\n        super().setup(test_filenames, shape, skiprows)\n        self.skiprows = self.skiprows_mapping[skiprows] if skiprows else None\n\nclass BaseReadCsv:\n    def setup_cache(self, test_filename=\"io_test_file\"):\n        test_filenames = prepare_io_data(\n            test_filename, \"str_int\", UNARY_OP_DATA_SIZE[ASV_DATASET_SIZE]\n        )\n        return test_filenames",
         "min_run_count": 2,
         "name": "io.csv.TimeReadCsvSkiprows.time_skiprows",
         "number": 0,
@@ -1163,11 +1163,35 @@
         "repeat": 0,
         "rounds": 2,
         "sample_time": 0.01,
-        "setup_cache_key": "io.csv:32",
+        "setup_cache_key": "io.csv:34",
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "f6ad8ffc075d605a25794b542b05d79b933743a4ad6bf416241dae3f6ec0bbe3",
+        "version": "b958a15568d2fc63152698f305ac0fb42dc7a10a6f9b3a1a481b4590286f0de8",
+        "warmup_time": -1
+    },
+    "io.csv.TimeReadCsvTrueFalseValues.time_true_false_values": {
+        "code": "class TimeReadCsvTrueFalseValues:\n    def time_true_false_values(self, test_filenames, shape):\n        execute(\n            IMPL[ASV_USE_IMPL].read_csv(\n                test_filenames[self.shape_id],\n                true_values=[\"Yes\", \"true\"],\n                false_values=[\"No\", \"false\"],\n            ),\n            trigger_omnisci_import=ASV_USE_BACKEND == \"omnisci\",\n        )\n\nclass BaseReadCsv:\n    def setup(self, test_filenames, shape, *args, **kwargs):\n        # ray init\n        if ASV_USE_IMPL == \"modin\":\n            pd.DataFrame([])\n        self.shape_id = get_shape_id(shape)\n\nclass TimeReadCsvTrueFalseValues:\n    def setup_cache(self, test_filename=\"io_test_file\"):\n        test_filenames = prepare_io_data(\n            test_filename, \"true_false_int\", UNARY_OP_DATA_SIZE[ASV_DATASET_SIZE]\n        )\n        return test_filenames",
+        "min_run_count": 2,
+        "name": "io.csv.TimeReadCsvTrueFalseValues.time_true_false_values",
+        "number": 0,
+        "param_names": [
+            "shape"
+        ],
+        "params": [
+            [
+                "(5000, 5000)",
+                "(1000000, 10)"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "setup_cache_key": "io.csv:84",
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "41e44f7055b5129aee9fa5bb59722aefda86c7b171866153d1d54bd5a996075e",
         "warmup_time": -1
     },
     "omnisci.benchmarks.TimeAppend.time_append": {
@@ -1858,11 +1882,35 @@
         "repeat": 0,
         "rounds": 2,
         "sample_time": 0.01,
-        "setup_cache_key": "omnisci.io:37",
+        "setup_cache_key": "omnisci.io:40",
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
         "version": "f3b53c2ce9425fcc0cbc134e008a36544b428cfc30e1ad10b6defd145d8023e7",
+        "warmup_time": -1
+    },
+    "omnisci.io.TimeReadCsvTrueFalseValues.time_true_false_values": {
+        "code": "class TimeReadCsvTrueFalseValues:\n    def time_true_false_values(self, test_filenames, shape):\n        execute(\n            IMPL[ASV_USE_IMPL].read_csv(\n                test_filenames[self.shape_id],\n                true_values=[\"Yes\", \"true\"],\n                false_values=[\"No\", \"false\"],\n            ),\n            trigger_omnisci_import=ASV_USE_BACKEND == \"omnisci\",\n        )\n\nclass BaseReadCsv:\n    def setup(self, test_filenames, shape, *args, **kwargs):\n        # ray init\n        if ASV_USE_IMPL == \"modin\":\n            pd.DataFrame([])\n        self.shape_id = get_shape_id(shape)\n\nclass TimeReadCsvTrueFalseValues:\n    def setup_cache(self, test_filename=\"io_test_file\"):\n        test_filenames = prepare_io_data(\n            test_filename, \"true_false_int\", UNARY_OP_DATA_SIZE[ASV_DATASET_SIZE]\n        )\n        return test_filenames",
+        "min_run_count": 2,
+        "name": "omnisci.io.TimeReadCsvTrueFalseValues.time_true_false_values",
+        "number": 0,
+        "param_names": [
+            "shape"
+        ],
+        "params": [
+            [
+                "(5000, 5000)",
+                "(1000000, 10)"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "setup_cache_key": "io.csv:84",
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "41e44f7055b5129aee9fa5bb59722aefda86c7b171866153d1d54bd5a996075e",
         "warmup_time": -1
     },
     "scalability.scalability_benchmarks.TimeFromPandas.time_from_pandas": {
