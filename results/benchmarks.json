@@ -320,23 +320,17 @@
         "version": "cbeb16adcb3fadd00159e6c9922ccbfaac0eb086cd953d0eebb36b89c3e6e266",
         "warmup_time": -1
     },
-    "benchmarks.TimeFillna.time_fillna": {
-        "code": "class TimeFillna:\n    def time_fillna(self, self_type, value_type, shape, limit, inplace):\n        kw = {\"value\": self.value, \"limit\": self.limit, \"inplace\": inplace}\n        if inplace:\n            self.dataset.fillna(**kw)\n            execute(self.dataset)\n        else:\n            execute(self.dataset.fillna(**kw))\n\n    def setup(self, self_type, value_type, shape, limit, inplace):\n        pd = IMPL[ASV_USE_IMPL]\n        columns = [f\"col{x}\" for x in range(shape[1])]\n        if self_type == \"DataFrame\":\n            self.dataset = pd.DataFrame(\n                np.nan, index=pd.RangeIndex(shape[0]), columns=columns\n            )\n        elif self_type == \"Series\":\n            self.dataset = pd.Series(np.nan, index=pd.RangeIndex(shape[0]))\n        else:\n            assert False\n        if value_type == \"scalar\":\n            self.value = 18.19\n        elif value_type == \"dict\":\n            self.value = {k: k * 1.23 for k in range(shape[0])}\n        elif value_type == \"Series\":\n            self.value = pd.Series(\n                [k * 1.23 for k in range(shape[0])], index=pd.RangeIndex(shape[0])\n            )\n        elif value_type == \"DataFrame\":\n            if self_type == \"Series\":\n                raise NotImplementedError\n            self.value = pd.DataFrame(\n                {\n                    k: [i + j * 1.23 for j in range(shape[0])]\n                    for i, k in enumerate(columns)\n                },\n                index=pd.RangeIndex(shape[0]),\n                columns=columns,\n            )\n        else:\n            assert False\n        self.limit = int(limit * shape[0]) if limit else None",
+    "benchmarks.TimeFillnaDataFrame.time_fillna": {
+        "code": "class TimeFillnaDataFrame:\n    def time_fillna(self, value_type, shape, limit):\n        execute(self.df.fillna(**self.kw))\n\n    def setup(self, value_type, shape, limit):\n        pd = IMPL[ASV_USE_IMPL]\n        self.df = gen_nan_data(ASV_USE_IMPL, *shape)\n        columns = self.df.columns\n    \n        if value_type == \"scalar\":\n            self.value = 18.19\n        elif value_type == \"dict\":\n            self.value = {k: i * 1.23 for i, k in enumerate(columns)}\n        elif value_type == \"Series\":\n            self.value = pd.Series(\n                [i * 1.23 for i in range(len(columns))], index=columns\n            )\n        elif value_type == \"DataFrame\":\n            self.value = pd.DataFrame(\n                {\n                    k: [i + j * 1.23 for j in range(shape[0])]\n                    for i, k in enumerate(columns)\n                },\n                index=pd.RangeIndex(shape[0]),\n                columns=columns,\n            )\n        else:\n            assert False\n        limit = int(limit * shape[0]) if limit else None\n        self.kw = {\"value\": self.value, \"limit\": limit}",
         "min_run_count": 2,
-        "name": "benchmarks.TimeFillna.time_fillna",
+        "name": "benchmarks.TimeFillnaDataFrame.time_fillna",
         "number": 0,
         "param_names": [
-            "self_type",
             "value_type",
             "shape",
-            "limit",
-            "inplace"
+            "limit"
         ],
         "params": [
-            [
-                "'DataFrame'",
-                "'Series'"
-            ],
             [
                 "'scalar'",
                 "'dict'",
@@ -350,10 +344,6 @@
             [
                 "None",
                 "0.8"
-            ],
-            [
-                "False",
-                "True"
             ]
         ],
         "repeat": 0,
@@ -362,7 +352,108 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "2fbfd0972c07a1a719adcbe59d5e0e0ca329ecab21043bd4b1c207076a8c4697",
+        "version": "2a53f1e1a0506c8eb4c8131875b0264407549701c13dd2dd8018496eb81ed5ec",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeFillnaDataFrame.time_fillna_inplace": {
+        "code": "class TimeFillnaDataFrame:\n    def time_fillna_inplace(self, value_type, shape, limit):\n        self.df.fillna(inplace=True, **self.kw)\n        execute(self.df)\n\n    def setup(self, value_type, shape, limit):\n        pd = IMPL[ASV_USE_IMPL]\n        self.df = gen_nan_data(ASV_USE_IMPL, *shape)\n        columns = self.df.columns\n    \n        if value_type == \"scalar\":\n            self.value = 18.19\n        elif value_type == \"dict\":\n            self.value = {k: i * 1.23 for i, k in enumerate(columns)}\n        elif value_type == \"Series\":\n            self.value = pd.Series(\n                [i * 1.23 for i in range(len(columns))], index=columns\n            )\n        elif value_type == \"DataFrame\":\n            self.value = pd.DataFrame(\n                {\n                    k: [i + j * 1.23 for j in range(shape[0])]\n                    for i, k in enumerate(columns)\n                },\n                index=pd.RangeIndex(shape[0]),\n                columns=columns,\n            )\n        else:\n            assert False\n        limit = int(limit * shape[0]) if limit else None\n        self.kw = {\"value\": self.value, \"limit\": limit}",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeFillnaDataFrame.time_fillna_inplace",
+        "number": 0,
+        "param_names": [
+            "value_type",
+            "shape",
+            "limit"
+        ],
+        "params": [
+            [
+                "'scalar'",
+                "'dict'",
+                "'DataFrame'",
+                "'Series'"
+            ],
+            [
+                "(5000, 5000)",
+                "(1000000, 10)"
+            ],
+            [
+                "None",
+                "0.8"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "56651978c860fb892d9eb8fcf32ccd99fcbadfe19d53dcdb4b70a9d2e38a3c6b",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeFillnaSeries.time_fillna": {
+        "code": "class TimeFillnaSeries:\n    def time_fillna(self, value_type, shape, limit):\n        execute(self.series.fillna(**self.kw))\n\n    def setup(self, value_type, shape, limit):\n        pd = IMPL[ASV_USE_IMPL]\n        self.series = gen_nan_data(ASV_USE_IMPL, *shape)\n    \n        if value_type == \"scalar\":\n            self.value = 18.19\n        elif value_type == \"dict\":\n            self.value = {k: k * 1.23 for k in range(shape[0])}\n        elif value_type == \"Series\":\n            self.value = pd.Series(\n                [k * 1.23 for k in range(shape[0])], index=pd.RangeIndex(shape[0])\n            )\n        else:\n            assert False\n        limit = int(limit * shape[0]) if limit else None\n        self.kw = {\"value\": self.value, \"limit\": limit}",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeFillnaSeries.time_fillna",
+        "number": 0,
+        "param_names": [
+            "value_type",
+            "shape",
+            "limit"
+        ],
+        "params": [
+            [
+                "'scalar'",
+                "'dict'",
+                "'Series'"
+            ],
+            [
+                "(100000, 1)"
+            ],
+            [
+                "None",
+                "0.8"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "115f3f751e134490d58d0d1c2719751654d2e9884fd5454b14ff96532d704a97",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeFillnaSeries.time_fillna_inplace": {
+        "code": "class TimeFillnaSeries:\n    def time_fillna_inplace(self, value_type, shape, limit):\n        self.series.fillna(inplace=True, **self.kw)\n        execute(self.series)\n\n    def setup(self, value_type, shape, limit):\n        pd = IMPL[ASV_USE_IMPL]\n        self.series = gen_nan_data(ASV_USE_IMPL, *shape)\n    \n        if value_type == \"scalar\":\n            self.value = 18.19\n        elif value_type == \"dict\":\n            self.value = {k: k * 1.23 for k in range(shape[0])}\n        elif value_type == \"Series\":\n            self.value = pd.Series(\n                [k * 1.23 for k in range(shape[0])], index=pd.RangeIndex(shape[0])\n            )\n        else:\n            assert False\n        limit = int(limit * shape[0]) if limit else None\n        self.kw = {\"value\": self.value, \"limit\": limit}",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeFillnaSeries.time_fillna_inplace",
+        "number": 0,
+        "param_names": [
+            "value_type",
+            "shape",
+            "limit"
+        ],
+        "params": [
+            [
+                "'scalar'",
+                "'dict'",
+                "'Series'"
+            ],
+            [
+                "(100000, 1)"
+            ],
+            [
+                "None",
+                "0.8"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "72c059f8c6ffc17e37dde767459a738f551b15746a1d284572ee91b3d913dc9c",
         "warmup_time": -1
     },
     "benchmarks.TimeGroupByDefaultAggregations.time_groupby_count": {
@@ -1485,7 +1576,7 @@
         "warmup_time": -1
     },
     "omnisci.benchmarks.TimeFillna.time_fillna": {
-        "code": "class TimeFillna:\n    def time_fillna(self, value_type, shape, limit):\n        execute(self.df.fillna(**self.kw))\n\n    def setup(self, value_type, shape, limit):\n        pd = IMPL[ASV_USE_IMPL]\n        columns = [f\"col{x}\" for x in range(shape[1])]\n        self.df = pd.DataFrame(np.nan, index=pd.RangeIndex(shape[0]), columns=columns)\n        trigger_import(self.df)\n    \n        value = self.create_fillna_value(value_type, columns)\n        limit = int(limit * shape[0]) if limit else None\n        self.kw = {\"value\": value, \"limit\": limit}",
+        "code": "class TimeFillna:\n    def time_fillna(self, value_type, shape, limit):\n        execute(self.df.fillna(**self.kw))\n\n    def setup(self, value_type, shape, limit):\n        self.df = gen_nan_data(ASV_USE_IMPL, *shape)\n        columns = self.df.columns\n        trigger_import(self.df)\n    \n        value = self.create_fillna_value(value_type, columns)\n        limit = int(limit * shape[0]) if limit else None\n        self.kw = {\"value\": value, \"limit\": limit}",
         "min_run_count": 2,
         "name": "omnisci.benchmarks.TimeFillna.time_fillna",
         "number": 0,
@@ -1512,7 +1603,7 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "43ffd190b73a4c15e625970d4b8df0ce1b585fcadbf53a9c526f72470e6fc9c8",
+        "version": "ded6d632f7f53f3204d98bcc3b747aec90825900141de185eb34abdae64ffa10",
         "warmup_time": -1
     },
     "omnisci.benchmarks.TimeGroupByDefaultAggregations.time_groupby_count": {
