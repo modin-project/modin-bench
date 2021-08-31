@@ -10,8 +10,8 @@
         ],
         "params": [
             [
-                "((5000, 5000), (5000, 5000))",
-                "((500000, 20), (1000000, 10))"
+                "[[5000, 5000], [5000, 5000]]",
+                "[[500000, 20], [1000000, 10]]"
             ],
             [
                 "False",
@@ -38,8 +38,8 @@
         ],
         "params": [
             [
-                "(5000, 5000)",
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "0",
@@ -66,8 +66,8 @@
         ],
         "params": [
             [
-                "(5000, 5000)",
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "0",
@@ -94,8 +94,8 @@
         ],
         "params": [
             [
-                "(5000, 5000)",
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "0",
@@ -122,8 +122,8 @@
         ],
         "params": [
             [
-                "(5000, 5000)",
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "0",
@@ -150,8 +150,8 @@
         ],
         "params": [
             [
-                "(5000, 5000)",
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "0",
@@ -179,8 +179,8 @@
         ],
         "params": [
             [
-                "(5000, 5000)",
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "'float64'",
@@ -212,8 +212,8 @@
         ],
         "params": [
             [
-                "((5000, 5000), (5000, 5000))",
-                "((500000, 20), (1000000, 10))"
+                "[[5000, 5000], [5000, 5000]]",
+                "[[500000, 20], [1000000, 10]]"
             ],
             [
                 "'mul'"
@@ -244,8 +244,8 @@
         ],
         "params": [
             [
-                "((5000, 5000), (5000, 5000))",
-                "((500000, 20), (1000000, 10))"
+                "[[5000, 5000], [5000, 5000]]",
+                "[[500000, 20], [1000000, 10]]"
             ],
             [
                 "'inner'"
@@ -274,8 +274,8 @@
         ],
         "params": [
             [
-                "(5000, 5000)",
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ]
         ],
         "repeat": 0,
@@ -299,8 +299,8 @@
         ],
         "params": [
             [
-                "(5000, 5000)",
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "0",
@@ -338,8 +338,8 @@
                 "'Series'"
             ],
             [
-                "(5000, 5000)",
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "None",
@@ -373,8 +373,8 @@
                 "'Series'"
             ],
             [
-                "(5000, 5000)",
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "None",
@@ -467,8 +467,8 @@
         ],
         "params": [
             [
-                "(5000, 5000)",
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "100",
@@ -495,8 +495,8 @@
         ],
         "params": [
             [
-                "(5000, 5000)",
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "100",
@@ -523,8 +523,8 @@
         ],
         "params": [
             [
-                "(5000, 5000)",
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "100",
@@ -551,8 +551,8 @@
         ],
         "params": [
             [
-                "(5000, 5000)",
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "100",
@@ -580,8 +580,8 @@
         ],
         "params": [
             [
-                "(5000, 5000)",
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "100",
@@ -613,8 +613,8 @@
         ],
         "params": [
             [
-                "(5000, 5000)",
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "100",
@@ -645,8 +645,8 @@
         ],
         "params": [
             [
-                "(5000, 5000)",
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "100",
@@ -676,8 +676,8 @@
         ],
         "params": [
             [
-                "(5000, 5000)",
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "5",
@@ -704,8 +704,8 @@
         ],
         "params": [
             [
-                "(5000, 5000)",
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "'scalar'",
@@ -735,8 +735,8 @@
         ],
         "params": [
             [
-                "(5000, 5000)",
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "'scalar'",
@@ -768,8 +768,8 @@
         ],
         "params": [
             [
-                "(5000, 5000)",
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "1"
@@ -806,8 +806,8 @@
         ],
         "params": [
             [
-                "(5000, 5000)",
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "1"
@@ -843,8 +843,8 @@
         ],
         "params": [
             [
-                "((5000, 5000), (5000, 5000))",
-                "((500000, 20), (1000000, 10))"
+                "[[5000, 5000], [5000, 5000]]",
+                "[[500000, 20], [1000000, 10]]"
             ],
             [
                 "'left'",
@@ -875,8 +875,8 @@
         ],
         "params": [
             [
-                "((5000, 5000), (5000, 5000))",
-                "((500000, 20), (1000000, 10))"
+                "[[5000, 5000], [5000, 5000]]",
+                "[[500000, 20], [1000000, 10]]"
             ],
             [
                 "'left'",
@@ -905,8 +905,8 @@
         ],
         "params": [
             [
-                "(5000, 5000)",
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ]
         ],
         "repeat": 0,
@@ -928,8 +928,8 @@
         ],
         "params": [
             [
-                "(5000, 5000)",
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ]
         ],
         "repeat": 0,
@@ -951,8 +951,8 @@
         ],
         "params": [
             [
-                "(5000, 5000)",
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ]
         ],
         "repeat": 0,
@@ -974,8 +974,8 @@
         ],
         "params": [
             [
-                "(5000, 5000)",
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ]
         ],
         "repeat": 0,
@@ -999,8 +999,8 @@
         ],
         "params": [
             [
-                "(5000, 5000)",
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "False",
@@ -1033,8 +1033,8 @@
         ],
         "params": [
             [
-                "(5000, 5000)",
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "1"
@@ -1071,8 +1071,8 @@
         ],
         "params": [
             [
-                "(5000, 5000)",
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "1"
@@ -1108,8 +1108,8 @@
         ],
         "params": [
             [
-                "(5000, 5000)",
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "1",
@@ -1143,8 +1143,8 @@
         ],
         "params": [
             [
-                "(5000, 5000)",
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "100",
@@ -1176,8 +1176,8 @@
         ],
         "params": [
             [
-                "(5000, 5000)",
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "100",
@@ -1198,7 +1198,7 @@
         "warmup_time": -1
     },
     "io.csv.TimeReadCsvNamesDtype.time_read_csv_names_dtype": {
-        "code": "class TimeReadCsvNamesDtype:\n    def time_read_csv_names_dtype(self, cache, shape, names, dtype):\n        execute(\n            IMPL[ASV_USE_IMPL].read_csv(\n                self.filename,\n                names=self.names,\n                header=0,\n                dtype=self.dtype,\n                parse_dates=self.parse_dates,\n            )\n        )\n\n    def setup(self, cache, shape, names, dtype):\n        # ray init\n        if ASV_USE_IMPL == \"modin\":\n            pd.DataFrame([])\n        file_id = self._get_file_id(shape, dtype)\n        self.filename, self.names, self.dtype = cache[file_id]\n    \n        self.parse_dates = None\n        if dtype == \"Int64_Timestamp\":\n            # cached version of dtype should not change\n            self.dtype = self.dtype.copy()\n            for col in self._timestamp_columns:\n                del self.dtype[col]\n            self.parse_dates = self._timestamp_columns\n\n    def setup_cache(self, test_filename=\"io_test_file_csv_names_dtype\"):\n        # filenames with a metadata of saved dataframes\n        cache = {}\n        for shape in UNARY_OP_DATA_SIZE[ASV_DATASET_SIZE]:\n            for dtype in self._dtypes_params:\n                df = generate_dataframe(\"pandas\", \"int\", *shape, RAND_LOW, RAND_HIGH)\n                if dtype == \"Int64_Timestamp\":\n                    df = self._add_timestamp_columns(df)\n    \n                file_id = self._get_file_id(shape, dtype)\n                cache[file_id] = (\n                    f\"{test_filename}_{file_id}.csv\",\n                    df.columns.to_list(),\n                    df.dtypes.to_dict(),\n                )\n                df.to_csv(cache[file_id][0], index=False)\n        return cache",
+        "code": "class TimeReadCsvNamesDtype:\n    def time_read_csv_names_dtype(self, cache, shape, names, dtype):\n        execute(\n            IMPL[ASV_USE_IMPL].read_csv(\n                self.filename,\n                names=self.names,\n                header=0,\n                dtype=self.dtype,\n                parse_dates=self.parse_dates,\n            )\n        )\n\n    def setup(self, cache, shape, names, dtype):\n        # ray init\n        if ASV_USE_IMPL == \"modin\":\n            pd.DataFrame([])\n        file_id = self._get_file_id(shape, dtype)\n        self.filename, self.names, self.dtype = cache[file_id]\n    \n        self.parse_dates = None\n        if dtype == \"Int64_Timestamp\":\n            # cached version of dtype should not change\n            self.dtype = self.dtype.copy()\n            for col in self._timestamp_columns:\n                del self.dtype[col]\n            self.parse_dates = self._timestamp_columns\n\n    def setup_cache(self, test_filename=\"io_test_file_csv_names_dtype\"):\n        # filenames with a metadata of saved dataframes\n        cache = {}\n        for shape in self.shapes:\n            for dtype in self._dtypes_params:\n                df = generate_dataframe(\"pandas\", \"int\", *shape, RAND_LOW, RAND_HIGH)\n                if dtype == \"Int64_Timestamp\":\n                    df = self._add_timestamp_columns(df)\n    \n                file_id = self._get_file_id(shape, dtype)\n                cache[file_id] = (\n                    f\"{test_filename}_{file_id}.csv\",\n                    df.columns.to_list(),\n                    df.dtypes.to_dict(),\n                )\n                df.to_csv(cache[file_id][0], index=False)\n        return cache",
         "min_run_count": 2,
         "name": "io.csv.TimeReadCsvNamesDtype.time_read_csv_names_dtype",
         "number": 0,
@@ -1209,8 +1209,8 @@
         ],
         "params": [
             [
-                "(5000, 5000)",
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "'array-like'"
@@ -1223,15 +1223,15 @@
         "repeat": 0,
         "rounds": 2,
         "sample_time": 0.01,
-        "setup_cache_key": "io.csv:126",
+        "setup_cache_key": "io.csv:121",
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "c87f3f28049f8c07a090a44814aaade5b9ba1c744cd56bf20efec79b2f1dfd83",
+        "version": "369f7d09f2322523c7befbe04c29bc8fdd6ca1273a5932743a623dcfdef3e597",
         "warmup_time": -1
     },
     "io.csv.TimeReadCsvSkiprows.time_skiprows": {
-        "code": "class TimeReadCsvSkiprows:\n    def time_skiprows(self, test_filenames, shape, skiprows):\n        execute(\n            IMPL[ASV_USE_IMPL].read_csv(\n                test_filenames[self.shape_id], skiprows=self.skiprows\n            )\n        )\n\n    def setup(self, test_filenames, shape, skiprows):\n        super().setup(test_filenames, shape, skiprows)\n        self.skiprows = self.skiprows_mapping[skiprows] if skiprows else None\n\nclass BaseReadCsv:\n    def setup_cache(self, test_filename=\"io_test_file\"):\n        test_filenames = prepare_io_data(\n            test_filename, \"str_int\", UNARY_OP_DATA_SIZE[ASV_DATASET_SIZE]\n        )\n        return test_filenames",
+        "code": "class TimeReadCsvSkiprows:\n    def time_skiprows(self, test_filenames, shape, skiprows):\n        execute(\n            IMPL[ASV_USE_IMPL].read_csv(\n                test_filenames[self.shape_id], skiprows=self.skiprows\n            )\n        )\n\n    def setup(self, test_filenames, shape, skiprows):\n        super().setup(test_filenames, shape, skiprows)\n        self.skiprows = self.skiprows_mapping[skiprows] if skiprows else None\n\nclass BaseReadCsv:\n    def setup_cache(self, test_filename=\"io_test_file\"):\n        test_filenames = prepare_io_data(\n            test_filename, self.data_type, get_benchmark_shapes(self.__class__.__name__)\n        )\n        return test_filenames",
         "min_run_count": 2,
         "name": "io.csv.TimeReadCsvSkiprows.time_skiprows",
         "number": 0,
@@ -1241,8 +1241,8 @@
         ],
         "params": [
             [
-                "(5000, 5000)",
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "None",
@@ -1254,15 +1254,15 @@
         "repeat": 0,
         "rounds": 2,
         "sample_time": 0.01,
-        "setup_cache_key": "io.csv:34",
+        "setup_cache_key": "io.csv:33",
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "b958a15568d2fc63152698f305ac0fb42dc7a10a6f9b3a1a481b4590286f0de8",
+        "version": "eeb505794553ac5bb0c569262aa60e11c74a22da29ae2a77b9c071c55c6770d1",
         "warmup_time": -1
     },
     "io.csv.TimeReadCsvTrueFalseValues.time_true_false_values": {
-        "code": "class TimeReadCsvTrueFalseValues:\n    def time_true_false_values(self, test_filenames, shape):\n        execute(\n            IMPL[ASV_USE_IMPL].read_csv(\n                test_filenames[self.shape_id],\n                true_values=[\"Yes\", \"true\"],\n                false_values=[\"No\", \"false\"],\n            ),\n            trigger_omnisci_import=ASV_USE_BACKEND == \"omnisci\",\n        )\n\nclass BaseReadCsv:\n    def setup(self, test_filenames, shape, *args, **kwargs):\n        # ray init\n        if ASV_USE_IMPL == \"modin\":\n            pd.DataFrame([])\n        self.shape_id = get_shape_id(shape)\n\nclass TimeReadCsvTrueFalseValues:\n    def setup_cache(self, test_filename=\"io_test_file\"):\n        test_filenames = prepare_io_data(\n            test_filename, \"true_false_int\", UNARY_OP_DATA_SIZE[ASV_DATASET_SIZE]\n        )\n        return test_filenames",
+        "code": "class TimeReadCsvTrueFalseValues:\n    def time_true_false_values(self, test_filenames, shape):\n        execute(\n            IMPL[ASV_USE_IMPL].read_csv(\n                test_filenames[self.shape_id],\n                true_values=[\"Yes\", \"true\"],\n                false_values=[\"No\", \"false\"],\n            ),\n            trigger_omnisci_import=ASV_USE_BACKEND == \"omnisci\",\n        )\n\nclass BaseReadCsv:\n    def setup(self, test_filenames, shape, *args, **kwargs):\n        # ray init\n        if ASV_USE_IMPL == \"modin\":\n            pd.DataFrame([])\n        self.shape_id = get_shape_id(shape)\n\n    def setup_cache(self, test_filename=\"io_test_file\"):\n        test_filenames = prepare_io_data(\n            test_filename, self.data_type, get_benchmark_shapes(self.__class__.__name__)\n        )\n        return test_filenames",
         "min_run_count": 2,
         "name": "io.csv.TimeReadCsvTrueFalseValues.time_true_false_values",
         "number": 0,
@@ -1271,18 +1271,18 @@
         ],
         "params": [
             [
-                "(5000, 5000)",
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ]
         ],
         "repeat": 0,
         "rounds": 2,
         "sample_time": 0.01,
-        "setup_cache_key": "io.csv:84",
+        "setup_cache_key": "io.csv:33",
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "41e44f7055b5129aee9fa5bb59722aefda86c7b171866153d1d54bd5a996075e",
+        "version": "eaa4cc15b433a38b333b4253efbc12e006b32fdb02cc28f8271db6b02e61d70a",
         "warmup_time": -1
     },
     "omnisci.benchmarks.TimeAppend.time_append": {
@@ -1295,7 +1295,8 @@
         ],
         "params": [
             [
-                "((500000, 20), (1000000, 10))"
+                "[[5000, 5000], [5000, 5000]]",
+                "[[500000, 20], [1000000, 10]]"
             ]
         ],
         "repeat": 0,
@@ -1317,7 +1318,8 @@
         ],
         "params": [
             [
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ]
         ],
         "repeat": 0,
@@ -1339,7 +1341,8 @@
         ],
         "params": [
             [
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ]
         ],
         "repeat": 0,
@@ -1361,7 +1364,8 @@
         ],
         "params": [
             [
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ]
         ],
         "repeat": 0,
@@ -1383,7 +1387,8 @@
         ],
         "params": [
             [
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ]
         ],
         "repeat": 0,
@@ -1405,7 +1410,8 @@
         ],
         "params": [
             [
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ]
         ],
         "repeat": 0,
@@ -1429,7 +1435,8 @@
         ],
         "params": [
             [
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "'float64'"
@@ -1459,7 +1466,8 @@
         ],
         "params": [
             [
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "'mul'"
@@ -1485,7 +1493,8 @@
         ],
         "params": [
             [
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "'mul'"
@@ -1511,7 +1520,7 @@
         ],
         "params": [
             [
-                "(10000000, 1)"
+                "(100000, 1)"
             ],
             [
                 "'mul'"
@@ -1536,7 +1545,8 @@
         ],
         "params": [
             [
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ]
         ],
         "repeat": 0,
@@ -1559,7 +1569,8 @@
         ],
         "params": [
             [
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "1",
@@ -1591,7 +1602,8 @@
                 "'dict'"
             ],
             [
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "None"
@@ -1617,7 +1629,8 @@
         ],
         "params": [
             [
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "100",
@@ -1644,7 +1657,8 @@
         ],
         "params": [
             [
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "100",
@@ -1672,7 +1686,8 @@
         ],
         "params": [
             [
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "100",
@@ -1703,7 +1718,8 @@
         ],
         "params": [
             [
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "100",
@@ -1734,7 +1750,8 @@
         ],
         "params": [
             [
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "100",
@@ -1764,7 +1781,8 @@
         ],
         "params": [
             [
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "5",
@@ -1791,7 +1809,8 @@
         ],
         "params": [
             [
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "'scalar'",
@@ -1821,7 +1840,8 @@
         ],
         "params": [
             [
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "'scalar'",
@@ -1851,7 +1871,8 @@
         ],
         "params": [
             [
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "'left'",
@@ -1878,7 +1899,8 @@
         ],
         "params": [
             [
-                "((500000, 20), (1000000, 10))"
+                "[[5000, 5000], [5000, 5000]]",
+                "[[500000, 20], [1000000, 10]]"
             ],
             [
                 "'left'"
@@ -1903,7 +1925,8 @@
         ],
         "params": [
             [
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ]
         ],
         "repeat": 0,
@@ -1925,7 +1948,8 @@
         ],
         "params": [
             [
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ]
         ],
         "repeat": 0,
@@ -1947,7 +1971,8 @@
         ],
         "params": [
             [
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ]
         ],
         "repeat": 0,
@@ -1971,7 +1996,8 @@
         ],
         "params": [
             [
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "False",
@@ -2003,7 +2029,8 @@
         ],
         "params": [
             [
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "1",
@@ -2034,7 +2061,7 @@
         ],
         "params": [
             [
-                "(10000000, 1)"
+                "(100000, 1)"
             ],
             [
                 "100",
@@ -2051,7 +2078,7 @@
         "warmup_time": -1
     },
     "omnisci.io.TimeReadCsvNames.time_read_csv_names": {
-        "code": "class TimeReadCsvNames:\n    def time_read_csv_names(self, cache, shape):\n        df = IMPL[ASV_USE_IMPL].read_csv(\n            self.filename,\n            names=self.names,\n            header=0,\n            dtype=self.dtype,\n        )\n        trigger_import(df)\n\n    def setup(self, cache, shape):\n        # ray init\n        if ASV_USE_IMPL == \"modin\":\n            pd.DataFrame([])\n        file_id = get_shape_id(shape)\n        self.filename, self.names, self.dtype = cache[file_id]\n\n    def setup_cache(self, test_filename=\"io_test_file_csv_names\"):\n        # filenames with a metadata of saved dataframes\n        cache = {}\n        for shape in UNARY_OP_DATA_SIZE[ASV_DATASET_SIZE]:\n            df = generate_dataframe(\"pandas\", \"int\", *shape, RAND_LOW, RAND_HIGH)\n            file_id = get_shape_id(shape)\n            cache[file_id] = (\n                f\"{test_filename}_{file_id}.csv\",\n                df.columns.to_list(),\n                df.dtypes.to_dict(),\n            )\n            df.to_csv(cache[file_id][0], index=False)\n        return cache",
+        "code": "class TimeReadCsvNames:\n    def time_read_csv_names(self, cache, shape):\n        df = IMPL[ASV_USE_IMPL].read_csv(\n            self.filename,\n            names=self.names,\n            header=0,\n            dtype=self.dtype,\n        )\n        trigger_import(df)\n\n    def setup(self, cache, shape):\n        # ray init\n        if ASV_USE_IMPL == \"modin\":\n            pd.DataFrame([])\n        file_id = get_shape_id(shape)\n        self.filename, self.names, self.dtype = cache[file_id]\n\n    def setup_cache(self, test_filename=\"io_test_file_csv_names\"):\n        # filenames with a metadata of saved dataframes\n        cache = {}\n        for shape in self.shapes:\n            df = generate_dataframe(\"pandas\", \"int\", *shape, RAND_LOW, RAND_HIGH)\n            file_id = get_shape_id(shape)\n            cache[file_id] = (\n                f\"{test_filename}_{file_id}.csv\",\n                df.columns.to_list(),\n                df.dtypes.to_dict(),\n            )\n            df.to_csv(cache[file_id][0], index=False)\n        return cache",
         "min_run_count": 2,
         "name": "omnisci.io.TimeReadCsvNames.time_read_csv_names",
         "number": 0,
@@ -2060,21 +2087,22 @@
         ],
         "params": [
             [
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ]
         ],
         "repeat": 0,
         "rounds": 2,
         "sample_time": 0.01,
-        "setup_cache_key": "omnisci.io:40",
+        "setup_cache_key": "omnisci.io:37",
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "f3b53c2ce9425fcc0cbc134e008a36544b428cfc30e1ad10b6defd145d8023e7",
+        "version": "ea3f66c8a5cbde5e04d94bc693e5b65e70285e7ebb5df1d6445a7f2aefb63f80",
         "warmup_time": -1
     },
     "omnisci.io.TimeReadCsvTrueFalseValues.time_true_false_values": {
-        "code": "class TimeReadCsvTrueFalseValues:\n    def time_true_false_values(self, test_filenames, shape):\n        execute(\n            IMPL[ASV_USE_IMPL].read_csv(\n                test_filenames[self.shape_id],\n                true_values=[\"Yes\", \"true\"],\n                false_values=[\"No\", \"false\"],\n            ),\n            trigger_omnisci_import=ASV_USE_BACKEND == \"omnisci\",\n        )\n\nclass BaseReadCsv:\n    def setup(self, test_filenames, shape, *args, **kwargs):\n        # ray init\n        if ASV_USE_IMPL == \"modin\":\n            pd.DataFrame([])\n        self.shape_id = get_shape_id(shape)\n\nclass TimeReadCsvTrueFalseValues:\n    def setup_cache(self, test_filename=\"io_test_file\"):\n        test_filenames = prepare_io_data(\n            test_filename, \"true_false_int\", UNARY_OP_DATA_SIZE[ASV_DATASET_SIZE]\n        )\n        return test_filenames",
+        "code": "class TimeReadCsvTrueFalseValues:\n    def time_true_false_values(self, test_filenames, shape):\n        execute(\n            IMPL[ASV_USE_IMPL].read_csv(\n                test_filenames[self.shape_id],\n                true_values=[\"Yes\", \"true\"],\n                false_values=[\"No\", \"false\"],\n            ),\n            trigger_omnisci_import=ASV_USE_BACKEND == \"omnisci\",\n        )\n\nclass BaseReadCsv:\n    def setup(self, test_filenames, shape, *args, **kwargs):\n        # ray init\n        if ASV_USE_IMPL == \"modin\":\n            pd.DataFrame([])\n        self.shape_id = get_shape_id(shape)\n\n    def setup_cache(self, test_filename=\"io_test_file\"):\n        test_filenames = prepare_io_data(\n            test_filename, self.data_type, get_benchmark_shapes(self.__class__.__name__)\n        )\n        return test_filenames",
         "min_run_count": 2,
         "name": "omnisci.io.TimeReadCsvTrueFalseValues.time_true_false_values",
         "number": 0,
@@ -2083,18 +2111,18 @@
         ],
         "params": [
             [
-                "(5000, 5000)",
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ]
         ],
         "repeat": 0,
         "rounds": 2,
         "sample_time": 0.01,
-        "setup_cache_key": "io.csv:84",
+        "setup_cache_key": "io.csv:33",
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "41e44f7055b5129aee9fa5bb59722aefda86c7b171866153d1d54bd5a996075e",
+        "version": "eaa4cc15b433a38b333b4253efbc12e006b32fdb02cc28f8271db6b02e61d70a",
         "warmup_time": -1
     },
     "scalability.scalability_benchmarks.TimeFromPandas.time_from_pandas": {
@@ -2108,8 +2136,8 @@
         ],
         "params": [
             [
-                "(5000, 5000)",
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "4",
@@ -2137,8 +2165,8 @@
         ],
         "params": [
             [
-                "(5000, 5000)",
-                "(1000000, 10)"
+                "[5000, 5000]",
+                "[1000000, 10]"
             ],
             [
                 "4",
