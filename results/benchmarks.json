@@ -2050,8 +2050,41 @@
         "version": "80291c87f0eb5241a860340ccd219981eb683da4e5702954d223fbbd475354d9",
         "warmup_time": -1
     },
+    "omnisci.benchmarks.TimeValueCountsDataFrame.time_value_counts": {
+        "code": "class TimeValueCountsDataFrame:\n    def time_value_counts(self, *args, **kwargs):\n        execute(self.df.value_counts(subset=self.subset))\n\nclass BaseTimeValueCounts:\n    def setup(self, shape, ngroups=5, subset=1):\n        ngroups = translator_groupby_ngroups(ngroups, shape)\n        self.df, self.subset = generate_dataframe(\n            ASV_USE_IMPL,\n            \"int\",\n            *shape,\n            RAND_LOW,\n            RAND_HIGH,\n            groupby_ncols=subset,\n            count_groups=ngroups,\n        )\n        trigger_import(self.df)",
+        "min_run_count": 2,
+        "name": "omnisci.benchmarks.TimeValueCountsDataFrame.time_value_counts",
+        "number": 0,
+        "param_names": [
+            "shape",
+            "ngroups",
+            "subset"
+        ],
+        "params": [
+            [
+                "[5000, 5000]",
+                "[1000000, 10]"
+            ],
+            [
+                "100",
+                "'huge_amount_groups'"
+            ],
+            [
+                "2",
+                "10"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "130f78c46e8dd21a9803c5e15312e7bbeea976b28fa21590ee73e0fe18de8624",
+        "warmup_time": -1
+    },
     "omnisci.benchmarks.TimeValueCountsSeries.time_value_counts": {
-        "code": "class TimeValueCountsSeries:\n    def time_value_counts(self, shape, ngroups):\n        execute(self.series.value_counts())\n\n    def setup(self, shape, ngroups):\n        ngroups = translator_groupby_ngroups(ngroups, shape)\n        self.df, self.column_names = generate_dataframe(\n            ASV_USE_IMPL,\n            \"int\",\n            *shape,\n            RAND_LOW,\n            RAND_HIGH,\n            groupby_ncols=1,\n            count_groups=ngroups,\n        )\n        self.series = self.df[self.column_names[0]]\n        trigger_import(self.series)",
+        "code": "class TimeValueCountsSeries:\n    def time_value_counts(self, shape, ngroups):\n        execute(self.series.value_counts())\n\n    def setup(self, shape, ngroups):\n        super().setup(shape, ngroups, subset=1)\n        self.series = self.df[self.subset[0]]\n        trigger_import(self.series)",
         "min_run_count": 2,
         "name": "omnisci.benchmarks.TimeValueCountsSeries.time_value_counts",
         "number": 0,
@@ -2074,7 +2107,7 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "70774d5bd191f6a87566ea922a4f7425641ae808c04e4cafaa0a0d927be0a84a",
+        "version": "50d039f809a57224798f163963708292724bc1f840d29c56433f0628d90b683b",
         "warmup_time": -1
     },
     "omnisci.io.TimeReadCsvNames.time_read_csv_names": {
