@@ -1868,7 +1868,7 @@
         "warmup_time": -1
     },
     "omnisci.benchmarks.TimeMerge.time_merge": {
-        "code": "class TimeMerge:\n    def time_merge(self, shapes, how):\n        # merging dataframes by index is not supported, therefore we merge by column\n        # with arbitrary values, which leads to an unpredictable form of the operation result;\n        # it's need to get the predictable shape to get consistent performance results\n        execute(\n            self.df1.merge(self.df2, on=\"col1\", how=how, suffixes=(\"left_\", \"right_\"))\n        )\n\n    def setup(self, shapes, how):\n        self.df1 = generate_dataframe(\n            ASV_USE_IMPL, \"int\", *shapes[0], RAND_LOW, RAND_HIGH\n        )\n        self.df2 = generate_dataframe(\n            ASV_USE_IMPL, \"int\", *shapes[1], RAND_LOW, RAND_HIGH\n        )\n        trigger_import(self.df1, self.df2)",
+        "code": "class TimeMerge:\n    def time_merge(self, shapes, how):\n        # merging dataframes by index is not supported, therefore we merge by column\n        # with arbitrary values, which leads to an unpredictable form of the operation result;\n        # it's need to get the predictable shape to get consistent performance results\n        execute(\n            self.dfs[0].merge(\n                self.dfs[1], on=\"col1\", how=how, suffixes=(\"left_\", \"right_\")\n            )\n        )\n\n    def setup(self, shapes, how):\n        gen_unique_key = how == \"inner\"\n        self.dfs = []\n        for shape in shapes:\n            self.dfs.append(\n                generate_dataframe(\n                    ASV_USE_IMPL,\n                    \"int\",\n                    *shape,\n                    RAND_LOW,\n                    RAND_HIGH,\n                    gen_unique_key=gen_unique_key,\n                )\n            )\n        trigger_import(*self.dfs)",
         "min_run_count": 2,
         "name": "omnisci.benchmarks.TimeMerge.time_merge",
         "number": 0,
@@ -1881,7 +1881,8 @@
                 "[[500000, 20], [1000000, 10]]"
             ],
             [
-                "'left'"
+                "'left'",
+                "'inner'"
             ]
         ],
         "repeat": 0,
@@ -1890,7 +1891,7 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "e9fc4f4bfabbef9470f18a815e57582c09797f6e609cf83eca5f0d5c6aa7c280",
+        "version": "23830785fe3f717a541b75bca7b15c818d1b27b09bf7e32ccc87dc0025b5354e",
         "warmup_time": -1
     },
     "omnisci.benchmarks.TimeProperties.time_columns": {
