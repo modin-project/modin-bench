@@ -1262,7 +1262,7 @@
         "warmup_time": -1
     },
     "io.csv.TimeReadCsvTrueFalseValues.time_true_false_values": {
-        "code": "class TimeReadCsvTrueFalseValues:\n    def time_true_false_values(self, test_filenames, shape):\n        execute(\n            IMPL[ASV_USE_IMPL].read_csv(\n                test_filenames[self.shape_id],\n                true_values=[\"Yes\", \"true\"],\n                false_values=[\"No\", \"false\"],\n            ),\n            trigger_omnisci_import=ASV_USE_BACKEND == \"omnisci\",\n        )\n\nclass BaseReadCsv:\n    def setup(self, test_filenames, shape, *args, **kwargs):\n        # ray init\n        if ASV_USE_IMPL == \"modin\":\n            pd.DataFrame([])\n        self.shape_id = get_shape_id(shape)\n\n    def setup_cache(self, test_filename=\"io_test_file\"):\n        test_filenames = prepare_io_data(\n            test_filename, self.data_type, get_benchmark_shapes(self.__class__.__name__)\n        )\n        return test_filenames",
+        "code": "class TimeReadCsvTrueFalseValues:\n    def time_true_false_values(self, test_filenames, shape):\n        execute(\n            IMPL[ASV_USE_IMPL].read_csv(\n                test_filenames[self.shape_id],\n                true_values=[\"Yes\", \"true\"],\n                false_values=[\"No\", \"false\"],\n            ),\n            trigger_omnisci_import=ASV_USE_STORAGE_FORMAT == \"omnisci\",\n        )\n\nclass BaseReadCsv:\n    def setup(self, test_filenames, shape, *args, **kwargs):\n        # ray init\n        if ASV_USE_IMPL == \"modin\":\n            pd.DataFrame([])\n        self.shape_id = get_shape_id(shape)\n\n    def setup_cache(self, test_filename=\"io_test_file\"):\n        test_filenames = prepare_io_data(\n            test_filename, self.data_type, get_benchmark_shapes(self.__class__.__name__)\n        )\n        return test_filenames",
         "min_run_count": 2,
         "name": "io.csv.TimeReadCsvTrueFalseValues.time_true_false_values",
         "number": 0,
@@ -1282,7 +1282,7 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "eaa4cc15b433a38b333b4253efbc12e006b32fdb02cc28f8271db6b02e61d70a",
+        "version": "12e5e8c7de4a5d3ecdf96c0d074afc33f7091f65ca0c8e2777bb25e2600a19cc",
         "warmup_time": -1
     },
     "omnisci.benchmarks.TimeAppend.time_append": {
@@ -2107,7 +2107,7 @@
         "warmup_time": -1
     },
     "omnisci.io.TimeReadCsvTrueFalseValues.time_true_false_values": {
-        "code": "class TimeReadCsvTrueFalseValues:\n    def time_true_false_values(self, test_filenames, shape):\n        execute(\n            IMPL[ASV_USE_IMPL].read_csv(\n                test_filenames[self.shape_id],\n                true_values=[\"Yes\", \"true\"],\n                false_values=[\"No\", \"false\"],\n            ),\n            trigger_omnisci_import=ASV_USE_BACKEND == \"omnisci\",\n        )\n\nclass BaseReadCsv:\n    def setup(self, test_filenames, shape, *args, **kwargs):\n        # ray init\n        if ASV_USE_IMPL == \"modin\":\n            pd.DataFrame([])\n        self.shape_id = get_shape_id(shape)\n\n    def setup_cache(self, test_filename=\"io_test_file\"):\n        test_filenames = prepare_io_data(\n            test_filename, self.data_type, get_benchmark_shapes(self.__class__.__name__)\n        )\n        return test_filenames",
+        "code": "class TimeReadCsvTrueFalseValues:\n    def time_true_false_values(self, test_filenames, shape):\n        execute(\n            IMPL[ASV_USE_IMPL].read_csv(\n                test_filenames[self.shape_id],\n                true_values=[\"Yes\", \"true\"],\n                false_values=[\"No\", \"false\"],\n            ),\n            trigger_omnisci_import=ASV_USE_STORAGE_FORMAT == \"omnisci\",\n        )\n\nclass BaseReadCsv:\n    def setup(self, test_filenames, shape, *args, **kwargs):\n        # ray init\n        if ASV_USE_IMPL == \"modin\":\n            pd.DataFrame([])\n        self.shape_id = get_shape_id(shape)\n\n    def setup_cache(self, test_filename=\"io_test_file\"):\n        test_filenames = prepare_io_data(\n            test_filename, self.data_type, get_benchmark_shapes(self.__class__.__name__)\n        )\n        return test_filenames",
         "min_run_count": 2,
         "name": "omnisci.io.TimeReadCsvTrueFalseValues.time_true_false_values",
         "number": 0,
@@ -2127,7 +2127,7 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "eaa4cc15b433a38b333b4253efbc12e006b32fdb02cc28f8271db6b02e61d70a",
+        "version": "12e5e8c7de4a5d3ecdf96c0d074afc33f7091f65ca0c8e2777bb25e2600a19cc",
         "warmup_time": -1
     },
     "scalability.scalability_benchmarks.TimeFromPandas.time_from_pandas": {
