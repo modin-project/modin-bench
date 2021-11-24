@@ -1607,7 +1607,7 @@
         "warmup_time": -1
     },
     "omnisci.benchmarks.TimeGroupByDefaultAggregations.time_groupby_count": {
-        "code": "class TimeGroupByDefaultAggregations:\n    def time_groupby_count(self, *args, **kwargs):\n        execute(self.df.groupby(by=self.groupby_columns).count())\n\nclass BaseTimeGroupBy:\n    def setup(self, shape, ngroups=5, groupby_ncols=1):\n        ngroups = translator_groupby_ngroups(ngroups, shape)\n        self.df, self.groupby_columns = generate_dataframe(\n            ASV_USE_IMPL,\n            \"int\",\n            *shape,\n            RAND_LOW,\n            RAND_HIGH,\n            groupby_ncols,\n            count_groups=ngroups,\n        )\n        trigger_import(self.df)",
+        "code": "class TimeGroupByDefaultAggregations:\n    def time_groupby_count(self, *args, **kwargs):\n        execute(self.df.groupby(by=self.groupby_columns).count())\n\nclass BaseTimeGroupBy:\n    def setup(self, shape, ngroups=5, groupby_ncols=1):\n        ngroups = translator_groupby_ngroups(ngroups, shape)\n        self.df, self.groupby_columns = generate_dataframe(\n            ASV_USE_IMPL,\n            \"int\",\n            *shape,\n            RAND_LOW,\n            RAND_HIGH,\n            groupby_ncols,\n            count_groups=ngroups,\n        )\n        # correct while we use 'col*' like name for non-groupby columns\n        # and 'groupby_col*' like name for groupby columns\n        self.non_groupby_columns = self.df.columns[:-groupby_ncols]\n        trigger_import(self.df)",
         "min_run_count": 2,
         "name": "omnisci.benchmarks.TimeGroupByDefaultAggregations.time_groupby_count",
         "number": 0,
@@ -1630,11 +1630,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "23828a6c2d72006664542f81e4745ca20d03e91ed2a366852706f6a0f8ba6a5b",
+        "version": "44639493437ba1e057d2d0793aebebf48eaf0141db935de196eb9ec9b386c7fd",
         "warmup_time": -1
     },
     "omnisci.benchmarks.TimeGroupByDefaultAggregations.time_groupby_sum": {
-        "code": "class TimeGroupByDefaultAggregations:\n    def time_groupby_sum(self, *args, **kwargs):\n        execute(self.df.groupby(by=self.groupby_columns).sum())\n\nclass BaseTimeGroupBy:\n    def setup(self, shape, ngroups=5, groupby_ncols=1):\n        ngroups = translator_groupby_ngroups(ngroups, shape)\n        self.df, self.groupby_columns = generate_dataframe(\n            ASV_USE_IMPL,\n            \"int\",\n            *shape,\n            RAND_LOW,\n            RAND_HIGH,\n            groupby_ncols,\n            count_groups=ngroups,\n        )\n        trigger_import(self.df)",
+        "code": "class TimeGroupByDefaultAggregations:\n    def time_groupby_sum(self, *args, **kwargs):\n        execute(self.df.groupby(by=self.groupby_columns).sum())\n\nclass BaseTimeGroupBy:\n    def setup(self, shape, ngroups=5, groupby_ncols=1):\n        ngroups = translator_groupby_ngroups(ngroups, shape)\n        self.df, self.groupby_columns = generate_dataframe(\n            ASV_USE_IMPL,\n            \"int\",\n            *shape,\n            RAND_LOW,\n            RAND_HIGH,\n            groupby_ncols,\n            count_groups=ngroups,\n        )\n        # correct while we use 'col*' like name for non-groupby columns\n        # and 'groupby_col*' like name for groupby columns\n        self.non_groupby_columns = self.df.columns[:-groupby_ncols]\n        trigger_import(self.df)",
         "min_run_count": 2,
         "name": "omnisci.benchmarks.TimeGroupByDefaultAggregations.time_groupby_sum",
         "number": 0,
@@ -1657,11 +1657,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "9c0a8d9189a5a6fadd049bd3a62bddea0a458f77dfb1b9b59d69300c83d52546",
+        "version": "2bd5327d40b4ea4a49760c67b22c6fd1ab3e7b4c54d7e24c277a866d7c6b5efc",
         "warmup_time": -1
     },
     "omnisci.benchmarks.TimeGroupByMultiColumn.time_groupby_agg_mean": {
-        "code": "class TimeGroupByMultiColumn:\n    def time_groupby_agg_mean(self, *args, **kwargs):\n        execute(self.df.groupby(by=self.groupby_columns).agg(\"mean\"))\n\nclass BaseTimeGroupBy:\n    def setup(self, shape, ngroups=5, groupby_ncols=1):\n        ngroups = translator_groupby_ngroups(ngroups, shape)\n        self.df, self.groupby_columns = generate_dataframe(\n            ASV_USE_IMPL,\n            \"int\",\n            *shape,\n            RAND_LOW,\n            RAND_HIGH,\n            groupby_ncols,\n            count_groups=ngroups,\n        )\n        trigger_import(self.df)",
+        "code": "class TimeGroupByMultiColumn:\n    def time_groupby_agg_mean(self, *args, **kwargs):\n        execute(self.df.groupby(by=self.groupby_columns).agg(\"mean\"))\n\nclass BaseTimeGroupBy:\n    def setup(self, shape, ngroups=5, groupby_ncols=1):\n        ngroups = translator_groupby_ngroups(ngroups, shape)\n        self.df, self.groupby_columns = generate_dataframe(\n            ASV_USE_IMPL,\n            \"int\",\n            *shape,\n            RAND_LOW,\n            RAND_HIGH,\n            groupby_ncols,\n            count_groups=ngroups,\n        )\n        # correct while we use 'col*' like name for non-groupby columns\n        # and 'groupby_col*' like name for groupby columns\n        self.non_groupby_columns = self.df.columns[:-groupby_ncols]\n        trigger_import(self.df)",
         "min_run_count": 2,
         "name": "omnisci.benchmarks.TimeGroupByMultiColumn.time_groupby_agg_mean",
         "number": 0,
@@ -1688,11 +1688,42 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "5c240e7ca02754d6d335a823dc6e56c36b8724de362287527816a8b8fb2a2dd5",
+        "version": "4801523df968913d263845e5472875c3d154857756a4c42c64a1c19a26107ed7",
+        "warmup_time": -1
+    },
+    "omnisci.benchmarks.TimeGroupByMultiColumn.time_groupby_agg_mean_dict": {
+        "code": "class TimeGroupByMultiColumn:\n    def time_groupby_agg_mean_dict(self, *args, **kwargs):\n        execute(\n            self.df.groupby(by=self.groupby_columns).agg(\n                {col: \"mean\" for col in self.non_groupby_columns}\n            )\n        )\n\nclass BaseTimeGroupBy:\n    def setup(self, shape, ngroups=5, groupby_ncols=1):\n        ngroups = translator_groupby_ngroups(ngroups, shape)\n        self.df, self.groupby_columns = generate_dataframe(\n            ASV_USE_IMPL,\n            \"int\",\n            *shape,\n            RAND_LOW,\n            RAND_HIGH,\n            groupby_ncols,\n            count_groups=ngroups,\n        )\n        # correct while we use 'col*' like name for non-groupby columns\n        # and 'groupby_col*' like name for groupby columns\n        self.non_groupby_columns = self.df.columns[:-groupby_ncols]\n        trigger_import(self.df)",
+        "min_run_count": 2,
+        "name": "omnisci.benchmarks.TimeGroupByMultiColumn.time_groupby_agg_mean_dict",
+        "number": 0,
+        "param_names": [
+            "shape",
+            "ngroups",
+            "groupby_ncols"
+        ],
+        "params": [
+            [
+                "[1000000, 10]"
+            ],
+            [
+                "100",
+                "'huge_amount_groups'"
+            ],
+            [
+                "6"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "2f1356cb83d0bebc29cae6e3d5f10ca627a7dfff7fb6e9714e19fa004d5c5628",
         "warmup_time": -1
     },
     "omnisci.benchmarks.TimeGroupByMultiColumn.time_groupby_agg_nunique": {
-        "code": "class TimeGroupByMultiColumn:\n    def time_groupby_agg_nunique(self, *args, **kwargs):\n        execute(self.df.groupby(by=self.groupby_columns).agg(\"nunique\"))\n\nclass BaseTimeGroupBy:\n    def setup(self, shape, ngroups=5, groupby_ncols=1):\n        ngroups = translator_groupby_ngroups(ngroups, shape)\n        self.df, self.groupby_columns = generate_dataframe(\n            ASV_USE_IMPL,\n            \"int\",\n            *shape,\n            RAND_LOW,\n            RAND_HIGH,\n            groupby_ncols,\n            count_groups=ngroups,\n        )\n        trigger_import(self.df)",
+        "code": "class TimeGroupByMultiColumn:\n    def time_groupby_agg_nunique(self, *args, **kwargs):\n        execute(self.df.groupby(by=self.groupby_columns).agg(\"nunique\"))\n\nclass BaseTimeGroupBy:\n    def setup(self, shape, ngroups=5, groupby_ncols=1):\n        ngroups = translator_groupby_ngroups(ngroups, shape)\n        self.df, self.groupby_columns = generate_dataframe(\n            ASV_USE_IMPL,\n            \"int\",\n            *shape,\n            RAND_LOW,\n            RAND_HIGH,\n            groupby_ncols,\n            count_groups=ngroups,\n        )\n        # correct while we use 'col*' like name for non-groupby columns\n        # and 'groupby_col*' like name for groupby columns\n        self.non_groupby_columns = self.df.columns[:-groupby_ncols]\n        trigger_import(self.df)",
         "min_run_count": 2,
         "name": "omnisci.benchmarks.TimeGroupByMultiColumn.time_groupby_agg_nunique",
         "number": 0,
@@ -1719,11 +1750,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "79e05eb423f8550c69d398c23b942938cef120854c728323f2b96335aa419a52",
+        "version": "40372ef500919f7009235c869f063859b9f57fc0f6a1cddab5ac084193470c0b",
         "warmup_time": -1
     },
     "omnisci.benchmarks.TimeGroupByMultiColumn.time_groupby_sum": {
-        "code": "class TimeGroupByMultiColumn:\n    def time_groupby_sum(self, *args, **kwargs):\n        execute(self.df.groupby(by=self.groupby_columns).sum())\n\nclass BaseTimeGroupBy:\n    def setup(self, shape, ngroups=5, groupby_ncols=1):\n        ngroups = translator_groupby_ngroups(ngroups, shape)\n        self.df, self.groupby_columns = generate_dataframe(\n            ASV_USE_IMPL,\n            \"int\",\n            *shape,\n            RAND_LOW,\n            RAND_HIGH,\n            groupby_ncols,\n            count_groups=ngroups,\n        )\n        trigger_import(self.df)",
+        "code": "class TimeGroupByMultiColumn:\n    def time_groupby_sum(self, *args, **kwargs):\n        execute(self.df.groupby(by=self.groupby_columns).sum())\n\nclass BaseTimeGroupBy:\n    def setup(self, shape, ngroups=5, groupby_ncols=1):\n        ngroups = translator_groupby_ngroups(ngroups, shape)\n        self.df, self.groupby_columns = generate_dataframe(\n            ASV_USE_IMPL,\n            \"int\",\n            *shape,\n            RAND_LOW,\n            RAND_HIGH,\n            groupby_ncols,\n            count_groups=ngroups,\n        )\n        # correct while we use 'col*' like name for non-groupby columns\n        # and 'groupby_col*' like name for groupby columns\n        self.non_groupby_columns = self.df.columns[:-groupby_ncols]\n        trigger_import(self.df)",
         "min_run_count": 2,
         "name": "omnisci.benchmarks.TimeGroupByMultiColumn.time_groupby_sum",
         "number": 0,
@@ -1750,7 +1781,7 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "2672c1431f2e5e0812e02b54bb5b9e08dfd612a937d1d57e2cd07a524b51c650",
+        "version": "46987ffa124f620185bcc2c10d5f7e9dfa7a5885f938de1b6c4ffb4b1e916df3",
         "warmup_time": -1
     },
     "omnisci.benchmarks.TimeHead.time_head": {
