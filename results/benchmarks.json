@@ -1286,7 +1286,7 @@
         "warmup_time": -1
     },
     "omnisci.benchmarks.TimeAppend.time_append": {
-        "code": "class TimeAppend:\n    def time_append(self, shapes):\n        execute(self.df1.append(self.df2))\n\n    def setup(self, shapes):\n        self.df1 = generate_dataframe(\n            ASV_USE_IMPL, \"int\", *shapes[0], RAND_LOW, RAND_HIGH\n        )\n        self.df2 = generate_dataframe(\n            ASV_USE_IMPL, \"int\", *shapes[1], RAND_LOW, RAND_HIGH\n        )\n        trigger_import(self.df1, self.df2)",
+        "code": "class TimeAppend:\n    def time_append(self, shapes):\n        execute(self.df1.append(self.df2))\n\n    def setup(self, shapes):\n        self.df1, self.df2 = (\n            generate_dataframe(\n                ASV_USE_IMPL,\n                \"int\",\n                *shape,\n                RAND_LOW,\n                RAND_HIGH,\n                cache_prefix=f\"{i}-th_frame_to_append\",\n            )\n            for i, shape in enumerate(shapes)\n        )\n        trigger_import(self.df1, self.df2)",
         "min_run_count": 2,
         "name": "omnisci.benchmarks.TimeAppend.time_append",
         "number": 0,
@@ -1304,7 +1304,7 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "a3cacbfc2a8a774c4d5f8246ef44446b11a8b1835e7a37c41c94d214b43ef227",
+        "version": "63544950c1476966977c77eae9667c39d304ab77355ca0cb03743f5f2cef92f0",
         "warmup_time": -1
     },
     "omnisci.benchmarks.TimeArithmetic.time_apply": {
@@ -1872,13 +1872,14 @@
         "warmup_time": -1
     },
     "omnisci.benchmarks.TimeJoin.time_join": {
-        "code": "class TimeJoin:\n    def time_join(self, shape, how):\n        # join dataframes on index to get the predictable shape\n        execute(self.df1.join(self.df2, how=how, lsuffix=\"left_\"))\n\n    def setup(self, shape, how):\n        self.df1 = generate_dataframe(ASV_USE_IMPL, \"int\", *shape, RAND_LOW, RAND_HIGH)\n        self.df2 = generate_dataframe(ASV_USE_IMPL, \"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df1, self.df2)",
+        "code": "class TimeJoin:\n    def time_join(self, shape, how, is_equal_keys):\n        # join dataframes on index to get the predictable shape\n        execute(self.df1.join(self.df2, how=how, lsuffix=\"left_\"))\n\n    def setup(self, shape, how, is_equal_keys):\n        self.df1, self.df2 = (\n            generate_dataframe(\n                ASV_USE_IMPL,\n                \"int\",\n                *frame_shape,\n                RAND_LOW,\n                RAND_HIGH,\n                cache_prefix=f\"{i}-th_frame_to_join\",\n            )\n            for i, frame_shape in enumerate((shape, shape))\n        )\n    \n        if is_equal_keys:\n            # When the frames have default indices to join on: RangeIndex(frame_length),\n            # OmniSci backend performs join on the internal meta-column called 'rowid'.\n            # There is a bug in the engine that makes such joins fail. To avoid joining\n            # on the meta-column we explicitly specify a non-default index to join on.\n            # https://github.com/modin-project/modin/issues/3740\n            # Generating a new object for every index to avoid shared index objects:\n            self.df1.index = pandas.RangeIndex(1, len(self.df1) + 1)\n            self.df2.index = pandas.RangeIndex(1, len(self.df2) + 1)\n        else:\n            # Intersection rate indicates how many common join-keys `self.df1`\n            # and `self.df2` have in terms of percentage.\n            indices_intersection_rate = 0.5\n    \n            frame_length = len(self.df1)\n            intersect_size = int(frame_length * indices_intersection_rate)\n    \n            intersect_part = random_state.choice(\n                self.df1.index, size=intersect_size, replace=False\n            )\n            non_intersect_part = np.arange(\n                start=frame_length, stop=frame_length + (frame_length - intersect_size)\n            )\n            new_index = np.concatenate([intersect_part, non_intersect_part])\n    \n            random_state.shuffle(new_index)\n            self.df1.index = new_index\n    \n        trigger_import(self.df1, self.df2)",
         "min_run_count": 2,
         "name": "omnisci.benchmarks.TimeJoin.time_join",
         "number": 0,
         "param_names": [
             "shape",
-            "how"
+            "how",
+            "is_equal_keys"
         ],
         "params": [
             [
@@ -1887,6 +1888,10 @@
             [
                 "'left'",
                 "'inner'"
+            ],
+            [
+                "True",
+                "False"
             ]
         ],
         "repeat": 0,
@@ -1895,11 +1900,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "2b4b99896e2128e094cd7fe693d48b70635d5a4ae868bbd5949d57f69d39cba0",
+        "version": "64224910083152b83f3cf1fabfd2d2b06ebab5e6ae167e7aac3775f33485e035",
         "warmup_time": -1
     },
     "omnisci.benchmarks.TimeMerge.time_merge": {
-        "code": "class TimeMerge:\n    def time_merge(self, shapes, how):\n        # merging dataframes by index is not supported, therefore we merge by column\n        # with arbitrary values, which leads to an unpredictable form of the operation result;\n        # it's need to get the predictable shape to get consistent performance results\n        execute(\n            self.dfs[0].merge(\n                self.dfs[1], on=\"col1\", how=how, suffixes=(\"left_\", \"right_\")\n            )\n        )\n\n    def setup(self, shapes, how):\n        gen_unique_key = how == \"inner\"\n        self.dfs = []\n        for shape in shapes:\n            self.dfs.append(\n                generate_dataframe(\n                    ASV_USE_IMPL,\n                    \"int\",\n                    *shape,\n                    RAND_LOW,\n                    RAND_HIGH,\n                    gen_unique_key=gen_unique_key,\n                )\n            )\n        trigger_import(*self.dfs)",
+        "code": "class TimeMerge:\n    def time_merge(self, shapes, how):\n        # merging dataframes by index is not supported, therefore we merge by column\n        # with arbitrary values, which leads to an unpredictable form of the operation result;\n        # it's need to get the predictable shape to get consistent performance results\n        execute(\n            self.dfs[0].merge(\n                self.dfs[1], on=\"col1\", how=how, suffixes=(\"left_\", \"right_\")\n            )\n        )\n\n    def setup(self, shapes, how):\n        gen_unique_key = how == \"inner\"\n        self.dfs = []\n        for i, shape in enumerate(shapes):\n            self.dfs.append(\n                generate_dataframe(\n                    ASV_USE_IMPL,\n                    \"int\",\n                    *shape,\n                    RAND_LOW,\n                    RAND_HIGH,\n                    gen_unique_key=gen_unique_key,\n                    cache_prefix=f\"{i}-th_frame_to_merge\",\n                )\n            )\n        trigger_import(*self.dfs)",
         "min_run_count": 2,
         "name": "omnisci.benchmarks.TimeMerge.time_merge",
         "number": 0,
@@ -1922,7 +1927,7 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "23830785fe3f717a541b75bca7b15c818d1b27b09bf7e32ccc87dc0025b5354e",
+        "version": "862e0903e0abe2580c3fd6b2fe52934cc7a0c0d145e058a3df15ed60f238b609",
         "warmup_time": -1
     },
     "omnisci.benchmarks.TimeProperties.time_columns": {
