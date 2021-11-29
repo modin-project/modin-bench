@@ -694,7 +694,7 @@
         "warmup_time": -1
     },
     "benchmarks.TimeIndexing.time_iloc": {
-        "code": "class TimeIndexing:\n    def time_iloc(self, shape, indexer_type):\n        execute(self.df.iloc[self.indexer])\n\n    def setup(self, shape, indexer_type):\n        self.df = generate_dataframe(ASV_USE_IMPL, \"int\", *shape, RAND_LOW, RAND_HIGH)\n        if indexer_type == \"bool\":\n            self.indexer = [False, True] * (shape[0] // 2)\n        elif indexer_type == \"scalar\":\n            self.indexer = shape[0] // 2\n        elif indexer_type == \"slice\":\n            self.indexer = slice(0, shape[0], 2)\n        elif indexer_type == \"list\":\n            self.indexer = [x for x in range(shape[0])]\n        elif indexer_type == \"function\":\n            self.indexer = lambda df: df.index[::-2]",
+        "code": "class TimeIndexing:\n    def time_iloc(self, shape, indexer_type):\n        # Pandas doesn't implement `df.iloc[series boolean_mask]` and raises an exception on it.\n        # Replacing this with the semantically equivalent construction:\n        if indexer_type != \"bool_series\":\n            execute(self.df.iloc[self.indexer])\n        else:\n            execute(self.df[self.indexer])\n\n    def setup(self, shape, indexer_type):\n        self.df = generate_dataframe(ASV_USE_IMPL, \"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)\n    \n        self.indexer = self.indexer_getters[indexer_type](self.df)\n        if isinstance(self.indexer, (pd.Series, pd.DataFrame)):\n            # HACK: Triggering `dtypes` meta-data computation in advance,\n            # so it won't affect the `loc/iloc` time:\n            self.indexer.dtypes",
         "min_run_count": 2,
         "name": "benchmarks.TimeIndexing.time_iloc",
         "number": 0,
@@ -708,10 +708,13 @@
                 "[1000000, 10]"
             ],
             [
+                "'bool_array'",
+                "'bool_series'",
                 "'scalar'",
-                "'bool'",
                 "'slice'",
-                "'list'",
+                "'continuous_slice'",
+                "'numpy_array_take_all_values'",
+                "'python_list_take_10_values'",
                 "'function'"
             ]
         ],
@@ -721,11 +724,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "4e7262aec0ddddcf2cf6befd225168aa1e9f52e0ebe945dc373d7bab9c5e494c",
+        "version": "0bd0ae3526940e0a2f9f79b17c7583ba0f2d6b33aad55393f2bd7a5f63b4de3f",
         "warmup_time": -1
     },
     "benchmarks.TimeIndexing.time_loc": {
-        "code": "class TimeIndexing:\n    def time_loc(self, shape, indexer_type):\n        execute(self.df.loc[self.indexer])\n\n    def setup(self, shape, indexer_type):\n        self.df = generate_dataframe(ASV_USE_IMPL, \"int\", *shape, RAND_LOW, RAND_HIGH)\n        if indexer_type == \"bool\":\n            self.indexer = [False, True] * (shape[0] // 2)\n        elif indexer_type == \"scalar\":\n            self.indexer = shape[0] // 2\n        elif indexer_type == \"slice\":\n            self.indexer = slice(0, shape[0], 2)\n        elif indexer_type == \"list\":\n            self.indexer = [x for x in range(shape[0])]\n        elif indexer_type == \"function\":\n            self.indexer = lambda df: df.index[::-2]",
+        "code": "class TimeIndexing:\n    def time_loc(self, shape, indexer_type):\n        execute(self.df.loc[self.indexer])\n\n    def setup(self, shape, indexer_type):\n        self.df = generate_dataframe(ASV_USE_IMPL, \"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)\n    \n        self.indexer = self.indexer_getters[indexer_type](self.df)\n        if isinstance(self.indexer, (pd.Series, pd.DataFrame)):\n            # HACK: Triggering `dtypes` meta-data computation in advance,\n            # so it won't affect the `loc/iloc` time:\n            self.indexer.dtypes",
         "min_run_count": 2,
         "name": "benchmarks.TimeIndexing.time_loc",
         "number": 0,
@@ -739,10 +742,13 @@
                 "[1000000, 10]"
             ],
             [
+                "'bool_array'",
+                "'bool_series'",
                 "'scalar'",
-                "'bool'",
                 "'slice'",
-                "'list'",
+                "'continuous_slice'",
+                "'numpy_array_take_all_values'",
+                "'python_list_take_10_values'",
                 "'function'"
             ]
         ],
@@ -752,7 +758,76 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "7b6fd37f862f1a881d3f8e46bfd517d56f952ee9725a393f5c66ef88ba8a3a38",
+        "version": "496fb1e124a319acd18ec43552530104fceb6b668df356a4694bc7f2fb0aa408",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeIndexingColumns.time___getitem__": {
+        "code": "class TimeIndexingColumns:\n    def time___getitem__(self, shape):\n        execute(self.df[self.labels_indexer])\n\n    def setup(self, shape):\n        self.df = generate_dataframe(ASV_USE_IMPL, \"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)\n        self.numeric_indexer = [0, 1]\n        self.labels_indexer = self.df.columns[self.numeric_indexer].tolist()",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeIndexingColumns.time___getitem__",
+        "number": 0,
+        "param_names": [
+            "shape"
+        ],
+        "params": [
+            [
+                "[5000, 5000]",
+                "[1000000, 10]"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "38a0fad1487d34f22254d7e3abf8f0c9debc51c0a14c4d2cfad57f2b8a38723f",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeIndexingColumns.time_iloc": {
+        "code": "class TimeIndexingColumns:\n    def time_iloc(self, shape):\n        execute(self.df.iloc[:, self.numeric_indexer])\n\n    def setup(self, shape):\n        self.df = generate_dataframe(ASV_USE_IMPL, \"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)\n        self.numeric_indexer = [0, 1]\n        self.labels_indexer = self.df.columns[self.numeric_indexer].tolist()",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeIndexingColumns.time_iloc",
+        "number": 0,
+        "param_names": [
+            "shape"
+        ],
+        "params": [
+            [
+                "[5000, 5000]",
+                "[1000000, 10]"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "d8b8c528f5b7eb459cf4f5cf42bb42af77b301eb1acec2dc93511ecd7a0584c5",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeIndexingColumns.time_loc": {
+        "code": "class TimeIndexingColumns:\n    def time_loc(self, shape):\n        execute(self.df.loc[:, self.labels_indexer])\n\n    def setup(self, shape):\n        self.df = generate_dataframe(ASV_USE_IMPL, \"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)\n        self.numeric_indexer = [0, 1]\n        self.labels_indexer = self.df.columns[self.numeric_indexer].tolist()",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeIndexingColumns.time_loc",
+        "number": 0,
+        "param_names": [
+            "shape"
+        ],
+        "params": [
+            [
+                "[5000, 5000]",
+                "[1000000, 10]"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "1bcabed67270f400c9f0ff69bed971dbb47456a21fc3d705e3986bb2cef41996",
         "warmup_time": -1
     },
     "benchmarks.TimeInsert.time_insert_qc": {
@@ -1812,7 +1887,7 @@
         "warmup_time": -1
     },
     "omnisci.benchmarks.TimeIndexing.time_iloc": {
-        "code": "class TimeIndexing:\n    def time_iloc(self, shape, indexer_type):\n        execute(self.df.iloc[self.indexer])\n\n    def setup(self, shape, indexer_type):\n        self.df = generate_dataframe(ASV_USE_IMPL, \"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)\n        self.indexer = {\n            \"bool\": [False, True] * (shape[0] // 2),\n            \"scalar\": shape[0] // 2,\n            \"slice\": slice(0, shape[0], 2),\n            \"list\": list(range(shape[0])),\n            \"function\": lambda df: df.index[::-2],\n        }[indexer_type]",
+        "code": "class TimeIndexing:\n    def time_iloc(self, shape, indexer_type):\n        # Pandas doesn't implement `df.iloc[series boolean_mask]` and raises an exception on it.\n        # Replacing this with the semantically equivalent construction:\n        if indexer_type != \"bool_series\":\n            execute(self.df.iloc[self.indexer])\n        else:\n            execute(self.df[self.indexer])\n\n    def setup(self, shape, indexer_type):\n        self.df = generate_dataframe(ASV_USE_IMPL, \"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)\n    \n        self.indexer = self.indexer_getters[indexer_type](self.df)\n        if isinstance(self.indexer, (pd.Series, pd.DataFrame)):\n            # HACK: Triggering `dtypes` meta-data computation in advance,\n            # so it won't affect the `loc/iloc` time:\n            self.indexer.dtypes",
         "min_run_count": 2,
         "name": "omnisci.benchmarks.TimeIndexing.time_iloc",
         "number": 0,
@@ -1825,10 +1900,13 @@
                 "[1000000, 10]"
             ],
             [
+                "'bool_array'",
+                "'bool_series'",
                 "'scalar'",
-                "'bool'",
                 "'slice'",
-                "'list'",
+                "'continuous_slice'",
+                "'numpy_array_take_all_values'",
+                "'python_list_take_10_values'",
                 "'function'"
             ]
         ],
@@ -1838,11 +1916,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "589f8c215898437525e4e3fb88c7f6fa2129b8b005f1020a4b649c342d694f45",
+        "version": "0bd0ae3526940e0a2f9f79b17c7583ba0f2d6b33aad55393f2bd7a5f63b4de3f",
         "warmup_time": -1
     },
     "omnisci.benchmarks.TimeIndexing.time_loc": {
-        "code": "class TimeIndexing:\n    def time_loc(self, shape, indexer_type):\n        execute(self.df.loc[self.indexer])\n\n    def setup(self, shape, indexer_type):\n        self.df = generate_dataframe(ASV_USE_IMPL, \"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)\n        self.indexer = {\n            \"bool\": [False, True] * (shape[0] // 2),\n            \"scalar\": shape[0] // 2,\n            \"slice\": slice(0, shape[0], 2),\n            \"list\": list(range(shape[0])),\n            \"function\": lambda df: df.index[::-2],\n        }[indexer_type]",
+        "code": "class TimeIndexing:\n    def time_loc(self, shape, indexer_type):\n        execute(self.df.loc[self.indexer])\n\n    def setup(self, shape, indexer_type):\n        self.df = generate_dataframe(ASV_USE_IMPL, \"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)\n    \n        self.indexer = self.indexer_getters[indexer_type](self.df)\n        if isinstance(self.indexer, (pd.Series, pd.DataFrame)):\n            # HACK: Triggering `dtypes` meta-data computation in advance,\n            # so it won't affect the `loc/iloc` time:\n            self.indexer.dtypes",
         "min_run_count": 2,
         "name": "omnisci.benchmarks.TimeIndexing.time_loc",
         "number": 0,
@@ -1855,10 +1933,13 @@
                 "[1000000, 10]"
             ],
             [
+                "'bool_array'",
+                "'bool_series'",
                 "'scalar'",
-                "'bool'",
                 "'slice'",
-                "'list'",
+                "'continuous_slice'",
+                "'numpy_array_take_all_values'",
+                "'python_list_take_10_values'",
                 "'function'"
             ]
         ],
@@ -1868,7 +1949,73 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "d399137366251ff11e3cbe69cc2e89676564e453b3bd0c3059c7c4b8c4b0d02d",
+        "version": "496fb1e124a319acd18ec43552530104fceb6b668df356a4694bc7f2fb0aa408",
+        "warmup_time": -1
+    },
+    "omnisci.benchmarks.TimeIndexingColumns.time___getitem__": {
+        "code": "class TimeIndexingColumns:\n    def time___getitem__(self, shape):\n        execute(self.df[self.labels_indexer])\n\n    def setup(self, shape):\n        self.df = generate_dataframe(ASV_USE_IMPL, \"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)\n        self.numeric_indexer = [0, 1]\n        self.labels_indexer = self.df.columns[self.numeric_indexer].tolist()",
+        "min_run_count": 2,
+        "name": "omnisci.benchmarks.TimeIndexingColumns.time___getitem__",
+        "number": 0,
+        "param_names": [
+            "shape"
+        ],
+        "params": [
+            [
+                "[1000000, 10]"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "38a0fad1487d34f22254d7e3abf8f0c9debc51c0a14c4d2cfad57f2b8a38723f",
+        "warmup_time": -1
+    },
+    "omnisci.benchmarks.TimeIndexingColumns.time_iloc": {
+        "code": "class TimeIndexingColumns:\n    def time_iloc(self, shape):\n        execute(self.df.iloc[:, self.numeric_indexer])\n\n    def setup(self, shape):\n        self.df = generate_dataframe(ASV_USE_IMPL, \"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)\n        self.numeric_indexer = [0, 1]\n        self.labels_indexer = self.df.columns[self.numeric_indexer].tolist()",
+        "min_run_count": 2,
+        "name": "omnisci.benchmarks.TimeIndexingColumns.time_iloc",
+        "number": 0,
+        "param_names": [
+            "shape"
+        ],
+        "params": [
+            [
+                "[1000000, 10]"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "d8b8c528f5b7eb459cf4f5cf42bb42af77b301eb1acec2dc93511ecd7a0584c5",
+        "warmup_time": -1
+    },
+    "omnisci.benchmarks.TimeIndexingColumns.time_loc": {
+        "code": "class TimeIndexingColumns:\n    def time_loc(self, shape):\n        execute(self.df.loc[:, self.labels_indexer])\n\n    def setup(self, shape):\n        self.df = generate_dataframe(ASV_USE_IMPL, \"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)\n        self.numeric_indexer = [0, 1]\n        self.labels_indexer = self.df.columns[self.numeric_indexer].tolist()",
+        "min_run_count": 2,
+        "name": "omnisci.benchmarks.TimeIndexingColumns.time_loc",
+        "number": 0,
+        "param_names": [
+            "shape"
+        ],
+        "params": [
+            [
+                "[1000000, 10]"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "1bcabed67270f400c9f0ff69bed971dbb47456a21fc3d705e3986bb2cef41996",
         "warmup_time": -1
     },
     "omnisci.benchmarks.TimeJoin.time_join": {
