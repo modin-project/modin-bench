@@ -27,6 +27,90 @@
         "version": "c2d89eb99a9d7965ff21009a90377a267577d695e1baeeedba0a97d62f2f8030",
         "warmup_time": -1
     },
+    "benchmarks.TimeArithmetic.time_abs": {
+        "code": "class TimeArithmetic:\n    def time_abs(self, shape, axis):\n        execute(self.df.abs())\n\n    def setup(self, shape, axis):\n        self.df = generate_dataframe(ASV_USE_IMPL, \"int\", *shape, RAND_LOW, RAND_HIGH)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeArithmetic.time_abs",
+        "number": 0,
+        "param_names": [
+            "shape",
+            "axis"
+        ],
+        "params": [
+            [
+                "[5000, 5000]",
+                "[1000000, 10]"
+            ],
+            [
+                "0",
+                "1"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "24f94b5cd16c91dc2b6404040d368ff5c94e3501114f33c6725c5518b224dc3f",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeArithmetic.time_add": {
+        "code": "class TimeArithmetic:\n    def time_add(self, shape, axis):\n        execute(self.df.add(2, axis=axis))\n\n    def setup(self, shape, axis):\n        self.df = generate_dataframe(ASV_USE_IMPL, \"int\", *shape, RAND_LOW, RAND_HIGH)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeArithmetic.time_add",
+        "number": 0,
+        "param_names": [
+            "shape",
+            "axis"
+        ],
+        "params": [
+            [
+                "[5000, 5000]",
+                "[1000000, 10]"
+            ],
+            [
+                "0",
+                "1"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "926c0f2b5bfbd2ed09c9346ea43c9fd1dd9b118570849bf7441f48a03516a224",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeArithmetic.time_aggregate": {
+        "code": "class TimeArithmetic:\n    def time_aggregate(self, shape, axis):\n        execute(self.df.aggregate(lambda df: df.sum(), axis=axis))\n\n    def setup(self, shape, axis):\n        self.df = generate_dataframe(ASV_USE_IMPL, \"int\", *shape, RAND_LOW, RAND_HIGH)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeArithmetic.time_aggregate",
+        "number": 0,
+        "param_names": [
+            "shape",
+            "axis"
+        ],
+        "params": [
+            [
+                "[5000, 5000]",
+                "[1000000, 10]"
+            ],
+            [
+                "0",
+                "1"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "f9927313f1bbf27149feaf733d3ac499f4ee819b96f0d62eddc3934eca2d2fb2",
+        "warmup_time": -1
+    },
     "benchmarks.TimeArithmetic.time_apply": {
         "code": "class TimeArithmetic:\n    def time_apply(self, shape, axis):\n        execute(self.df.apply(lambda df: df.sum(), axis=axis))\n\n    def setup(self, shape, axis):\n        self.df = generate_dataframe(ASV_USE_IMPL, \"int\", *shape, RAND_LOW, RAND_HIGH)",
         "min_run_count": 2,
@@ -53,6 +137,62 @@
         "type": "time",
         "unit": "seconds",
         "version": "219317b7fcbaf3f87050bca6999e1b68c258853598a859ac59da82b025bf251a",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeArithmetic.time_count": {
+        "code": "class TimeArithmetic:\n    def time_count(self, shape, axis):\n        execute(self.df.count(axis=axis))\n\n    def setup(self, shape, axis):\n        self.df = generate_dataframe(ASV_USE_IMPL, \"int\", *shape, RAND_LOW, RAND_HIGH)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeArithmetic.time_count",
+        "number": 0,
+        "param_names": [
+            "shape",
+            "axis"
+        ],
+        "params": [
+            [
+                "[5000, 5000]",
+                "[1000000, 10]"
+            ],
+            [
+                "0",
+                "1"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "937a01aa3157b31b90d06b230e988161f695f9177379d1cabcdebbbde01dbee8",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeArithmetic.time_is_in": {
+        "code": "class TimeArithmetic:\n    def time_is_in(self, shape, axis):\n        execute(self.df.isin([0, 2]))\n\n    def setup(self, shape, axis):\n        self.df = generate_dataframe(ASV_USE_IMPL, \"int\", *shape, RAND_LOW, RAND_HIGH)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeArithmetic.time_is_in",
+        "number": 0,
+        "param_names": [
+            "shape",
+            "axis"
+        ],
+        "params": [
+            [
+                "[5000, 5000]",
+                "[1000000, 10]"
+            ],
+            [
+                "0",
+                "1"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "75f626b4cadcefefd7d710aca76a4d389b9e84c04ad15e57f38a5eb5ef3ee1fe",
         "warmup_time": -1
     },
     "benchmarks.TimeArithmetic.time_mean": {
@@ -111,6 +251,90 @@
         "version": "6f99b2ce6d39b39818206977c6513e7df8166e01bbff37724a82601a9c4875ad",
         "warmup_time": -1
     },
+    "benchmarks.TimeArithmetic.time_mod": {
+        "code": "class TimeArithmetic:\n    def time_mod(self, shape, axis):\n        execute(self.df.mod(2, axis=axis))\n\n    def setup(self, shape, axis):\n        self.df = generate_dataframe(ASV_USE_IMPL, \"int\", *shape, RAND_LOW, RAND_HIGH)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeArithmetic.time_mod",
+        "number": 0,
+        "param_names": [
+            "shape",
+            "axis"
+        ],
+        "params": [
+            [
+                "[5000, 5000]",
+                "[1000000, 10]"
+            ],
+            [
+                "0",
+                "1"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "79c73bb1f28da6f697ffd689a2159040e9c1e55940e3d12c5978a59a0a1d49e1",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeArithmetic.time_mode": {
+        "code": "class TimeArithmetic:\n    def time_mode(self, shape, axis):\n        execute(self.df.mode(axis=axis))\n\n    def setup(self, shape, axis):\n        self.df = generate_dataframe(ASV_USE_IMPL, \"int\", *shape, RAND_LOW, RAND_HIGH)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeArithmetic.time_mode",
+        "number": 0,
+        "param_names": [
+            "shape",
+            "axis"
+        ],
+        "params": [
+            [
+                "[5000, 5000]",
+                "[1000000, 10]"
+            ],
+            [
+                "0",
+                "1"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "8a005b316455fcca753ca4edbb670ef5f5b93695be2cdda740158fe96407f527",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeArithmetic.time_mul": {
+        "code": "class TimeArithmetic:\n    def time_mul(self, shape, axis):\n        execute(self.df.mul(2, axis=axis))\n\n    def setup(self, shape, axis):\n        self.df = generate_dataframe(ASV_USE_IMPL, \"int\", *shape, RAND_LOW, RAND_HIGH)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeArithmetic.time_mul",
+        "number": 0,
+        "param_names": [
+            "shape",
+            "axis"
+        ],
+        "params": [
+            [
+                "[5000, 5000]",
+                "[1000000, 10]"
+            ],
+            [
+                "0",
+                "1"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "641518d19f0fdf68546ce858ce9bb40a774bf6de779da780a464f7b9e6e3dbc6",
+        "warmup_time": -1
+    },
     "benchmarks.TimeArithmetic.time_nunique": {
         "code": "class TimeArithmetic:\n    def time_nunique(self, shape, axis):\n        execute(self.df.nunique(axis=axis))\n\n    def setup(self, shape, axis):\n        self.df = generate_dataframe(ASV_USE_IMPL, \"int\", *shape, RAND_LOW, RAND_HIGH)",
         "min_run_count": 2,
@@ -165,6 +389,34 @@
         "type": "time",
         "unit": "seconds",
         "version": "3ade96bfe969295a9d3c99d61bc88dedda36a799925710d5620e5fb30438d074",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeArithmetic.time_transpose": {
+        "code": "class TimeArithmetic:\n    def time_transpose(self, shape, axis):\n        execute(self.df.transpose())\n\n    def setup(self, shape, axis):\n        self.df = generate_dataframe(ASV_USE_IMPL, \"int\", *shape, RAND_LOW, RAND_HIGH)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeArithmetic.time_transpose",
+        "number": 0,
+        "param_names": [
+            "shape",
+            "axis"
+        ],
+        "params": [
+            [
+                "[5000, 5000]",
+                "[1000000, 10]"
+            ],
+            [
+                "0",
+                "1"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "899e91bd633602197288afb8eedca1c38d2df5fb39590f0693060e896e297e41",
         "warmup_time": -1
     },
     "benchmarks.TimeAstype.time_astype": {
@@ -318,6 +570,29 @@
         "type": "time",
         "unit": "seconds",
         "version": "cbeb16adcb3fadd00159e6c9922ccbfaac0eb086cd953d0eebb36b89c3e6e266",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeExplode.time_explode": {
+        "code": "class TimeExplode:\n    def time_explode(self, shape):\n        execute(self.df.explode(\"col1\"))\n\n    def setup(self, shape):\n        self.df = generate_dataframe(\n            ASV_USE_IMPL, \"int\", *shape, RAND_LOW, RAND_HIGH, gen_unique_key=True\n        )",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeExplode.time_explode",
+        "number": 0,
+        "param_names": [
+            "shape"
+        ],
+        "params": [
+            [
+                "[5000, 5000]",
+                "[1000000, 10]"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "838561e282ad48904dd657640c80a57649cdca0dd65193a9f71528401ab163be",
         "warmup_time": -1
     },
     "benchmarks.TimeFillnaDataFrame.time_fillna": {
@@ -1206,6 +1481,34 @@
         "version": "5cf2258ccb3d7833acd5e9765b8023fdbf0d27fd70e540f457f576be26c37ec9",
         "warmup_time": -1
     },
+    "benchmarks.TimeTail.time_tail": {
+        "code": "class TimeTail:\n    def time_tail(self, shape, tail_count):\n        execute(self.df.tail(self.tail_count))\n\n    def setup(self, shape, tail_count):\n        self.df = generate_dataframe(ASV_USE_IMPL, \"int\", *shape, RAND_LOW, RAND_HIGH)\n        self.tail_count = (\n            int(tail_count * len(self.df.index))\n            if isinstance(tail_count, float)\n            else tail_count\n        )",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeTail.time_tail",
+        "number": 0,
+        "param_names": [
+            "shape",
+            "tail_count"
+        ],
+        "params": [
+            [
+                "[5000, 5000]",
+                "[1000000, 10]"
+            ],
+            [
+                "5",
+                "0.8"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "9495a0ea1a5971936e52b8002b286fe7a89c3d369e790ad396708620f8daa685",
+        "warmup_time": -1
+    },
     "benchmarks.TimeValueCountsFrame.time_value_counts": {
         "code": "class TimeValueCountsFrame:\n    def time_value_counts(self, *args, **kwargs):\n        execute(self.df.value_counts(subset=self.subset))\n\nclass BaseTimeValueCounts:\n    def setup(self, shape, ngroups=5, subset=1):\n        ngroups = translator_groupby_ngroups(ngroups, shape)\n        self.df, self.subset = generate_dataframe(\n            ASV_USE_IMPL,\n            \"int\",\n            *shape,\n            RAND_LOW,\n            RAND_HIGH,\n            groupby_ncols=subset,\n            count_groups=ngroups,\n        )",
         "min_run_count": 2,
@@ -1358,6 +1661,30 @@
         "type": "time",
         "unit": "seconds",
         "version": "12e5e8c7de4a5d3ecdf96c0d074afc33f7091f65ca0c8e2777bb25e2600a19cc",
+        "warmup_time": -1
+    },
+    "io.parquet.TimeReadParquet.time_read_parquet": {
+        "code": "class TimeReadParquet:\n    def time_read_parquet(self, test_filenames, shape):\n        execute(\n            IMPL[ASV_USE_IMPL].read_parquet(\n                test_filenames[self.shape_id],\n            )\n        )\n\n    def setup(self, test_filenames, shape):\n        # ray init\n        if ASV_USE_IMPL == \"modin\":\n            pd.DataFrame([])\n        self.shape_id = get_shape_id(shape)\n\n    def setup_cache(self, test_filename=\"io_test_file\"):\n        test_filenames = prepare_io_data_parquet(\n            test_filename, self.data_type, get_benchmark_shapes(self.__class__.__name__)\n        )\n        return test_filenames",
+        "min_run_count": 2,
+        "name": "io.parquet.TimeReadParquet.time_read_parquet",
+        "number": 0,
+        "param_names": [
+            "shape"
+        ],
+        "params": [
+            [
+                "[5000, 5000]",
+                "[1000000, 10]"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "setup_cache_key": "io.parquet:36",
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "6c6ecffce9824ae3a5ad80efca974b844cf1cc6219e16b176c7ed4887a204ac0",
         "warmup_time": -1
     },
     "omnisci.benchmarks.TimeAppend.time_append": {
