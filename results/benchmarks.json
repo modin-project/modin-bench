@@ -420,7 +420,7 @@
         "warmup_time": -1
     },
     "benchmarks.TimeAstype.time_astype": {
-        "code": "class TimeAstype:\n    def time_astype(self, shape, dtype, astype_ncolumns):\n        execute(self.df.astype(self.astype_arg))\n\n    def setup(self, shape, dtype, astype_ncolumns):\n        self.df = generate_dataframe(ASV_USE_IMPL, \"int\", *shape, RAND_LOW, RAND_HIGH)\n        if astype_ncolumns == \"all\":\n            self.astype_arg = dtype\n        elif astype_ncolumns == \"one\":\n            self.astype_arg = {\"col1\": dtype}\n        else:\n            raise ValueError(\"astype_ncolumns: {astype_ncolumns} isn't supported\")",
+        "code": "class TimeAstype:\n    def time_astype(self, shape, dtype, astype_ncolumns):\n        execute(self.df.astype(self.astype_arg))\n\n    def setup(self, shape, dtype, astype_ncolumns):\n        self.df = generate_dataframe(ASV_USE_IMPL, \"int\", *shape, RAND_LOW, RAND_HIGH)\n        if astype_ncolumns == \"all\":\n            self.astype_arg = dtype\n        elif astype_ncolumns == \"one\":\n            self.astype_arg = {\"col1\": dtype}\n        else:\n            raise ValueError(f\"astype_ncolumns: {astype_ncolumns} isn't supported\")",
         "min_run_count": 2,
         "name": "benchmarks.TimeAstype.time_astype",
         "number": 0,
@@ -449,7 +449,7 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "e0815604b1644fa44789102d06d841ad6e2d03792cc5d694a40c0838ae3275f3",
+        "version": "2c9914d910acdc984e9ed93f58b52ea59a07273d6dd0f8b8d150e78cfce95cec",
         "warmup_time": -1
     },
     "benchmarks.TimeBinaryOp.time_binary_op": {
