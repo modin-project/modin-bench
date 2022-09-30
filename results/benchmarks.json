@@ -485,14 +485,15 @@
         "warmup_time": -1
     },
     "benchmarks.TimeConcat.time_concat": {
-        "code": "class TimeConcat:\n    def time_concat(self, shapes, how, axis):\n        execute(IMPL.concat([self.df1, self.df2], axis=axis, join=how))\n\n    def setup(self, shapes, how, axis):\n        self.df1 = generate_dataframe(\"int\", *shapes[0], RAND_LOW, RAND_HIGH)\n        self.df2 = generate_dataframe(\"int\", *shapes[1], RAND_LOW, RAND_HIGH)",
+        "code": "class TimeConcat:\n    def time_concat(self, shapes, how, axis, ignore_index):\n        execute(\n            IMPL.concat(\n                [self.df1, self.df2], axis=axis, join=how, ignore_index=ignore_index\n            )\n        )\n\n    def setup(self, shapes, how, axis, ignore_index):\n        self.df1 = generate_dataframe(\"int\", *shapes[0], RAND_LOW, RAND_HIGH)\n        self.df2 = generate_dataframe(\"int\", *shapes[1], RAND_LOW, RAND_HIGH)",
         "min_run_count": 2,
         "name": "benchmarks.TimeConcat.time_concat",
         "number": 0,
         "param_names": [
             "shapes",
             "how",
-            "axis"
+            "axis",
+            "ignore_index"
         ],
         "params": [
             [
@@ -500,11 +501,16 @@
                 "[[500000, 20], [1000000, 10]]"
             ],
             [
-                "'inner'"
+                "'inner'",
+                "'outer'"
             ],
             [
                 "0",
                 "1"
+            ],
+            [
+                "True",
+                "False"
             ]
         ],
         "repeat": 0,
@@ -513,7 +519,7 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "5664485452827186c8e791f82d8e11bda1d56e3f47882268dab3b84d3300929d",
+        "version": "94bed16113bf2aeaaf75ac7229e0e7c5ef43059876eb31042216f20b06a91b9d",
         "warmup_time": -1
     },
     "benchmarks.TimeDescribe.time_describe": {
