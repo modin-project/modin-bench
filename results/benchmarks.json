@@ -484,6 +484,33 @@
         "version": "fe707e7e930d09206b8c08fca7ad864cf9b81bb120afa334fc22ae27c5022207",
         "warmup_time": -1
     },
+    "benchmarks.TimeBinaryOpSeries.time_binary_op_series": {
+        "code": "class TimeBinaryOpSeries:\n    def time_binary_op_series(self, shapes, binary_op):\n        execute(self.op(self.series2))\n\n    def setup(self, shapes, binary_op):\n        df1 = generate_dataframe(\"int\", *shapes[0], RAND_LOW, RAND_HIGH)\n        df2 = generate_dataframe(\"int\", *shapes[1], RAND_LOW, RAND_HIGH)\n        self.series1 = df1[df1.columns[0]]\n        self.series2 = df2[df2.columns[0]]\n        self.op = getattr(self.series1, binary_op)\n        execute(self.series1)\n        execute(self.series2)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeBinaryOpSeries.time_binary_op_series",
+        "number": 0,
+        "param_names": [
+            "shapes",
+            "binary_op"
+        ],
+        "params": [
+            [
+                "[[500000, 1], [1000000, 1]]",
+                "[[500000, 1], [500000, 1]]"
+            ],
+            [
+                "'mul'"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "589c221a3bb152b7562be5030ccdfcbd30d065b76355a4058e89813947806b06",
+        "warmup_time": -1
+    },
     "benchmarks.TimeConcat.time_concat": {
         "code": "class TimeConcat:\n    def time_concat(self, shapes, how, axis, ignore_index):\n        execute(\n            IMPL.concat(\n                [self.df1, self.df2], axis=axis, join=how, ignore_index=ignore_index\n            )\n        )\n\n    def setup(self, shapes, how, axis, ignore_index):\n        self.df1 = generate_dataframe(\"int\", *shapes[0], RAND_LOW, RAND_HIGH)\n        self.df2 = generate_dataframe(\"int\", *shapes[1], RAND_LOW, RAND_HIGH)",
         "min_run_count": 2,
