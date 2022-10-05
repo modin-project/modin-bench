@@ -1278,6 +1278,33 @@
         "version": "e5ab191558a6c2d17298fcc42734dcba1b02fe6fe925ccf6cd5267813f99ba73",
         "warmup_time": -1
     },
+    "benchmarks.TimeMergeCategoricals.time_merge_categoricals": {
+        "code": "class TimeMergeCategoricals:\n    def time_merge_categoricals(self, shapes, data_type):\n        execute(IMPL.merge(self.left, self.right, on=\"X\"))\n\n    def setup(self, shapes, data_type):\n        assert len(shapes) == 2\n        assert shapes[1] == 2\n        size = (shapes[0],)\n        self.left = IMPL.DataFrame(\n            {\n                \"X\": np.random.choice(range(0, 10), size=size),\n                \"Y\": np.random.choice([\"one\", \"two\", \"three\"], size=size),\n            }\n        )\n    \n        self.right = IMPL.DataFrame(\n            {\n                \"X\": np.random.choice(range(0, 10), size=size),\n                \"Z\": np.random.choice([\"jjj\", \"kkk\", \"sss\"], size=size),\n            }\n        )\n    \n        if data_type == \"category\":\n            self.left = self.left.assign(Y=self.left[\"Y\"].astype(\"category\"))\n            execute(self.left)\n            self.right = self.right.assign(Z=self.right[\"Z\"].astype(\"category\"))\n            execute(self.right)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeMergeCategoricals.time_merge_categoricals",
+        "number": 0,
+        "param_names": [
+            "shapes",
+            "data_type"
+        ],
+        "params": [
+            [
+                "[10000, 2]"
+            ],
+            [
+                "'object'",
+                "'category'"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "3956a7dc8885e15fe2b390886446bfdbc660d37e2fa92d99a858bbe4f3104fb5",
+        "warmup_time": -1
+    },
     "benchmarks.TimeMultiIndexing.time_multiindex_loc": {
         "code": "class TimeMultiIndexing:\n    def time_multiindex_loc(self, shape):\n        execute(\n            self.df.loc[\n                self.df.index[2] : self.df.index[-2],\n                self.df.columns[2] : self.df.columns[-2],\n            ]\n        )\n\n    def setup(self, shape):\n        df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n    \n        index = IMPL.MultiIndex.from_product(\n            [df.index[: shape[0] // 2], [\"bar\", \"foo\"]]\n        )\n        columns = IMPL.MultiIndex.from_product(\n            [df.columns[: shape[1] // 2], [\"buz\", \"fuz\"]]\n        )\n    \n        df.index = index\n        df.columns = columns\n    \n        self.df = df.sort_index(axis=1)",
         "min_run_count": 2,
