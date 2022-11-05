@@ -2372,7 +2372,7 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "7b73f9643fa771d31cbaccfd55da0c6b6d8b7f67f2252ba5f17ed73350a54288",
+        "version": "57f6902544078f7caed1f63dd8d1b4f89a94d5f1168e40f907418ac476d32aec",
         "warmup_time": -1
     },
     "hdk.benchmarks.TimeIndexing.time_loc": {
@@ -2405,7 +2405,7 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "822e648264a13f7e22816c17b42e9d47753fbcb058fcd3885ec93872245c4290",
+        "version": "5c867ac6c039472986054638ee75133c203afee997e4c97cf6dd60eda7378c53",
         "warmup_time": -1
     },
     "hdk.benchmarks.TimeIndexingColumns.time___getitem__": {
@@ -2427,7 +2427,7 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "6fa82daf47b740e60aad7b96fd846c6a92b09b84143fc302aef64690219c9b35",
+        "version": "61bf3c3ef0919a675ba355715ab9cd8be47a30e20e2341f2430927076aec7810",
         "warmup_time": -1
     },
     "hdk.benchmarks.TimeIndexingColumns.time_iloc": {
@@ -2449,7 +2449,7 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "5bb0aafeffe2a1aeb522c1fd1d12dd0e71c4b31ede8e2b6eff891ef79a0af478",
+        "version": "1e414daf610131f4ade7d17d2e78e7977fe95e7a21d473d0e6eec947a35d1e34",
         "warmup_time": -1
     },
     "hdk.benchmarks.TimeIndexingColumns.time_loc": {
@@ -2471,7 +2471,7 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "b4304883d436bf17c07ce9b7ff3e7ff1cda770f40a7860d94de51f65d417717f",
+        "version": "2f1e02a867fc8a474e83e1c01096fd1a1c7478695d03717506c6be36acfb8708",
         "warmup_time": -1
     },
     "hdk.benchmarks.TimeJoin.time_join": {
