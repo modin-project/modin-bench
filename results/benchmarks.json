@@ -698,6 +698,116 @@
         "version": "6f3b82c2cb3ef9b6f703c833eed50f48a5e560e68986722ce1e691427f85f6a6",
         "warmup_time": -1
     },
+    "benchmarks.TimeFillnaMethodDataframe.time_float_32": {
+        "code": "class TimeFillnaMethodDataframe:\n    def time_float_32(self, shape, method):\n        execute(self.df_ts_float32.fillna(method=method))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeFillnaMethodDataframe:\n    def setup(self, shape, method):\n        self.idx = IMPL.date_range(\"1/1/2000\", periods=shape[0], freq=\"1min\")\n        df_ts = IMPL.DataFrame(np.random.randn(*shape), index=self.idx)[::2]\n        self.df_ts_reindexed = df_ts.reindex(self.idx)\n        self.df_ts_float32 = self.df_ts_reindexed.astype(\"float32\")\n        execute(self.df_ts_reindexed), execute(self.df_ts_float32)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeFillnaMethodDataframe.time_float_32",
+        "number": 0,
+        "param_names": [
+            "shape",
+            "method"
+        ],
+        "params": [
+            [
+                "[5000, 5000]",
+                "[1000000, 10]"
+            ],
+            [
+                "'pad'",
+                "'backfill'"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "37b50e15102678b23534ef0bcbe7c5b191de48c9d9ff14a30d7a8501644a157c",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeFillnaMethodDataframe.time_reindexed": {
+        "code": "class TimeFillnaMethodDataframe:\n    def time_reindexed(self, shape, method):\n        execute(self.df_ts_reindexed.fillna(method=method))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeFillnaMethodDataframe:\n    def setup(self, shape, method):\n        self.idx = IMPL.date_range(\"1/1/2000\", periods=shape[0], freq=\"1min\")\n        df_ts = IMPL.DataFrame(np.random.randn(*shape), index=self.idx)[::2]\n        self.df_ts_reindexed = df_ts.reindex(self.idx)\n        self.df_ts_float32 = self.df_ts_reindexed.astype(\"float32\")\n        execute(self.df_ts_reindexed), execute(self.df_ts_float32)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeFillnaMethodDataframe.time_reindexed",
+        "number": 0,
+        "param_names": [
+            "shape",
+            "method"
+        ],
+        "params": [
+            [
+                "[5000, 5000]",
+                "[1000000, 10]"
+            ],
+            [
+                "'pad'",
+                "'backfill'"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "4008426308104d700048881a026ff72c1f77399217444f5b0d5bde9c5c10c117",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeFillnaMethodSeries.time_float_32": {
+        "code": "class TimeFillnaMethodSeries:\n    def time_float_32(self, shape, method):\n        execute(self.ts_float32.fillna(method=method))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeFillnaMethodSeries:\n    def setup(self, shape, method):\n        N = shape[0]\n        self.idx = IMPL.date_range(\"1/1/2000\", periods=N, freq=\"1min\")\n        ts = IMPL.Series(np.random.randn(N), index=self.idx)[::2]\n        self.ts_reindexed = ts.reindex(self.idx)\n        self.ts_float32 = self.ts_reindexed.astype(\"float32\")\n        execute(self.ts_reindexed), execute(self.ts_float32)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeFillnaMethodSeries.time_float_32",
+        "number": 0,
+        "param_names": [
+            "shape",
+            "method"
+        ],
+        "params": [
+            [
+                "[100000, 1]"
+            ],
+            [
+                "'pad'",
+                "'backfill'"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "d93af3841c222510aa8a59a84c7160178be422ee6a55d4f6dd16c68ff44fa8d8",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeFillnaMethodSeries.time_reindexed": {
+        "code": "class TimeFillnaMethodSeries:\n    def time_reindexed(self, shape, method):\n        execute(self.ts_reindexed.fillna(method=method))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeFillnaMethodSeries:\n    def setup(self, shape, method):\n        N = shape[0]\n        self.idx = IMPL.date_range(\"1/1/2000\", periods=N, freq=\"1min\")\n        ts = IMPL.Series(np.random.randn(N), index=self.idx)[::2]\n        self.ts_reindexed = ts.reindex(self.idx)\n        self.ts_float32 = self.ts_reindexed.astype(\"float32\")\n        execute(self.ts_reindexed), execute(self.ts_float32)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeFillnaMethodSeries.time_reindexed",
+        "number": 0,
+        "param_names": [
+            "shape",
+            "method"
+        ],
+        "params": [
+            [
+                "[100000, 1]"
+            ],
+            [
+                "'pad'",
+                "'backfill'"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "454a52557ff470f79eb4ef6b32a09370f52377c03f2a8d75340002e5eb1603c1",
+        "warmup_time": -1
+    },
     "benchmarks.TimeFillnaSeries.time_fillna": {
         "code": "class TimeFillnaSeries:\n    def time_fillna(self, value_type, shape, limit):\n        execute(self.series.fillna(**self.kw))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeFillnaSeries:\n    def setup(self, value_type, shape, limit):\n        self.series = gen_nan_data(*shape)\n    \n        if value_type == \"scalar\":\n            self.value = 18.19\n        elif value_type == \"dict\":\n            self.value = {k: k * 1.23 for k in range(shape[0])}\n        elif value_type == \"Series\":\n            self.value = IMPL.Series(\n                [k * 1.23 for k in range(shape[0])], index=IMPL.RangeIndex(shape[0])\n            )\n        else:\n            assert False\n        limit = int(limit * shape[0]) if limit else None\n        self.kw = {\"value\": self.value, \"limit\": limit}",
         "min_run_count": 2,
@@ -1138,6 +1248,435 @@
         "version": "2f1e02a867fc8a474e83e1c01096fd1a1c7478695d03717506c6be36acfb8708",
         "warmup_time": -1
     },
+    "benchmarks.TimeIndexingNumericSeries.time_getitem_array": {
+        "code": "class TimeIndexingNumericSeries:\n    def time_getitem_array(self, shape, index, index_structure):\n        execute(self.data[self.array])\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeIndexingNumericSeries:\n    def setup(self, shape, dtype, index_structure):\n        N = shape[0]\n        indices = {\n            \"unique_monotonic_inc\": IMPL.Index(range(N), dtype=dtype),\n            \"nonunique_monotonic_inc\": IMPL.Index(\n                list(range(N // 100)) + [(N // 100) - 1] + list(range(N // 100, N - 1)),\n                dtype=dtype,\n            ),\n        }\n        self.data = IMPL.Series(np.random.rand(N), index=indices[index_structure])\n        self.array = np.arange(N // 2)\n        self.index_to_query = N // 2\n        self.array_list = self.array.tolist()\n        execute(self.data)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeIndexingNumericSeries.time_getitem_array",
+        "number": 0,
+        "param_names": [
+            "shape",
+            "dtype",
+            "index_structure"
+        ],
+        "params": [
+            [
+                "[100000, 1]"
+            ],
+            [
+                "<class 'numpy.int64'>",
+                "<class 'numpy.uint64'>",
+                "<class 'numpy.float64'>"
+            ],
+            [
+                "'unique_monotonic_inc'",
+                "'nonunique_monotonic_inc'"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "f803e75ac4521d67886eb86095fecd29d77f5fae699c2d617e7b8563de308121",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeIndexingNumericSeries.time_getitem_list_like": {
+        "code": "class TimeIndexingNumericSeries:\n    def time_getitem_list_like(self, shape, index, index_structure):\n        execute(self.data[[self.index_to_query]])\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeIndexingNumericSeries:\n    def setup(self, shape, dtype, index_structure):\n        N = shape[0]\n        indices = {\n            \"unique_monotonic_inc\": IMPL.Index(range(N), dtype=dtype),\n            \"nonunique_monotonic_inc\": IMPL.Index(\n                list(range(N // 100)) + [(N // 100) - 1] + list(range(N // 100, N - 1)),\n                dtype=dtype,\n            ),\n        }\n        self.data = IMPL.Series(np.random.rand(N), index=indices[index_structure])\n        self.array = np.arange(N // 2)\n        self.index_to_query = N // 2\n        self.array_list = self.array.tolist()\n        execute(self.data)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeIndexingNumericSeries.time_getitem_list_like",
+        "number": 0,
+        "param_names": [
+            "shape",
+            "dtype",
+            "index_structure"
+        ],
+        "params": [
+            [
+                "[100000, 1]"
+            ],
+            [
+                "<class 'numpy.int64'>",
+                "<class 'numpy.uint64'>",
+                "<class 'numpy.float64'>"
+            ],
+            [
+                "'unique_monotonic_inc'",
+                "'nonunique_monotonic_inc'"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "26da39d1a81853e67e5f4b607175768b1bdc2569c6c0201c74cbe105cbf92df8",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeIndexingNumericSeries.time_getitem_lists": {
+        "code": "class TimeIndexingNumericSeries:\n    def time_getitem_lists(self, shape, index, index_structure):\n        execute(self.data[self.array_list])\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeIndexingNumericSeries:\n    def setup(self, shape, dtype, index_structure):\n        N = shape[0]\n        indices = {\n            \"unique_monotonic_inc\": IMPL.Index(range(N), dtype=dtype),\n            \"nonunique_monotonic_inc\": IMPL.Index(\n                list(range(N // 100)) + [(N // 100) - 1] + list(range(N // 100, N - 1)),\n                dtype=dtype,\n            ),\n        }\n        self.data = IMPL.Series(np.random.rand(N), index=indices[index_structure])\n        self.array = np.arange(N // 2)\n        self.index_to_query = N // 2\n        self.array_list = self.array.tolist()\n        execute(self.data)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeIndexingNumericSeries.time_getitem_lists",
+        "number": 0,
+        "param_names": [
+            "shape",
+            "dtype",
+            "index_structure"
+        ],
+        "params": [
+            [
+                "[100000, 1]"
+            ],
+            [
+                "<class 'numpy.int64'>",
+                "<class 'numpy.uint64'>",
+                "<class 'numpy.float64'>"
+            ],
+            [
+                "'unique_monotonic_inc'",
+                "'nonunique_monotonic_inc'"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "a6e9eef437105ddd6e706f4e3d8a191345770ceb3a5f8c870c9d667837cd4182",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeIndexingNumericSeries.time_getitem_scalar": {
+        "code": "class TimeIndexingNumericSeries:\n    def time_getitem_scalar(self, shape, index, index_structure):\n        # not calling execute as execute function fails for scalar\n        self.data[self.index_to_query]\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeIndexingNumericSeries:\n    def setup(self, shape, dtype, index_structure):\n        N = shape[0]\n        indices = {\n            \"unique_monotonic_inc\": IMPL.Index(range(N), dtype=dtype),\n            \"nonunique_monotonic_inc\": IMPL.Index(\n                list(range(N // 100)) + [(N // 100) - 1] + list(range(N // 100, N - 1)),\n                dtype=dtype,\n            ),\n        }\n        self.data = IMPL.Series(np.random.rand(N), index=indices[index_structure])\n        self.array = np.arange(N // 2)\n        self.index_to_query = N // 2\n        self.array_list = self.array.tolist()\n        execute(self.data)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeIndexingNumericSeries.time_getitem_scalar",
+        "number": 0,
+        "param_names": [
+            "shape",
+            "dtype",
+            "index_structure"
+        ],
+        "params": [
+            [
+                "[100000, 1]"
+            ],
+            [
+                "<class 'numpy.int64'>",
+                "<class 'numpy.uint64'>",
+                "<class 'numpy.float64'>"
+            ],
+            [
+                "'unique_monotonic_inc'",
+                "'nonunique_monotonic_inc'"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "95ebede2af65e9f362f0825c28b5d4b735962eb2ee47fcd069966569913ed84e",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeIndexingNumericSeries.time_getitem_slice": {
+        "code": "class TimeIndexingNumericSeries:\n    def time_getitem_slice(self, shape, index, index_structure):\n        execute(self.data[: self.index_to_query])\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeIndexingNumericSeries:\n    def setup(self, shape, dtype, index_structure):\n        N = shape[0]\n        indices = {\n            \"unique_monotonic_inc\": IMPL.Index(range(N), dtype=dtype),\n            \"nonunique_monotonic_inc\": IMPL.Index(\n                list(range(N // 100)) + [(N // 100) - 1] + list(range(N // 100, N - 1)),\n                dtype=dtype,\n            ),\n        }\n        self.data = IMPL.Series(np.random.rand(N), index=indices[index_structure])\n        self.array = np.arange(N // 2)\n        self.index_to_query = N // 2\n        self.array_list = self.array.tolist()\n        execute(self.data)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeIndexingNumericSeries.time_getitem_slice",
+        "number": 0,
+        "param_names": [
+            "shape",
+            "dtype",
+            "index_structure"
+        ],
+        "params": [
+            [
+                "[100000, 1]"
+            ],
+            [
+                "<class 'numpy.int64'>",
+                "<class 'numpy.uint64'>",
+                "<class 'numpy.float64'>"
+            ],
+            [
+                "'unique_monotonic_inc'",
+                "'nonunique_monotonic_inc'"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "805faf9c8281540f36b9981891d4644a3c78cf4903a9c299f9413c35401053db",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeIndexingNumericSeries.time_iloc_array": {
+        "code": "class TimeIndexingNumericSeries:\n    def time_iloc_array(self, shape, index, index_structure):\n        execute(self.data.iloc[self.array])\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeIndexingNumericSeries:\n    def setup(self, shape, dtype, index_structure):\n        N = shape[0]\n        indices = {\n            \"unique_monotonic_inc\": IMPL.Index(range(N), dtype=dtype),\n            \"nonunique_monotonic_inc\": IMPL.Index(\n                list(range(N // 100)) + [(N // 100) - 1] + list(range(N // 100, N - 1)),\n                dtype=dtype,\n            ),\n        }\n        self.data = IMPL.Series(np.random.rand(N), index=indices[index_structure])\n        self.array = np.arange(N // 2)\n        self.index_to_query = N // 2\n        self.array_list = self.array.tolist()\n        execute(self.data)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeIndexingNumericSeries.time_iloc_array",
+        "number": 0,
+        "param_names": [
+            "shape",
+            "dtype",
+            "index_structure"
+        ],
+        "params": [
+            [
+                "[100000, 1]"
+            ],
+            [
+                "<class 'numpy.int64'>",
+                "<class 'numpy.uint64'>",
+                "<class 'numpy.float64'>"
+            ],
+            [
+                "'unique_monotonic_inc'",
+                "'nonunique_monotonic_inc'"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "a0941c973a470724de2294d999e7d1f296c15669e1388569425a68ee3a1a5df7",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeIndexingNumericSeries.time_iloc_list_like": {
+        "code": "class TimeIndexingNumericSeries:\n    def time_iloc_list_like(self, shape, index, index_structure):\n        execute(self.data.iloc[[self.index_to_query]])\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeIndexingNumericSeries:\n    def setup(self, shape, dtype, index_structure):\n        N = shape[0]\n        indices = {\n            \"unique_monotonic_inc\": IMPL.Index(range(N), dtype=dtype),\n            \"nonunique_monotonic_inc\": IMPL.Index(\n                list(range(N // 100)) + [(N // 100) - 1] + list(range(N // 100, N - 1)),\n                dtype=dtype,\n            ),\n        }\n        self.data = IMPL.Series(np.random.rand(N), index=indices[index_structure])\n        self.array = np.arange(N // 2)\n        self.index_to_query = N // 2\n        self.array_list = self.array.tolist()\n        execute(self.data)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeIndexingNumericSeries.time_iloc_list_like",
+        "number": 0,
+        "param_names": [
+            "shape",
+            "dtype",
+            "index_structure"
+        ],
+        "params": [
+            [
+                "[100000, 1]"
+            ],
+            [
+                "<class 'numpy.int64'>",
+                "<class 'numpy.uint64'>",
+                "<class 'numpy.float64'>"
+            ],
+            [
+                "'unique_monotonic_inc'",
+                "'nonunique_monotonic_inc'"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "5653d4b0747898788aa7de62ba54038ed67e9c72db80214f305faa6f3730dcf1",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeIndexingNumericSeries.time_iloc_scalar": {
+        "code": "class TimeIndexingNumericSeries:\n    def time_iloc_scalar(self, shape, index, index_structure):\n        # not calling execute as execute function fails for scalar\n        self.data.iloc[self.index_to_query]\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeIndexingNumericSeries:\n    def setup(self, shape, dtype, index_structure):\n        N = shape[0]\n        indices = {\n            \"unique_monotonic_inc\": IMPL.Index(range(N), dtype=dtype),\n            \"nonunique_monotonic_inc\": IMPL.Index(\n                list(range(N // 100)) + [(N // 100) - 1] + list(range(N // 100, N - 1)),\n                dtype=dtype,\n            ),\n        }\n        self.data = IMPL.Series(np.random.rand(N), index=indices[index_structure])\n        self.array = np.arange(N // 2)\n        self.index_to_query = N // 2\n        self.array_list = self.array.tolist()\n        execute(self.data)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeIndexingNumericSeries.time_iloc_scalar",
+        "number": 0,
+        "param_names": [
+            "shape",
+            "dtype",
+            "index_structure"
+        ],
+        "params": [
+            [
+                "[100000, 1]"
+            ],
+            [
+                "<class 'numpy.int64'>",
+                "<class 'numpy.uint64'>",
+                "<class 'numpy.float64'>"
+            ],
+            [
+                "'unique_monotonic_inc'",
+                "'nonunique_monotonic_inc'"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "b5ab555f94ed58dae63b37699af2624e56ec9377414cced699c6e754afa607fb",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeIndexingNumericSeries.time_iloc_slice": {
+        "code": "class TimeIndexingNumericSeries:\n    def time_iloc_slice(self, shape, index, index_structure):\n        execute(self.data.iloc[: self.index_to_query])\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeIndexingNumericSeries:\n    def setup(self, shape, dtype, index_structure):\n        N = shape[0]\n        indices = {\n            \"unique_monotonic_inc\": IMPL.Index(range(N), dtype=dtype),\n            \"nonunique_monotonic_inc\": IMPL.Index(\n                list(range(N // 100)) + [(N // 100) - 1] + list(range(N // 100, N - 1)),\n                dtype=dtype,\n            ),\n        }\n        self.data = IMPL.Series(np.random.rand(N), index=indices[index_structure])\n        self.array = np.arange(N // 2)\n        self.index_to_query = N // 2\n        self.array_list = self.array.tolist()\n        execute(self.data)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeIndexingNumericSeries.time_iloc_slice",
+        "number": 0,
+        "param_names": [
+            "shape",
+            "dtype",
+            "index_structure"
+        ],
+        "params": [
+            [
+                "[100000, 1]"
+            ],
+            [
+                "<class 'numpy.int64'>",
+                "<class 'numpy.uint64'>",
+                "<class 'numpy.float64'>"
+            ],
+            [
+                "'unique_monotonic_inc'",
+                "'nonunique_monotonic_inc'"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "d2aba6c7e5393c8b8f96bd480aa03c8e04948a397932d2465c02de0e448a93b6",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeIndexingNumericSeries.time_loc_array": {
+        "code": "class TimeIndexingNumericSeries:\n    def time_loc_array(self, shape, index, index_structure):\n        execute(self.data.loc[self.array])\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeIndexingNumericSeries:\n    def setup(self, shape, dtype, index_structure):\n        N = shape[0]\n        indices = {\n            \"unique_monotonic_inc\": IMPL.Index(range(N), dtype=dtype),\n            \"nonunique_monotonic_inc\": IMPL.Index(\n                list(range(N // 100)) + [(N // 100) - 1] + list(range(N // 100, N - 1)),\n                dtype=dtype,\n            ),\n        }\n        self.data = IMPL.Series(np.random.rand(N), index=indices[index_structure])\n        self.array = np.arange(N // 2)\n        self.index_to_query = N // 2\n        self.array_list = self.array.tolist()\n        execute(self.data)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeIndexingNumericSeries.time_loc_array",
+        "number": 0,
+        "param_names": [
+            "shape",
+            "dtype",
+            "index_structure"
+        ],
+        "params": [
+            [
+                "[100000, 1]"
+            ],
+            [
+                "<class 'numpy.int64'>",
+                "<class 'numpy.uint64'>",
+                "<class 'numpy.float64'>"
+            ],
+            [
+                "'unique_monotonic_inc'",
+                "'nonunique_monotonic_inc'"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "6cf704634f4a86aac88d6b4f58f31ce98b2272157c8eb03282a15ce55645ffca",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeIndexingNumericSeries.time_loc_list_like": {
+        "code": "class TimeIndexingNumericSeries:\n    def time_loc_list_like(self, shape, index, index_structure):\n        execute(self.data.loc[[self.index_to_query]])\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeIndexingNumericSeries:\n    def setup(self, shape, dtype, index_structure):\n        N = shape[0]\n        indices = {\n            \"unique_monotonic_inc\": IMPL.Index(range(N), dtype=dtype),\n            \"nonunique_monotonic_inc\": IMPL.Index(\n                list(range(N // 100)) + [(N // 100) - 1] + list(range(N // 100, N - 1)),\n                dtype=dtype,\n            ),\n        }\n        self.data = IMPL.Series(np.random.rand(N), index=indices[index_structure])\n        self.array = np.arange(N // 2)\n        self.index_to_query = N // 2\n        self.array_list = self.array.tolist()\n        execute(self.data)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeIndexingNumericSeries.time_loc_list_like",
+        "number": 0,
+        "param_names": [
+            "shape",
+            "dtype",
+            "index_structure"
+        ],
+        "params": [
+            [
+                "[100000, 1]"
+            ],
+            [
+                "<class 'numpy.int64'>",
+                "<class 'numpy.uint64'>",
+                "<class 'numpy.float64'>"
+            ],
+            [
+                "'unique_monotonic_inc'",
+                "'nonunique_monotonic_inc'"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "bc25e647c81d68d2d2905ee6a40ad9e2c43dcde9de2fc8997919ea72bb3ce4af",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeIndexingNumericSeries.time_loc_scalar": {
+        "code": "class TimeIndexingNumericSeries:\n    def time_loc_scalar(self, shape, index, index_structure):\n        self.data.loc[self.index_to_query]\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeIndexingNumericSeries:\n    def setup(self, shape, dtype, index_structure):\n        N = shape[0]\n        indices = {\n            \"unique_monotonic_inc\": IMPL.Index(range(N), dtype=dtype),\n            \"nonunique_monotonic_inc\": IMPL.Index(\n                list(range(N // 100)) + [(N // 100) - 1] + list(range(N // 100, N - 1)),\n                dtype=dtype,\n            ),\n        }\n        self.data = IMPL.Series(np.random.rand(N), index=indices[index_structure])\n        self.array = np.arange(N // 2)\n        self.index_to_query = N // 2\n        self.array_list = self.array.tolist()\n        execute(self.data)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeIndexingNumericSeries.time_loc_scalar",
+        "number": 0,
+        "param_names": [
+            "shape",
+            "dtype",
+            "index_structure"
+        ],
+        "params": [
+            [
+                "[100000, 1]"
+            ],
+            [
+                "<class 'numpy.int64'>",
+                "<class 'numpy.uint64'>",
+                "<class 'numpy.float64'>"
+            ],
+            [
+                "'unique_monotonic_inc'",
+                "'nonunique_monotonic_inc'"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "95efa9333bb3b2c567ef9917011cf27240d4f55e10260cfa0c7799001b3b59b2",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeIndexingNumericSeries.time_loc_slice": {
+        "code": "class TimeIndexingNumericSeries:\n    def time_loc_slice(self, shape, index, index_structure):\n        execute(self.data.loc[: self.index_to_query])\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeIndexingNumericSeries:\n    def setup(self, shape, dtype, index_structure):\n        N = shape[0]\n        indices = {\n            \"unique_monotonic_inc\": IMPL.Index(range(N), dtype=dtype),\n            \"nonunique_monotonic_inc\": IMPL.Index(\n                list(range(N // 100)) + [(N // 100) - 1] + list(range(N // 100, N - 1)),\n                dtype=dtype,\n            ),\n        }\n        self.data = IMPL.Series(np.random.rand(N), index=indices[index_structure])\n        self.array = np.arange(N // 2)\n        self.index_to_query = N // 2\n        self.array_list = self.array.tolist()\n        execute(self.data)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeIndexingNumericSeries.time_loc_slice",
+        "number": 0,
+        "param_names": [
+            "shape",
+            "dtype",
+            "index_structure"
+        ],
+        "params": [
+            [
+                "[100000, 1]"
+            ],
+            [
+                "<class 'numpy.int64'>",
+                "<class 'numpy.uint64'>",
+                "<class 'numpy.float64'>"
+            ],
+            [
+                "'unique_monotonic_inc'",
+                "'nonunique_monotonic_inc'"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "69a04b3e51c478ebcd1bda1e548f320dc16dafb02031bf21cf5454fdfca1e35f",
+        "warmup_time": -1
+    },
     "benchmarks.TimeInsert.time_insert_qc": {
         "code": "class TimeInsert:\n    def time_insert_qc(self, *args, **kwargs):\n        self.df.insert(loc=self.iloc, column=random_string(), value=self.item)\n        execute(self.df)\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass BaseTimeSetItem:\n    def setup(self, shape, item_length, loc, is_equal_indices):\n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH).copy()\n        self.loc, self.iloc = self.get_loc(\n            self.df, loc, item_length=item_length, axis=1\n        )\n    \n        self.item = self.df[self.loc] + 1\n        self.item_raw = self.item.to_numpy()\n        if not is_equal_indices:\n            self.item.index = reversed(self.item.index)",
         "min_run_count": 2,
@@ -1576,6 +2115,154 @@
         "type": "time",
         "unit": "seconds",
         "version": "835d326a5a42748b739c20db4dd983cbf1e8996ab2b8bff3d3e5709a5a548e90",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeReindex.time_reindex_columns": {
+        "code": "class TimeReindex:\n    def time_reindex_columns(self, shape):\n        execute(self.df2.reindex(columns=self.df.columns[1:5]))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeReindex:\n    def setup(self, shape):\n        rows, cols = shape\n        rng = IMPL.date_range(start=\"1/1/1970\", periods=rows, freq=\"1min\")\n        self.df = IMPL.DataFrame(\n            np.random.rand(rows, cols), index=rng, columns=range(cols)\n        )\n        self.df[\"foo\"] = \"bar\"\n        self.rng_subset = IMPL.Index(rng[::2])\n        self.df2 = IMPL.DataFrame(\n            index=range(rows), data=np.random.rand(rows, cols), columns=range(cols)\n        )\n        level1 = tm.makeStringIndex(rows).values.repeat(cols)\n        level2 = np.tile(tm.makeStringIndex(cols).values, rows)\n        index = IMPL.MultiIndex.from_arrays([level1, level2])\n        self.s = IMPL.Series(np.random.randn(rows * cols), index=index)\n        self.s_subset = self.s[::2]\n        self.s_subset_no_cache = self.s[::2].copy()\n    \n        mi = IMPL.MultiIndex.from_product([rng, range(100)])\n        self.s2 = IMPL.Series(np.random.randn(len(mi)), index=mi)\n        self.s2_subset = self.s2[::2].copy()\n        execute(self.df), execute(self.df2)\n        execute(self.s), execute(self.s_subset)\n        execute(self.s2), execute(self.s2_subset)\n        execute(self.s_subset_no_cache)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeReindex.time_reindex_columns",
+        "number": 0,
+        "param_names": [
+            "shape"
+        ],
+        "params": [
+            [
+                "[5000, 5000]",
+                "[1000000, 10]"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "3cdb685b3c49c3cd4b8b743acc4e5bb329aa1d94d81e8733ac2f82b42cde2cff",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeReindex.time_reindex_dates": {
+        "code": "class TimeReindex:\n    def time_reindex_dates(self, shape):\n        execute(self.df.reindex(self.rng_subset))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeReindex:\n    def setup(self, shape):\n        rows, cols = shape\n        rng = IMPL.date_range(start=\"1/1/1970\", periods=rows, freq=\"1min\")\n        self.df = IMPL.DataFrame(\n            np.random.rand(rows, cols), index=rng, columns=range(cols)\n        )\n        self.df[\"foo\"] = \"bar\"\n        self.rng_subset = IMPL.Index(rng[::2])\n        self.df2 = IMPL.DataFrame(\n            index=range(rows), data=np.random.rand(rows, cols), columns=range(cols)\n        )\n        level1 = tm.makeStringIndex(rows).values.repeat(cols)\n        level2 = np.tile(tm.makeStringIndex(cols).values, rows)\n        index = IMPL.MultiIndex.from_arrays([level1, level2])\n        self.s = IMPL.Series(np.random.randn(rows * cols), index=index)\n        self.s_subset = self.s[::2]\n        self.s_subset_no_cache = self.s[::2].copy()\n    \n        mi = IMPL.MultiIndex.from_product([rng, range(100)])\n        self.s2 = IMPL.Series(np.random.randn(len(mi)), index=mi)\n        self.s2_subset = self.s2[::2].copy()\n        execute(self.df), execute(self.df2)\n        execute(self.s), execute(self.s_subset)\n        execute(self.s2), execute(self.s2_subset)\n        execute(self.s_subset_no_cache)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeReindex.time_reindex_dates",
+        "number": 0,
+        "param_names": [
+            "shape"
+        ],
+        "params": [
+            [
+                "[5000, 5000]",
+                "[1000000, 10]"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "7a0f5798c060d33cf901e20434050cb35a4329e4281b84547bb702457786191c",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeReindex.time_reindex_multiindex_no_cache": {
+        "code": "class TimeReindex:\n    def time_reindex_multiindex_no_cache(self, shape):\n        # Copy to avoid MultiIndex._values getting cached (pandas specific)\n        execute(self.s.reindex(self.s_subset_no_cache.index.copy()))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeReindex:\n    def setup(self, shape):\n        rows, cols = shape\n        rng = IMPL.date_range(start=\"1/1/1970\", periods=rows, freq=\"1min\")\n        self.df = IMPL.DataFrame(\n            np.random.rand(rows, cols), index=rng, columns=range(cols)\n        )\n        self.df[\"foo\"] = \"bar\"\n        self.rng_subset = IMPL.Index(rng[::2])\n        self.df2 = IMPL.DataFrame(\n            index=range(rows), data=np.random.rand(rows, cols), columns=range(cols)\n        )\n        level1 = tm.makeStringIndex(rows).values.repeat(cols)\n        level2 = np.tile(tm.makeStringIndex(cols).values, rows)\n        index = IMPL.MultiIndex.from_arrays([level1, level2])\n        self.s = IMPL.Series(np.random.randn(rows * cols), index=index)\n        self.s_subset = self.s[::2]\n        self.s_subset_no_cache = self.s[::2].copy()\n    \n        mi = IMPL.MultiIndex.from_product([rng, range(100)])\n        self.s2 = IMPL.Series(np.random.randn(len(mi)), index=mi)\n        self.s2_subset = self.s2[::2].copy()\n        execute(self.df), execute(self.df2)\n        execute(self.s), execute(self.s_subset)\n        execute(self.s2), execute(self.s2_subset)\n        execute(self.s_subset_no_cache)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeReindex.time_reindex_multiindex_no_cache",
+        "number": 0,
+        "param_names": [
+            "shape"
+        ],
+        "params": [
+            [
+                "[5000, 5000]",
+                "[1000000, 10]"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "769d5526884c4c5b1b4139f04e94c1ca70aa430dda6833be0d7c230f819bf8bc",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeReindex.time_reindex_multiindex_no_cache_dates": {
+        "code": "class TimeReindex:\n    def time_reindex_multiindex_no_cache_dates(self, shape):\n        # Copy to avoid MultiIndex._values getting cached (pandas specific)\n        execute(self.s2_subset.reindex(self.s2.index.copy()))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeReindex:\n    def setup(self, shape):\n        rows, cols = shape\n        rng = IMPL.date_range(start=\"1/1/1970\", periods=rows, freq=\"1min\")\n        self.df = IMPL.DataFrame(\n            np.random.rand(rows, cols), index=rng, columns=range(cols)\n        )\n        self.df[\"foo\"] = \"bar\"\n        self.rng_subset = IMPL.Index(rng[::2])\n        self.df2 = IMPL.DataFrame(\n            index=range(rows), data=np.random.rand(rows, cols), columns=range(cols)\n        )\n        level1 = tm.makeStringIndex(rows).values.repeat(cols)\n        level2 = np.tile(tm.makeStringIndex(cols).values, rows)\n        index = IMPL.MultiIndex.from_arrays([level1, level2])\n        self.s = IMPL.Series(np.random.randn(rows * cols), index=index)\n        self.s_subset = self.s[::2]\n        self.s_subset_no_cache = self.s[::2].copy()\n    \n        mi = IMPL.MultiIndex.from_product([rng, range(100)])\n        self.s2 = IMPL.Series(np.random.randn(len(mi)), index=mi)\n        self.s2_subset = self.s2[::2].copy()\n        execute(self.df), execute(self.df2)\n        execute(self.s), execute(self.s_subset)\n        execute(self.s2), execute(self.s2_subset)\n        execute(self.s_subset_no_cache)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeReindex.time_reindex_multiindex_no_cache_dates",
+        "number": 0,
+        "param_names": [
+            "shape"
+        ],
+        "params": [
+            [
+                "[5000, 5000]",
+                "[1000000, 10]"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "7e61e3559498f6098fa2441ed8da34aee22fc3dfb4c348c47487c74454e72cdc",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeReindex.time_reindex_multiindex_with_cache": {
+        "code": "class TimeReindex:\n    def time_reindex_multiindex_with_cache(self, shape):\n        # MultiIndex._values gets cached (pandas specific)\n        execute(self.s.reindex(self.s_subset.index))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeReindex:\n    def setup(self, shape):\n        rows, cols = shape\n        rng = IMPL.date_range(start=\"1/1/1970\", periods=rows, freq=\"1min\")\n        self.df = IMPL.DataFrame(\n            np.random.rand(rows, cols), index=rng, columns=range(cols)\n        )\n        self.df[\"foo\"] = \"bar\"\n        self.rng_subset = IMPL.Index(rng[::2])\n        self.df2 = IMPL.DataFrame(\n            index=range(rows), data=np.random.rand(rows, cols), columns=range(cols)\n        )\n        level1 = tm.makeStringIndex(rows).values.repeat(cols)\n        level2 = np.tile(tm.makeStringIndex(cols).values, rows)\n        index = IMPL.MultiIndex.from_arrays([level1, level2])\n        self.s = IMPL.Series(np.random.randn(rows * cols), index=index)\n        self.s_subset = self.s[::2]\n        self.s_subset_no_cache = self.s[::2].copy()\n    \n        mi = IMPL.MultiIndex.from_product([rng, range(100)])\n        self.s2 = IMPL.Series(np.random.randn(len(mi)), index=mi)\n        self.s2_subset = self.s2[::2].copy()\n        execute(self.df), execute(self.df2)\n        execute(self.s), execute(self.s_subset)\n        execute(self.s2), execute(self.s2_subset)\n        execute(self.s_subset_no_cache)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeReindex.time_reindex_multiindex_with_cache",
+        "number": 0,
+        "param_names": [
+            "shape"
+        ],
+        "params": [
+            [
+                "[5000, 5000]",
+                "[1000000, 10]"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "7ae0d1c78bffc2b8223cf68ea3561f7681ef13b2e4e4fa2a0d99f359439c37e4",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeReindexMethod.time_reindex_method": {
+        "code": "class TimeReindexMethod:\n    def time_reindex_method(self, shape, method, constructor):\n        execute(self.ts.reindex(self.idx, method=method))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeReindexMethod:\n    def setup(self, shape, method, constructor):\n        N = shape[0]\n        self.idx = constructor(\"1/1/2000\", periods=N, freq=\"1min\")\n        self.ts = IMPL.Series(np.random.randn(N), index=self.idx)[::2]\n        execute(self.ts)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeReindexMethod.time_reindex_method",
+        "number": 0,
+        "param_names": [
+            "shape",
+            "method",
+            "constructor"
+        ],
+        "params": [
+            [
+                "[5000, 5000]",
+                "[1000000, 10]"
+            ],
+            [
+                "'pad'",
+                "'backfill'"
+            ],
+            [
+                "<function date_range>",
+                "<function period_range>"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "a85eb27dbaec41ac2e57df3941ef6147a8a6c8d7e47e8470ab33420cda35dcc8",
         "warmup_time": -1
     },
     "benchmarks.TimeResetIndex.time_reset_index": {
