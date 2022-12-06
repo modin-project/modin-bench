@@ -605,6 +605,96 @@
         "version": "98b4265684fad1fbfdb0e570c030fa704996b9590c29f57fc6ba3a89b6eefc2b",
         "warmup_time": -1
     },
+    "benchmarks.TimeDropDuplicatesDataframe.time_drop_dups": {
+        "code": "class TimeDropDuplicatesDataframe:\n    def time_drop_dups(self, shape):\n        execute(self.df.drop_duplicates(self.df.columns[:-1]))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeDropDuplicatesDataframe:\n    def setup(self, shape):\n        rows, cols = shape\n        N = rows // 10\n        K = 10\n        self.df = IMPL.DataFrame()\n        # dataframe would  have cols-1 keys(strings) and one value(int) column\n        for col in range(cols - 1):\n            self.df[\"key\" + str(col + 1)] = tm.makeStringIndex(N).values.repeat(K)\n        self.df[\"value\"] = np.random.randn(N * K)\n        execute(self.df)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeDropDuplicatesDataframe.time_drop_dups",
+        "number": 0,
+        "param_names": [
+            "shape"
+        ],
+        "params": [
+            [
+                "[5000, 5000]",
+                "[1000000, 10]"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "8ca5ba88f37bee0f1812c851c9b5ab344d95a73efa8ee627cf50291c4079eb6d",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeDropDuplicatesDataframe.time_drop_dups_inplace": {
+        "code": "class TimeDropDuplicatesDataframe:\n    def time_drop_dups_inplace(self, shape):\n        self.df.drop_duplicates(self.df.columns[:-1], inplace=True)\n        execute(self.df)\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeDropDuplicatesDataframe:\n    def setup(self, shape):\n        rows, cols = shape\n        N = rows // 10\n        K = 10\n        self.df = IMPL.DataFrame()\n        # dataframe would  have cols-1 keys(strings) and one value(int) column\n        for col in range(cols - 1):\n            self.df[\"key\" + str(col + 1)] = tm.makeStringIndex(N).values.repeat(K)\n        self.df[\"value\"] = np.random.randn(N * K)\n        execute(self.df)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeDropDuplicatesDataframe.time_drop_dups_inplace",
+        "number": 0,
+        "param_names": [
+            "shape"
+        ],
+        "params": [
+            [
+                "[5000, 5000]",
+                "[1000000, 10]"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "bfdb6e947b496e9de0230224a344eb73e8c50726e1394f6c920d5d29aa3ef506",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeDropDuplicatesSeries.time_drop_dups": {
+        "code": "class TimeDropDuplicatesSeries:\n    def time_drop_dups(self, shape):\n        execute(self.series.drop_duplicates())\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeDropDuplicatesSeries:\n    def setup(self, shape):\n        rows = shape[0]\n        self.series = IMPL.Series(np.tile(tm.makeStringIndex(rows // 10).values, 10))\n        execute(self.series)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeDropDuplicatesSeries.time_drop_dups",
+        "number": 0,
+        "param_names": [
+            "shape"
+        ],
+        "params": [
+            [
+                "[100000, 1]"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "750e26deadfa7abda332ca1ab655495d62797d36884c782ef0cfd18c63f25b0d",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeDropDuplicatesSeries.time_drop_dups_string": {
+        "code": "class TimeDropDuplicatesSeries:\n    def time_drop_dups_string(self, shape):\n        self.series.drop_duplicates(inplace=True)\n        execute(self.series)\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeDropDuplicatesSeries:\n    def setup(self, shape):\n        rows = shape[0]\n        self.series = IMPL.Series(np.tile(tm.makeStringIndex(rows // 10).values, 10))\n        execute(self.series)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeDropDuplicatesSeries.time_drop_dups_string",
+        "number": 0,
+        "param_names": [
+            "shape"
+        ],
+        "params": [
+            [
+                "[100000, 1]"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "3a8fc013427719a2abceab512c0efc47304a08c3a2dee37b17dcaa856b89f8f8",
+        "warmup_time": -1
+    },
     "benchmarks.TimeExplode.time_explode": {
         "code": "class TimeExplode:\n    def time_explode(self, shape):\n        execute(self.df.explode(\"col1\"))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeExplode:\n    def setup(self, shape):\n        self.df = generate_dataframe(\n            \"int\", *shape, RAND_LOW, RAND_HIGH, gen_unique_key=True\n        )",
         "min_run_count": 2,
@@ -1864,6 +1954,52 @@
         "type": "time",
         "unit": "seconds",
         "version": "08548c5c0b6b1d831f15455b1e1e42c9c99f9c21747ef4c4d360f4fb296ebbcd",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeLevelAlign.time_align_level": {
+        "code": "class TimeLevelAlign:\n    def time_align_level(self, shapes):\n        left, right = self.df1.align(self.df2, level=1, copy=False)\n        execute(left), execute(right)\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeLevelAlign:\n    def setup(self, shapes):\n        rows, cols = shapes[0]\n        rows_sqrt = round(math.sqrt(rows))\n        # the new number of rows may differ from the requested (slightly, so ok)\n        rows = rows_sqrt * rows_sqrt\n        self.index = IMPL.MultiIndex(\n            levels=[np.arange(10), np.arange(rows_sqrt), np.arange(rows_sqrt)],\n            codes=[\n                np.arange(10).repeat(rows),\n                np.tile(np.arange(rows_sqrt).repeat(rows_sqrt), 10),\n                np.tile(np.tile(np.arange(rows_sqrt), rows_sqrt), 10),\n            ],\n        )\n        self.df1 = IMPL.DataFrame(\n            np.random.randn(len(self.index), cols), index=self.index\n        )\n        self.df2 = IMPL.DataFrame(np.random.randn(*shapes[1]))\n        execute(self.df1), execute(self.df2)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeLevelAlign.time_align_level",
+        "number": 0,
+        "param_names": [
+            "shapes"
+        ],
+        "params": [
+            [
+                "[[5000, 5000], [5000, 5000]]",
+                "[[500000, 20], [1000000, 10]]"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "9fdf3ba05fbf459a13567b6e5215a25a9a1da1f38b63de1ad03848cf0003cda7",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeLevelAlign.time_reindex_level": {
+        "code": "class TimeLevelAlign:\n    def time_reindex_level(self, shapes):\n        # `reindex` returns the same result here as `align`.\n        # Approximately the same performance is expected.\n        execute(self.df2.reindex(self.index, level=1))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeLevelAlign:\n    def setup(self, shapes):\n        rows, cols = shapes[0]\n        rows_sqrt = round(math.sqrt(rows))\n        # the new number of rows may differ from the requested (slightly, so ok)\n        rows = rows_sqrt * rows_sqrt\n        self.index = IMPL.MultiIndex(\n            levels=[np.arange(10), np.arange(rows_sqrt), np.arange(rows_sqrt)],\n            codes=[\n                np.arange(10).repeat(rows),\n                np.tile(np.arange(rows_sqrt).repeat(rows_sqrt), 10),\n                np.tile(np.tile(np.arange(rows_sqrt), rows_sqrt), 10),\n            ],\n        )\n        self.df1 = IMPL.DataFrame(\n            np.random.randn(len(self.index), cols), index=self.index\n        )\n        self.df2 = IMPL.DataFrame(np.random.randn(*shapes[1]))\n        execute(self.df1), execute(self.df2)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeLevelAlign.time_reindex_level",
+        "number": 0,
+        "param_names": [
+            "shapes"
+        ],
+        "params": [
+            [
+                "[[5000, 5000], [5000, 5000]]",
+                "[[500000, 20], [1000000, 10]]"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "4563182535cc854923e92e8f96193a3d8078461fe13d681a81c9db355c3be627",
         "warmup_time": -1
     },
     "benchmarks.TimeMerge.time_merge": {
