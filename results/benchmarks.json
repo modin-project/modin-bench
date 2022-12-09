@@ -549,6 +549,72 @@
         "version": "b7e9f8fa534d19b45940d79ae9955ad145a2f419892d062560ff785a71b7324e",
         "warmup_time": -1
     },
+    "benchmarks.TimeDatetimeAccessor.time_dt_accessor": {
+        "code": "class TimeDatetimeAccessor:\n    def time_dt_accessor(self, shape):\n        execute(self.series.dt)\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeDatetimeAccessor:\n    def setup(self, shape):\n        self.series = IMPL.Series(\n            IMPL.timedelta_range(\"1 days\", periods=shape[0], freq=\"h\")\n        )\n        execute(self.series)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeDatetimeAccessor.time_dt_accessor",
+        "number": 0,
+        "param_names": [
+            "shape"
+        ],
+        "params": [
+            [
+                "[100000, 1]"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "5aa3041a80bba5711fb6cefb02615ebfb2e7f317974a8b6c8634de55423db941",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeDatetimeAccessor.time_timedelta_days": {
+        "code": "class TimeDatetimeAccessor:\n    def time_timedelta_days(self, shape):\n        execute(self.series.dt.days)\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeDatetimeAccessor:\n    def setup(self, shape):\n        self.series = IMPL.Series(\n            IMPL.timedelta_range(\"1 days\", periods=shape[0], freq=\"h\")\n        )\n        execute(self.series)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeDatetimeAccessor.time_timedelta_days",
+        "number": 0,
+        "param_names": [
+            "shape"
+        ],
+        "params": [
+            [
+                "[100000, 1]"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "4b534d0f817199eb24114991087402515e52121b261fc5421b86b8c04e925916",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeDatetimeAccessor.time_timedelta_seconds": {
+        "code": "class TimeDatetimeAccessor:\n    def time_timedelta_seconds(self, shape):\n        execute(self.series.dt.seconds)\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeDatetimeAccessor:\n    def setup(self, shape):\n        self.series = IMPL.Series(\n            IMPL.timedelta_range(\"1 days\", periods=shape[0], freq=\"h\")\n        )\n        execute(self.series)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeDatetimeAccessor.time_timedelta_seconds",
+        "number": 0,
+        "param_names": [
+            "shape"
+        ],
+        "params": [
+            [
+                "[100000, 1]"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "385d670206287f645d2414386c8fc06dd7e0e95da8e08b06e057899eca19cc5e",
+        "warmup_time": -1
+    },
     "benchmarks.TimeDescribe.time_describe": {
         "code": "class TimeDescribe:\n    def time_describe(self, shape):\n        execute(self.df.describe())\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeDescribe:\n    def setup(self, shape):\n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)",
         "min_run_count": 2,
@@ -606,7 +672,7 @@
         "warmup_time": -1
     },
     "benchmarks.TimeDropDuplicatesDataframe.time_drop_dups": {
-        "code": "class TimeDropDuplicatesDataframe:\n    def time_drop_dups(self, shape):\n        execute(self.df.drop_duplicates(self.df.columns[:-1]))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeDropDuplicatesDataframe:\n    def setup(self, shape):\n        rows, cols = shape\n        N = rows // 10\n        K = 10\n        self.df = IMPL.DataFrame()\n        # dataframe would  have cols-1 keys(strings) and one value(int) column\n        for col in range(cols - 1):\n            self.df[\"key\" + str(col + 1)] = tm.makeStringIndex(N).values.repeat(K)\n        self.df[\"value\"] = np.random.randn(N * K)\n        execute(self.df)",
+        "code": "class TimeDropDuplicatesDataframe:\n    def time_drop_dups(self, shape):\n        execute(self.df.drop_duplicates(self.df.columns[:-1]))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeDropDuplicatesDataframe:\n    def setup(self, shape):\n        from pandas import DataFrame\n    \n        rows, cols = shape\n        N = rows // 10\n        K = 10\n        # Assigning a large number of columns - inefficient in Modin, so use pandas\n        temp_df = DataFrame()\n        # dataframe would  have cols-1 keys(strings) and one value(int) column\n        for col in range(cols - 1):\n            temp_df[\"key\" + str(col + 1)] = tm.makeStringIndex(N).values.repeat(K)\n        self.df = IMPL.DataFrame(temp_df)\n        self.df[\"value\"] = np.random.randn(N * K)\n        execute(self.df)",
         "min_run_count": 2,
         "name": "benchmarks.TimeDropDuplicatesDataframe.time_drop_dups",
         "number": 0,
@@ -625,11 +691,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "8ca5ba88f37bee0f1812c851c9b5ab344d95a73efa8ee627cf50291c4079eb6d",
+        "version": "f788e904876422251cd71736d69842c4db5da9dad1135104393697df269a268b",
         "warmup_time": -1
     },
     "benchmarks.TimeDropDuplicatesDataframe.time_drop_dups_inplace": {
-        "code": "class TimeDropDuplicatesDataframe:\n    def time_drop_dups_inplace(self, shape):\n        self.df.drop_duplicates(self.df.columns[:-1], inplace=True)\n        execute(self.df)\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeDropDuplicatesDataframe:\n    def setup(self, shape):\n        rows, cols = shape\n        N = rows // 10\n        K = 10\n        self.df = IMPL.DataFrame()\n        # dataframe would  have cols-1 keys(strings) and one value(int) column\n        for col in range(cols - 1):\n            self.df[\"key\" + str(col + 1)] = tm.makeStringIndex(N).values.repeat(K)\n        self.df[\"value\"] = np.random.randn(N * K)\n        execute(self.df)",
+        "code": "class TimeDropDuplicatesDataframe:\n    def time_drop_dups_inplace(self, shape):\n        self.df.drop_duplicates(self.df.columns[:-1], inplace=True)\n        execute(self.df)\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeDropDuplicatesDataframe:\n    def setup(self, shape):\n        from pandas import DataFrame\n    \n        rows, cols = shape\n        N = rows // 10\n        K = 10\n        # Assigning a large number of columns - inefficient in Modin, so use pandas\n        temp_df = DataFrame()\n        # dataframe would  have cols-1 keys(strings) and one value(int) column\n        for col in range(cols - 1):\n            temp_df[\"key\" + str(col + 1)] = tm.makeStringIndex(N).values.repeat(K)\n        self.df = IMPL.DataFrame(temp_df)\n        self.df[\"value\"] = np.random.randn(N * K)\n        execute(self.df)",
         "min_run_count": 2,
         "name": "benchmarks.TimeDropDuplicatesDataframe.time_drop_dups_inplace",
         "number": 0,
@@ -648,7 +714,7 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "bfdb6e947b496e9de0230224a344eb73e8c50726e1394f6c920d5d29aa3ef506",
+        "version": "fee4f9eafe1b6b919a8ce5ed9956364984968a916d2e185bb8a8d3b963992df4",
         "warmup_time": -1
     },
     "benchmarks.TimeDropDuplicatesSeries.time_drop_dups": {
@@ -2401,6 +2467,28 @@
         "version": "a85eb27dbaec41ac2e57df3941ef6147a8a6c8d7e47e8470ab33420cda35dcc8",
         "warmup_time": -1
     },
+    "benchmarks.TimeRemoveCategories.time_remove_categories": {
+        "code": "class TimeRemoveCategories:\n    def time_remove_categories(self, shape):\n        execute(self.ts.cat.remove_categories(self.ts.cat.categories[::2]))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass BaseCategories:\n    def setup(self, shape):\n        rows = shape[0]\n        arr = [f\"s{i:04d}\" for i in np.random.randint(0, rows // 10, size=rows)]\n        self.ts = IMPL.Series(arr).astype(\"category\")\n        execute(self.ts)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeRemoveCategories.time_remove_categories",
+        "number": 0,
+        "param_names": [
+            "shape"
+        ],
+        "params": [
+            [
+                "[100000, 1]"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "32ed06594a8f002224167ccf02375a2b743a5f09cd19558f138693c5de367252",
+        "warmup_time": -1
+    },
     "benchmarks.TimeResetIndex.time_reset_index": {
         "code": "class TimeResetIndex:\n    def time_reset_index(self, shape, drop, level):\n        execute(self.df.reset_index(drop=drop, level=level))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeResetIndex:\n    def setup(self, shape, drop, level):\n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n    \n        if level:\n            index = IMPL.MultiIndex.from_product(\n                [self.df.index[: shape[0] // 2], [\"bar\", \"foo\"]],\n                names=[\"level_1\", \"level_2\"],\n            )\n            self.df.index = index",
         "min_run_count": 2,
@@ -2432,6 +2520,28 @@
         "type": "time",
         "unit": "seconds",
         "version": "f1f536693a3ef307abe578e7b471baba7478ef4fe7c646fe3bc5538a5d222b2a",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeSetCategories.time_set_categories": {
+        "code": "class TimeSetCategories:\n    def time_set_categories(self, shape):\n        execute(self.ts.cat.set_categories(self.ts.cat.categories[::2]))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass BaseCategories:\n    def setup(self, shape):\n        rows = shape[0]\n        arr = [f\"s{i:04d}\" for i in np.random.randint(0, rows // 10, size=rows)]\n        self.ts = IMPL.Series(arr).astype(\"category\")\n        execute(self.ts)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeSetCategories.time_set_categories",
+        "number": 0,
+        "param_names": [
+            "shape"
+        ],
+        "params": [
+            [
+                "[100000, 1]"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "918fa90450e704ce177a50063e3eb5bfc853e0f5594ed72fb9ffb01ca51b634b",
         "warmup_time": -1
     },
     "benchmarks.TimeSetItem.time_setitem_qc": {
