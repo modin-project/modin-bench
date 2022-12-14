@@ -1239,6 +1239,50 @@
         "version": "50ae1cd91cc4847545e60def4db8a3aae7791df32c250b7fab664ff6afbb7745",
         "warmup_time": -1
     },
+    "benchmarks.TimeGroups.time_series_groups": {
+        "code": "class TimeGroups:\n    def time_series_groups(self, shape):\n        self.series.groupby(self.series).groups\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeGroups:\n    def setup(self, shape):\n        self.series = IMPL.Series(np.random.randint(0, 100, size=shape[0]))\n        execute(self.series)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeGroups.time_series_groups",
+        "number": 0,
+        "param_names": [
+            "shape"
+        ],
+        "params": [
+            [
+                "[100000, 1]"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "49d19bb2dfbeae4994ac63644d1978aaaf9f2ff4a6c6b8d7dc697f3ab898c2eb",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeGroups.time_series_indices": {
+        "code": "class TimeGroups:\n    def time_series_indices(self, shape):\n        self.series.groupby(self.series).indices\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeGroups:\n    def setup(self, shape):\n        self.series = IMPL.Series(np.random.randint(0, 100, size=shape[0]))\n        execute(self.series)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeGroups.time_series_indices",
+        "number": 0,
+        "param_names": [
+            "shape"
+        ],
+        "params": [
+            [
+                "[100000, 1]"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "a3fb3bc21581284efd01af28ab8ceb007db943464ade69fee1e1e3c10b8797b9",
+        "warmup_time": -1
+    },
     "benchmarks.TimeHead.time_head": {
         "code": "class TimeHead:\n    def time_head(self, shape, head_count):\n        execute(self.df.head(self.head_count))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeHead:\n    def setup(self, shape, head_count):\n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n        self.head_count = (\n            int(head_count * len(self.df.index))\n            if isinstance(head_count, float)\n            else head_count\n        )",
         "min_run_count": 2,
@@ -2489,6 +2533,28 @@
         "version": "32ed06594a8f002224167ccf02375a2b743a5f09cd19558f138693c5de367252",
         "warmup_time": -1
     },
+    "benchmarks.TimeReplace.time_replace": {
+        "code": "class TimeReplace:\n    def time_replace(self, shape):\n        execute(self.df.replace(self.to_replace))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeReplace:\n    def setup(self, shape):\n        rows, cols = shape\n        self.to_replace = {i: getattr(IMPL, \"Timestamp\")(i) for i in range(rows)}\n        self.df = IMPL.DataFrame(np.random.randint(rows, size=(rows, cols)))\n        execute(self.df)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeReplace.time_replace",
+        "number": 0,
+        "param_names": [
+            "shape"
+        ],
+        "params": [
+            [
+                "[10000, 2]"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "45ab10af4bc620f4b44f4821fa6a7fa3a51252402e5ca2837986dc48c916433e",
+        "warmup_time": -1
+    },
     "benchmarks.TimeResetIndex.time_reset_index": {
         "code": "class TimeResetIndex:\n    def time_reset_index(self, shape, drop, level):\n        execute(self.df.reset_index(drop=drop, level=level))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeResetIndex:\n    def setup(self, shape, drop, level):\n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n    \n        if level:\n            index = IMPL.MultiIndex.from_product(\n                [self.df.index[: shape[0] // 2], [\"bar\", \"foo\"]],\n                names=[\"level_1\", \"level_2\"],\n            )\n            self.df.index = index",
         "min_run_count": 2,
@@ -2655,6 +2721,29 @@
         "version": "4151dad779d1ec88a410642a779a3319c5be6efd3c7c7e7f4db0d856d5299cf1",
         "warmup_time": -1
     },
+    "benchmarks.TimeStack.time_stack": {
+        "code": "class TimeStack:\n    def time_stack(self, shape):\n        execute(self.udf.stack())\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeStack:\n    def setup(self, shape):\n        super().setup(shape)\n        self.udf = self.df.unstack(1)\n        execute(self.udf)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeStack.time_stack",
+        "number": 0,
+        "param_names": [
+            "shape"
+        ],
+        "params": [
+            [
+                "[5000, 5000]",
+                "[1000000, 10]"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "4d4d65fc0a3a1a396fc68ca4aa7672392b2c96ec009baad399b1fc88912e09de",
+        "warmup_time": -1
+    },
     "benchmarks.TimeTail.time_tail": {
         "code": "class TimeTail:\n    def time_tail(self, shape, tail_count):\n        execute(self.df.tail(self.tail_count))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeTail:\n    def setup(self, shape, tail_count):\n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n        self.tail_count = (\n            int(tail_count * len(self.df.index))\n            if isinstance(tail_count, float)\n            else tail_count\n        )",
         "min_run_count": 2,
@@ -2681,6 +2770,29 @@
         "type": "time",
         "unit": "seconds",
         "version": "3fc2ca0189a263deb96bc65c86201648d3c88ad1535fb4f98c01ab99bc5b42c9",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeUnstack.time_unstack": {
+        "code": "class TimeUnstack:\n    def time_unstack(self, shape):\n        execute(self.df.unstack(1))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass BaseReshape:\n    def setup(self, shape):\n        rows, cols = shape\n        k = 10\n        arrays = [\n            np.arange(rows // k).repeat(k),\n            np.roll(np.tile(np.arange(rows // k), k), 25),\n        ]\n        index = IMPL.MultiIndex.from_arrays(arrays)\n        self.df = IMPL.DataFrame(np.random.randn(rows, cols), index=index)\n        execute(self.df)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeUnstack.time_unstack",
+        "number": 0,
+        "param_names": [
+            "shape"
+        ],
+        "params": [
+            [
+                "[5000, 5000]",
+                "[1000000, 10]"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "c6f7c763b39023bdcf126f28392b104717c37a5c586aa727879102c452bedd26",
         "warmup_time": -1
     },
     "benchmarks.TimeValueCountsFrame.time_value_counts": {
