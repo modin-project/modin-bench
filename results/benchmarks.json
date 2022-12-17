@@ -761,6 +761,62 @@
         "version": "3a8fc013427719a2abceab512c0efc47304a08c3a2dee37b17dcaa856b89f8f8",
         "warmup_time": -1
     },
+    "benchmarks.TimeDropna.time_dropna": {
+        "code": "class TimeDropna:\n    def time_dropna(self, how, axis, shape):\n        execute(self.df.dropna(how=how, axis=axis))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeDropna:\n    def setup(self, how, axis, shape):\n        row, col = shape\n        self.df = IMPL.DataFrame(np.random.randn(row, col))\n        self.df.iloc[row // 20 : row // 10, col // 3 : col // 2] = np.nan\n        self.df[\"foo\"] = \"bar\"\n        execute(self.df)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeDropna.time_dropna",
+        "number": 0,
+        "param_names": [
+            "how",
+            "axis",
+            "shape"
+        ],
+        "params": [
+            [
+                "'all'",
+                "'any'"
+            ],
+            [
+                "0",
+                "1"
+            ],
+            [
+                "[5000, 5000]",
+                "[1000000, 10]"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "31b4cb1f4ce1f10774bef57934fd5b0f5c99d6597ffbc97886ad18e4d2e9f1b6",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeEquals.time_frame_float_equal": {
+        "code": "class TimeEquals:\n    def time_frame_float_equal(self, shape):\n        self.df.equals(self.df)\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeEquals:\n    def setup(self, shape):\n        self.df = IMPL.DataFrame(np.random.randn(*shape))\n        self.df.iloc[-1, -1] = np.nan\n        execute(self.df)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeEquals.time_frame_float_equal",
+        "number": 0,
+        "param_names": [
+            "shape"
+        ],
+        "params": [
+            [
+                "[5000, 5000]",
+                "[1000000, 10]"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "f014b9f5101b85fa876297856777ac578d1186fb61f12bb517e672f472019bc9",
+        "warmup_time": -1
+    },
     "benchmarks.TimeExplode.time_explode": {
         "code": "class TimeExplode:\n    def time_explode(self, shape):\n        execute(self.df.explode(\"col1\"))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeExplode:\n    def setup(self, shape):\n        self.df = generate_dataframe(\n            \"int\", *shape, RAND_LOW, RAND_HIGH, gen_unique_key=True\n        )",
         "min_run_count": 2,
@@ -1953,6 +2009,29 @@
         "version": "d1a063efea99ced99a5ef07138540c8bbc10f12e41576d87010e8d65d3354154",
         "warmup_time": -1
     },
+    "benchmarks.TimeIsnull.time_isnull": {
+        "code": "class TimeIsnull:\n    def time_isnull(self, shape):\n        execute(IMPL.isnull(self.df))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeIsnull:\n    def setup(self, shape):\n        sample = np.array([np.nan, 1.0])\n        data = np.random.choice(sample, (shape[0], shape[1]))\n        self.df = IMPL.DataFrame(data)\n        execute(self.df)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeIsnull.time_isnull",
+        "number": 0,
+        "param_names": [
+            "shape"
+        ],
+        "params": [
+            [
+                "[5000, 5000]",
+                "[1000000, 10]"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "c555f8ce555705f7b1b85bc88460298b3ca6500159e9347a069cf26a3374e618",
+        "warmup_time": -1
+    },
     "benchmarks.TimeJoin.time_join": {
         "code": "class TimeJoin:\n    def time_join(self, shapes, how, sort):\n        # join dataframes on index to get the predictable shape\n        execute(self.df1.join(self.df2, how=how, lsuffix=\"left_\", sort=sort))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeJoin:\n    def setup(self, shapes, how, sort):\n        self.df1 = generate_dataframe(\"int\", *shapes[0], RAND_LOW, RAND_HIGH)\n        self.df2 = generate_dataframe(\"int\", *shapes[1], RAND_LOW, RAND_HIGH)",
         "min_run_count": 2,
@@ -2110,6 +2189,29 @@
         "type": "time",
         "unit": "seconds",
         "version": "4563182535cc854923e92e8f96193a3d8078461fe13d681a81c9db355c3be627",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeMaskBool.time_frame_mask": {
+        "code": "class TimeMaskBool:\n    def time_frame_mask(self, shape):\n        execute(self.df.mask(self.mask))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeMaskBool:\n    def setup(self, shape):\n        self.df = IMPL.DataFrame(np.random.randn(*shape))\n        self.mask = self.df < 0\n        execute(self.df), execute(self.mask)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeMaskBool.time_frame_mask",
+        "number": 0,
+        "param_names": [
+            "shape"
+        ],
+        "params": [
+            [
+                "[5000, 5000]",
+                "[1000000, 10]"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "ce6a0113669d66ea945a752479d180e5dae9f01485ee5137cfadd76e7b9e77b6",
         "warmup_time": -1
     },
     "benchmarks.TimeMerge.time_merge": {
@@ -2553,6 +2655,29 @@
         "type": "time",
         "unit": "seconds",
         "version": "45ab10af4bc620f4b44f4821fa6a7fa3a51252402e5ca2837986dc48c916433e",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeRepr.time_repr": {
+        "code": "class TimeRepr:\n    def time_repr(self, shape):\n        repr(self.df)\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeRepr:\n    def setup(self, shape):\n        self.df = IMPL.DataFrame(np.random.randn(*shape))\n        execute(self.df)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeRepr.time_repr",
+        "number": 0,
+        "param_names": [
+            "shape"
+        ],
+        "params": [
+            [
+                "[5000, 5000]",
+                "[1000000, 10]"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "5a304b0674995b844a4386b5c4e662aa5844ed39c14b9b7ececcb2b41503663e",
         "warmup_time": -1
     },
     "benchmarks.TimeResetIndex.time_reset_index": {
