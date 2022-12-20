@@ -2155,8 +2155,8 @@
         ],
         "params": [
             [
-                "[[5000, 5000], [5000, 5000]]",
-                "[[500000, 20], [1000000, 10]]"
+                "[[2500, 2500], [2500, 2500]]",
+                "[[250000, 20], [500000, 10]]"
             ]
         ],
         "repeat": 0,
@@ -2178,8 +2178,8 @@
         ],
         "params": [
             [
-                "[[5000, 5000], [5000, 5000]]",
-                "[[500000, 20], [1000000, 10]]"
+                "[[2500, 2500], [2500, 2500]]",
+                "[[250000, 20], [500000, 10]]"
             ]
         ],
         "repeat": 0,
@@ -2313,39 +2313,6 @@
         "version": "1cf28ad4faba42a0109fc07aa20eaba5f169eddf58b0f2d3482b9f00b8ea0bfc",
         "warmup_time": -1
     },
-    "benchmarks.TimeMerge.time_merge_default": {
-        "code": "class TimeMerge:\n    def time_merge_default(self, shapes, how, sort):\n        execute(IMPL.merge(self.df1, self.df2, how=how, sort=sort))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeMerge:\n    def setup(self, shapes, how, sort):\n        self.df1 = generate_dataframe(\"int\", *shapes[0], RAND_LOW, RAND_HIGH)\n        self.df2 = generate_dataframe(\"int\", *shapes[1], RAND_LOW, RAND_HIGH)",
-        "min_run_count": 2,
-        "name": "benchmarks.TimeMerge.time_merge_default",
-        "number": 0,
-        "param_names": [
-            "shapes",
-            "how",
-            "sort"
-        ],
-        "params": [
-            [
-                "[[5000, 5000], [5000, 5000]]",
-                "[[500000, 20], [1000000, 10]]"
-            ],
-            [
-                "'left'",
-                "'inner'"
-            ],
-            [
-                "True",
-                "False"
-            ]
-        ],
-        "repeat": 0,
-        "rounds": 2,
-        "sample_time": 0.01,
-        "timeout": 60.0,
-        "type": "time",
-        "unit": "seconds",
-        "version": "e5c7a78f6c5def00833e97ab98e941811ec1ecec7d1895e674486ad4b611525a",
-        "warmup_time": -1
-    },
     "benchmarks.TimeMergeCategoricals.time_merge_categoricals": {
         "code": "class TimeMergeCategoricals:\n    def time_merge_categoricals(self, shapes, data_type):\n        execute(IMPL.merge(self.left, self.right, on=\"X\"))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeMergeCategoricals:\n    def setup(self, shapes, data_type):\n        assert len(shapes) == 2\n        assert shapes[1] == 2\n        size = (shapes[0],)\n        self.left = IMPL.DataFrame(\n            {\n                \"X\": np.random.choice(range(0, 10), size=size),\n                \"Y\": np.random.choice([\"one\", \"two\", \"three\"], size=size),\n            }\n        )\n    \n        self.right = IMPL.DataFrame(\n            {\n                \"X\": np.random.choice(range(0, 10), size=size),\n                \"Z\": np.random.choice([\"jjj\", \"kkk\", \"sss\"], size=size),\n            }\n        )\n    \n        if data_type == \"category\":\n            self.left = self.left.assign(Y=self.left[\"Y\"].astype(\"category\"))\n            execute(self.left)\n            self.right = self.right.assign(Z=self.right[\"Z\"].astype(\"category\"))\n            execute(self.right)",
         "min_run_count": 2,
@@ -2371,6 +2338,39 @@
         "type": "time",
         "unit": "seconds",
         "version": "de7ab8fa098db7e2c3b0c10a03c76e90ebeccf73adab2d10f1551b37a18749cc",
+        "warmup_time": -1
+    },
+    "benchmarks.TimeMergeDefault.time_merge": {
+        "code": "class TimeMergeDefault:\n    def time_merge(self, shapes, how, sort):\n        execute(IMPL.merge(self.df1, self.df2, how=how, sort=sort))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeMergeDefault:\n    def setup(self, shapes, how, sort):\n        self.df1 = generate_dataframe(\"int\", *shapes[0], RAND_LOW, RAND_HIGH)\n        self.df2 = generate_dataframe(\"int\", *shapes[1], RAND_LOW, RAND_HIGH)",
+        "min_run_count": 2,
+        "name": "benchmarks.TimeMergeDefault.time_merge",
+        "number": 0,
+        "param_names": [
+            "shapes",
+            "how",
+            "sort"
+        ],
+        "params": [
+            [
+                "[[1000, 1000], [1000, 1000]]",
+                "[[500000, 20], [1000000, 10]]"
+            ],
+            [
+                "'left'",
+                "'inner'"
+            ],
+            [
+                "True",
+                "False"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "db2037b63b97aa8cbfc60027ac8f947eef9800c3ec05270be0143c605c403d94",
         "warmup_time": -1
     },
     "benchmarks.TimeMultiIndexing.time_multiindex_loc": {
@@ -2466,7 +2466,7 @@
         "warmup_time": -1
     },
     "benchmarks.TimeReindex.time_reindex_columns": {
-        "code": "class TimeReindex:\n    def time_reindex_columns(self, shape):\n        execute(self.df2.reindex(columns=self.df.columns[1:5]))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeReindex:\n    def setup(self, shape):\n        rows, cols = shape\n        rng = IMPL.date_range(start=\"1/1/1970\", periods=rows, freq=\"1min\")\n        self.df = IMPL.DataFrame(\n            np.random.rand(rows, cols), index=rng, columns=range(cols)\n        )\n        self.df[\"foo\"] = \"bar\"\n        self.rng_subset = IMPL.Index(rng[::2])\n        self.df2 = IMPL.DataFrame(\n            index=range(rows), data=np.random.rand(rows, cols), columns=range(cols)\n        )\n        level1 = tm.makeStringIndex(rows).values.repeat(cols)\n        level2 = np.tile(tm.makeStringIndex(cols).values, rows)\n        index = IMPL.MultiIndex.from_arrays([level1, level2])\n        self.s = IMPL.Series(np.random.randn(rows * cols), index=index)\n        self.s_subset = self.s[::2]\n        self.s_subset_no_cache = self.s[::2].copy()\n    \n        mi = IMPL.MultiIndex.from_product([rng, range(100)])\n        self.s2 = IMPL.Series(np.random.randn(len(mi)), index=mi)\n        self.s2_subset = self.s2[::2].copy()\n        execute(self.df), execute(self.df2)\n        execute(self.s), execute(self.s_subset)\n        execute(self.s2), execute(self.s2_subset)\n        execute(self.s_subset_no_cache)",
+        "code": "class TimeReindex:\n    def time_reindex_columns(self, shape):\n        execute(self.df2.reindex(columns=self.df.columns[1:5]))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeReindex:\n    def setup(self, shape):\n        rows, cols = shape\n        rng = IMPL.date_range(start=\"1/1/1970\", periods=rows, freq=\"1min\")\n        self.df = IMPL.DataFrame(\n            np.random.rand(rows, cols), index=rng, columns=range(cols)\n        )\n        self.df[\"foo\"] = \"bar\"\n        self.rng_subset = IMPL.Index(rng[::2])\n        self.df2 = IMPL.DataFrame(\n            index=range(rows), data=np.random.rand(rows, cols), columns=range(cols)\n        )\n        level1 = tm.makeStringIndex(rows // 10).values.repeat(10)\n        level2 = np.tile(tm.makeStringIndex(10).values, rows // 10)\n        index = IMPL.MultiIndex.from_arrays([level1, level2])\n        self.s = IMPL.Series(np.random.randn(rows), index=index)\n        self.s_subset = self.s[::2]\n        self.s_subset_no_cache = self.s[::2].copy()\n    \n        mi = IMPL.MultiIndex.from_product([rng[: len(rng) // 10], range(10)])\n        self.s2 = IMPL.Series(np.random.randn(len(mi)), index=mi)\n        self.s2_subset = self.s2[::2].copy()\n        execute(self.df), execute(self.df2)\n        execute(self.s), execute(self.s_subset)\n        execute(self.s2), execute(self.s2_subset)\n        execute(self.s_subset_no_cache)",
         "min_run_count": 2,
         "name": "benchmarks.TimeReindex.time_reindex_columns",
         "number": 0,
@@ -2485,11 +2485,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "3cdb685b3c49c3cd4b8b743acc4e5bb329aa1d94d81e8733ac2f82b42cde2cff",
+        "version": "b88fb9ae2272f7f43ab75c000ed1e55f68421b2c53edbe7363a7740c3a066a8e",
         "warmup_time": -1
     },
     "benchmarks.TimeReindex.time_reindex_dates": {
-        "code": "class TimeReindex:\n    def time_reindex_dates(self, shape):\n        execute(self.df.reindex(self.rng_subset))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeReindex:\n    def setup(self, shape):\n        rows, cols = shape\n        rng = IMPL.date_range(start=\"1/1/1970\", periods=rows, freq=\"1min\")\n        self.df = IMPL.DataFrame(\n            np.random.rand(rows, cols), index=rng, columns=range(cols)\n        )\n        self.df[\"foo\"] = \"bar\"\n        self.rng_subset = IMPL.Index(rng[::2])\n        self.df2 = IMPL.DataFrame(\n            index=range(rows), data=np.random.rand(rows, cols), columns=range(cols)\n        )\n        level1 = tm.makeStringIndex(rows).values.repeat(cols)\n        level2 = np.tile(tm.makeStringIndex(cols).values, rows)\n        index = IMPL.MultiIndex.from_arrays([level1, level2])\n        self.s = IMPL.Series(np.random.randn(rows * cols), index=index)\n        self.s_subset = self.s[::2]\n        self.s_subset_no_cache = self.s[::2].copy()\n    \n        mi = IMPL.MultiIndex.from_product([rng, range(100)])\n        self.s2 = IMPL.Series(np.random.randn(len(mi)), index=mi)\n        self.s2_subset = self.s2[::2].copy()\n        execute(self.df), execute(self.df2)\n        execute(self.s), execute(self.s_subset)\n        execute(self.s2), execute(self.s2_subset)\n        execute(self.s_subset_no_cache)",
+        "code": "class TimeReindex:\n    def time_reindex_dates(self, shape):\n        execute(self.df.reindex(self.rng_subset))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeReindex:\n    def setup(self, shape):\n        rows, cols = shape\n        rng = IMPL.date_range(start=\"1/1/1970\", periods=rows, freq=\"1min\")\n        self.df = IMPL.DataFrame(\n            np.random.rand(rows, cols), index=rng, columns=range(cols)\n        )\n        self.df[\"foo\"] = \"bar\"\n        self.rng_subset = IMPL.Index(rng[::2])\n        self.df2 = IMPL.DataFrame(\n            index=range(rows), data=np.random.rand(rows, cols), columns=range(cols)\n        )\n        level1 = tm.makeStringIndex(rows // 10).values.repeat(10)\n        level2 = np.tile(tm.makeStringIndex(10).values, rows // 10)\n        index = IMPL.MultiIndex.from_arrays([level1, level2])\n        self.s = IMPL.Series(np.random.randn(rows), index=index)\n        self.s_subset = self.s[::2]\n        self.s_subset_no_cache = self.s[::2].copy()\n    \n        mi = IMPL.MultiIndex.from_product([rng[: len(rng) // 10], range(10)])\n        self.s2 = IMPL.Series(np.random.randn(len(mi)), index=mi)\n        self.s2_subset = self.s2[::2].copy()\n        execute(self.df), execute(self.df2)\n        execute(self.s), execute(self.s_subset)\n        execute(self.s2), execute(self.s2_subset)\n        execute(self.s_subset_no_cache)",
         "min_run_count": 2,
         "name": "benchmarks.TimeReindex.time_reindex_dates",
         "number": 0,
@@ -2508,11 +2508,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "7a0f5798c060d33cf901e20434050cb35a4329e4281b84547bb702457786191c",
+        "version": "22ac86ec9adde20da7a93fff8e94258ef970ec9d84ba200e75c455d5a5b5a901",
         "warmup_time": -1
     },
     "benchmarks.TimeReindex.time_reindex_multiindex_no_cache": {
-        "code": "class TimeReindex:\n    def time_reindex_multiindex_no_cache(self, shape):\n        # Copy to avoid MultiIndex._values getting cached (pandas specific)\n        execute(self.s.reindex(self.s_subset_no_cache.index.copy()))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeReindex:\n    def setup(self, shape):\n        rows, cols = shape\n        rng = IMPL.date_range(start=\"1/1/1970\", periods=rows, freq=\"1min\")\n        self.df = IMPL.DataFrame(\n            np.random.rand(rows, cols), index=rng, columns=range(cols)\n        )\n        self.df[\"foo\"] = \"bar\"\n        self.rng_subset = IMPL.Index(rng[::2])\n        self.df2 = IMPL.DataFrame(\n            index=range(rows), data=np.random.rand(rows, cols), columns=range(cols)\n        )\n        level1 = tm.makeStringIndex(rows).values.repeat(cols)\n        level2 = np.tile(tm.makeStringIndex(cols).values, rows)\n        index = IMPL.MultiIndex.from_arrays([level1, level2])\n        self.s = IMPL.Series(np.random.randn(rows * cols), index=index)\n        self.s_subset = self.s[::2]\n        self.s_subset_no_cache = self.s[::2].copy()\n    \n        mi = IMPL.MultiIndex.from_product([rng, range(100)])\n        self.s2 = IMPL.Series(np.random.randn(len(mi)), index=mi)\n        self.s2_subset = self.s2[::2].copy()\n        execute(self.df), execute(self.df2)\n        execute(self.s), execute(self.s_subset)\n        execute(self.s2), execute(self.s2_subset)\n        execute(self.s_subset_no_cache)",
+        "code": "class TimeReindex:\n    def time_reindex_multiindex_no_cache(self, shape):\n        # Copy to avoid MultiIndex._values getting cached (pandas specific)\n        execute(self.s.reindex(self.s_subset_no_cache.index.copy()))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeReindex:\n    def setup(self, shape):\n        rows, cols = shape\n        rng = IMPL.date_range(start=\"1/1/1970\", periods=rows, freq=\"1min\")\n        self.df = IMPL.DataFrame(\n            np.random.rand(rows, cols), index=rng, columns=range(cols)\n        )\n        self.df[\"foo\"] = \"bar\"\n        self.rng_subset = IMPL.Index(rng[::2])\n        self.df2 = IMPL.DataFrame(\n            index=range(rows), data=np.random.rand(rows, cols), columns=range(cols)\n        )\n        level1 = tm.makeStringIndex(rows // 10).values.repeat(10)\n        level2 = np.tile(tm.makeStringIndex(10).values, rows // 10)\n        index = IMPL.MultiIndex.from_arrays([level1, level2])\n        self.s = IMPL.Series(np.random.randn(rows), index=index)\n        self.s_subset = self.s[::2]\n        self.s_subset_no_cache = self.s[::2].copy()\n    \n        mi = IMPL.MultiIndex.from_product([rng[: len(rng) // 10], range(10)])\n        self.s2 = IMPL.Series(np.random.randn(len(mi)), index=mi)\n        self.s2_subset = self.s2[::2].copy()\n        execute(self.df), execute(self.df2)\n        execute(self.s), execute(self.s_subset)\n        execute(self.s2), execute(self.s2_subset)\n        execute(self.s_subset_no_cache)",
         "min_run_count": 2,
         "name": "benchmarks.TimeReindex.time_reindex_multiindex_no_cache",
         "number": 0,
@@ -2531,11 +2531,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "769d5526884c4c5b1b4139f04e94c1ca70aa430dda6833be0d7c230f819bf8bc",
+        "version": "e44e55a20554e3af0c1a23351cdcb571a7f04975e525e7aa2f2c737b88596078",
         "warmup_time": -1
     },
     "benchmarks.TimeReindex.time_reindex_multiindex_no_cache_dates": {
-        "code": "class TimeReindex:\n    def time_reindex_multiindex_no_cache_dates(self, shape):\n        # Copy to avoid MultiIndex._values getting cached (pandas specific)\n        execute(self.s2_subset.reindex(self.s2.index.copy()))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeReindex:\n    def setup(self, shape):\n        rows, cols = shape\n        rng = IMPL.date_range(start=\"1/1/1970\", periods=rows, freq=\"1min\")\n        self.df = IMPL.DataFrame(\n            np.random.rand(rows, cols), index=rng, columns=range(cols)\n        )\n        self.df[\"foo\"] = \"bar\"\n        self.rng_subset = IMPL.Index(rng[::2])\n        self.df2 = IMPL.DataFrame(\n            index=range(rows), data=np.random.rand(rows, cols), columns=range(cols)\n        )\n        level1 = tm.makeStringIndex(rows).values.repeat(cols)\n        level2 = np.tile(tm.makeStringIndex(cols).values, rows)\n        index = IMPL.MultiIndex.from_arrays([level1, level2])\n        self.s = IMPL.Series(np.random.randn(rows * cols), index=index)\n        self.s_subset = self.s[::2]\n        self.s_subset_no_cache = self.s[::2].copy()\n    \n        mi = IMPL.MultiIndex.from_product([rng, range(100)])\n        self.s2 = IMPL.Series(np.random.randn(len(mi)), index=mi)\n        self.s2_subset = self.s2[::2].copy()\n        execute(self.df), execute(self.df2)\n        execute(self.s), execute(self.s_subset)\n        execute(self.s2), execute(self.s2_subset)\n        execute(self.s_subset_no_cache)",
+        "code": "class TimeReindex:\n    def time_reindex_multiindex_no_cache_dates(self, shape):\n        # Copy to avoid MultiIndex._values getting cached (pandas specific)\n        execute(self.s2_subset.reindex(self.s2.index.copy()))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeReindex:\n    def setup(self, shape):\n        rows, cols = shape\n        rng = IMPL.date_range(start=\"1/1/1970\", periods=rows, freq=\"1min\")\n        self.df = IMPL.DataFrame(\n            np.random.rand(rows, cols), index=rng, columns=range(cols)\n        )\n        self.df[\"foo\"] = \"bar\"\n        self.rng_subset = IMPL.Index(rng[::2])\n        self.df2 = IMPL.DataFrame(\n            index=range(rows), data=np.random.rand(rows, cols), columns=range(cols)\n        )\n        level1 = tm.makeStringIndex(rows // 10).values.repeat(10)\n        level2 = np.tile(tm.makeStringIndex(10).values, rows // 10)\n        index = IMPL.MultiIndex.from_arrays([level1, level2])\n        self.s = IMPL.Series(np.random.randn(rows), index=index)\n        self.s_subset = self.s[::2]\n        self.s_subset_no_cache = self.s[::2].copy()\n    \n        mi = IMPL.MultiIndex.from_product([rng[: len(rng) // 10], range(10)])\n        self.s2 = IMPL.Series(np.random.randn(len(mi)), index=mi)\n        self.s2_subset = self.s2[::2].copy()\n        execute(self.df), execute(self.df2)\n        execute(self.s), execute(self.s_subset)\n        execute(self.s2), execute(self.s2_subset)\n        execute(self.s_subset_no_cache)",
         "min_run_count": 2,
         "name": "benchmarks.TimeReindex.time_reindex_multiindex_no_cache_dates",
         "number": 0,
@@ -2554,11 +2554,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "7e61e3559498f6098fa2441ed8da34aee22fc3dfb4c348c47487c74454e72cdc",
+        "version": "016033d78edab11afd4cf25c73a7f3384588778ee05c819df605c8a5810fcc76",
         "warmup_time": -1
     },
     "benchmarks.TimeReindex.time_reindex_multiindex_with_cache": {
-        "code": "class TimeReindex:\n    def time_reindex_multiindex_with_cache(self, shape):\n        # MultiIndex._values gets cached (pandas specific)\n        execute(self.s.reindex(self.s_subset.index))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeReindex:\n    def setup(self, shape):\n        rows, cols = shape\n        rng = IMPL.date_range(start=\"1/1/1970\", periods=rows, freq=\"1min\")\n        self.df = IMPL.DataFrame(\n            np.random.rand(rows, cols), index=rng, columns=range(cols)\n        )\n        self.df[\"foo\"] = \"bar\"\n        self.rng_subset = IMPL.Index(rng[::2])\n        self.df2 = IMPL.DataFrame(\n            index=range(rows), data=np.random.rand(rows, cols), columns=range(cols)\n        )\n        level1 = tm.makeStringIndex(rows).values.repeat(cols)\n        level2 = np.tile(tm.makeStringIndex(cols).values, rows)\n        index = IMPL.MultiIndex.from_arrays([level1, level2])\n        self.s = IMPL.Series(np.random.randn(rows * cols), index=index)\n        self.s_subset = self.s[::2]\n        self.s_subset_no_cache = self.s[::2].copy()\n    \n        mi = IMPL.MultiIndex.from_product([rng, range(100)])\n        self.s2 = IMPL.Series(np.random.randn(len(mi)), index=mi)\n        self.s2_subset = self.s2[::2].copy()\n        execute(self.df), execute(self.df2)\n        execute(self.s), execute(self.s_subset)\n        execute(self.s2), execute(self.s2_subset)\n        execute(self.s_subset_no_cache)",
+        "code": "class TimeReindex:\n    def time_reindex_multiindex_with_cache(self, shape):\n        # MultiIndex._values gets cached (pandas specific)\n        execute(self.s.reindex(self.s_subset.index))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeReindex:\n    def setup(self, shape):\n        rows, cols = shape\n        rng = IMPL.date_range(start=\"1/1/1970\", periods=rows, freq=\"1min\")\n        self.df = IMPL.DataFrame(\n            np.random.rand(rows, cols), index=rng, columns=range(cols)\n        )\n        self.df[\"foo\"] = \"bar\"\n        self.rng_subset = IMPL.Index(rng[::2])\n        self.df2 = IMPL.DataFrame(\n            index=range(rows), data=np.random.rand(rows, cols), columns=range(cols)\n        )\n        level1 = tm.makeStringIndex(rows // 10).values.repeat(10)\n        level2 = np.tile(tm.makeStringIndex(10).values, rows // 10)\n        index = IMPL.MultiIndex.from_arrays([level1, level2])\n        self.s = IMPL.Series(np.random.randn(rows), index=index)\n        self.s_subset = self.s[::2]\n        self.s_subset_no_cache = self.s[::2].copy()\n    \n        mi = IMPL.MultiIndex.from_product([rng[: len(rng) // 10], range(10)])\n        self.s2 = IMPL.Series(np.random.randn(len(mi)), index=mi)\n        self.s2_subset = self.s2[::2].copy()\n        execute(self.df), execute(self.df2)\n        execute(self.s), execute(self.s_subset)\n        execute(self.s2), execute(self.s2_subset)\n        execute(self.s_subset_no_cache)",
         "min_run_count": 2,
         "name": "benchmarks.TimeReindex.time_reindex_multiindex_with_cache",
         "number": 0,
@@ -2577,7 +2577,7 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "7ae0d1c78bffc2b8223cf68ea3561f7681ef13b2e4e4fa2a0d99f359439c37e4",
+        "version": "d51fe9de4d31fb0b00a3d66299cdd9b43c88e13829e26d9a6426fd0933bcca2e",
         "warmup_time": -1
     },
     "benchmarks.TimeReindexMethod.time_reindex_method": {
@@ -2856,8 +2856,8 @@
         ],
         "params": [
             [
-                "[5000, 5000]",
-                "[1000000, 10]"
+                "[1500, 1500]",
+                "[100000, 10]"
             ]
         ],
         "repeat": 0,
@@ -2907,8 +2907,8 @@
         ],
         "params": [
             [
-                "[5000, 5000]",
-                "[1000000, 10]"
+                "[1500, 1500]",
+                "[100000, 10]"
             ]
         ],
         "repeat": 0,
