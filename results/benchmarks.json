@@ -2987,7 +2987,7 @@
         "warmup_time": -1
     },
     "hdk.benchmarks.TimeAppend.time_append": {
-        "code": "class TimeAppend:\n    def time_append(self, shapes):\n        execute(self.df1.append(self.df2))\n\n    def setup(self, shapes):\n        self.df1, self.df2 = (\n            generate_dataframe(\n                \"int\",\n                *shape,\n                RAND_LOW,\n                RAND_HIGH,\n                cache_prefix=f\"{i}-th_frame_to_append\",\n            )\n            for i, shape in enumerate(shapes)\n        )\n        trigger_import(self.df1, self.df2)",
+        "code": "class TimeAppend:\n    def time_append(self, shapes):\n        execute(self.df1.append(self.df2))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeAppend:\n    def setup(self, shapes):\n        self.df1, self.df2 = (\n            generate_dataframe(\n                \"int\",\n                *shape,\n                RAND_LOW,\n                RAND_HIGH,\n                cache_prefix=f\"{i}-th_frame_to_append\",\n            )\n            for i, shape in enumerate(shapes)\n        )\n        trigger_import(self.df1, self.df2)",
         "min_run_count": 2,
         "name": "hdk.benchmarks.TimeAppend.time_append",
         "number": 0,
@@ -3005,11 +3005,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "3d56626993f30d99b372ec1d74e334aa724b4f3174b13064bc8bf0e2b4e37f95",
+        "version": "498be33e0cdd1eae6b22e175ab430dbde0f3e82010068b40fc3358c9c859135c",
         "warmup_time": -1
     },
     "hdk.benchmarks.TimeArithmetic.time_apply": {
-        "code": "class TimeArithmetic:\n    def time_apply(self, shape):\n        execute(self.df.apply(lambda df: df.sum()))\n\n    def setup(self, shape):\n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)",
+        "code": "class TimeArithmetic:\n    def time_apply(self, shape):\n        execute(self.df.apply(lambda df: df.sum()))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeArithmetic:\n    def setup(self, shape):\n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)",
         "min_run_count": 2,
         "name": "hdk.benchmarks.TimeArithmetic.time_apply",
         "number": 0,
@@ -3027,11 +3027,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "5c06eea1bfff38877c7a94b785db324baef0568536b6fe22e33bcaa1c2fc1350",
+        "version": "772c5e38e6692c3c985432bc55d1b5af0ef7087f249119aff30deaf8c4beb14b",
         "warmup_time": -1
     },
     "hdk.benchmarks.TimeArithmetic.time_mean": {
-        "code": "class TimeArithmetic:\n    def time_mean(self, shape):\n        execute(self.df.mean())\n\n    def setup(self, shape):\n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)",
+        "code": "class TimeArithmetic:\n    def time_mean(self, shape):\n        execute(self.df.mean())\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeArithmetic:\n    def setup(self, shape):\n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)",
         "min_run_count": 2,
         "name": "hdk.benchmarks.TimeArithmetic.time_mean",
         "number": 0,
@@ -3049,11 +3049,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "b5932abebe92ec18c2b2845f2dad0d12ef3aabc43c5e859cbf3c1eec3fd2cace",
+        "version": "4715cce8d88b9d2f7c31180e1b2298953478829c6a1f7173ccf4e7326034ea71",
         "warmup_time": -1
     },
     "hdk.benchmarks.TimeArithmetic.time_median": {
-        "code": "class TimeArithmetic:\n    def time_median(self, shape):\n        execute(self.df.median())\n\n    def setup(self, shape):\n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)",
+        "code": "class TimeArithmetic:\n    def time_median(self, shape):\n        execute(self.df.median())\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeArithmetic:\n    def setup(self, shape):\n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)",
         "min_run_count": 2,
         "name": "hdk.benchmarks.TimeArithmetic.time_median",
         "number": 0,
@@ -3071,11 +3071,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "4be907522d1c862af3f732f4c51aea9ba6f0da113da694c1eda09f6e2d4d6f6d",
+        "version": "127bf14784981c6ff54f5f4664bea95b0ff9b147d5451918f87c971861768b41",
         "warmup_time": -1
     },
     "hdk.benchmarks.TimeArithmetic.time_nunique": {
-        "code": "class TimeArithmetic:\n    def time_nunique(self, shape):\n        execute(self.df.nunique())\n\n    def setup(self, shape):\n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)",
+        "code": "class TimeArithmetic:\n    def time_nunique(self, shape):\n        execute(self.df.nunique())\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeArithmetic:\n    def setup(self, shape):\n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)",
         "min_run_count": 2,
         "name": "hdk.benchmarks.TimeArithmetic.time_nunique",
         "number": 0,
@@ -3093,11 +3093,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "4c2982f7aa48c80b57ca274631524e49c76a539b0f3066cac8008cdbb2802196",
+        "version": "8b26ac7a71449759333c2edd5f740683736d88d9f62a2349567ad2d67248dd60",
         "warmup_time": -1
     },
     "hdk.benchmarks.TimeArithmetic.time_sum": {
-        "code": "class TimeArithmetic:\n    def time_sum(self, shape):\n        execute(self.df.sum())\n\n    def setup(self, shape):\n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)",
+        "code": "class TimeArithmetic:\n    def time_sum(self, shape):\n        execute(self.df.sum())\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeArithmetic:\n    def setup(self, shape):\n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)",
         "min_run_count": 2,
         "name": "hdk.benchmarks.TimeArithmetic.time_sum",
         "number": 0,
@@ -3115,11 +3115,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "bc189635d3fe40bc8cadc7f5c21988ffb9c4619a083fb4c1c709868f4ea8add9",
+        "version": "d35b6879e84825651e672e8df0fc57b388ce4f090e4781a1884c1632563efcd0",
         "warmup_time": -1
     },
     "hdk.benchmarks.TimeAstype.time_astype": {
-        "code": "class TimeAstype:\n    def time_astype(self, shape, dtype, astype_ncolumns):\n        execute(self.df.astype(self.astype_arg))\n\n    def setup(self, shape, dtype, astype_ncolumns):\n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)\n        self.astype_arg = self.create_astype_arg(dtype, astype_ncolumns)",
+        "code": "class TimeAstype:\n    def time_astype(self, shape, dtype, astype_ncolumns):\n        execute(self.df.astype(self.astype_arg))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeAstype:\n    def setup(self, shape, dtype, astype_ncolumns):\n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)\n        self.astype_arg = self.create_astype_arg(dtype, astype_ncolumns)",
         "min_run_count": 2,
         "name": "hdk.benchmarks.TimeAstype.time_astype",
         "number": 0,
@@ -3146,11 +3146,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "9c491a3703315c203c25d58d0ef8623b2d8f308f628538543f5b6661486e71f9",
+        "version": "0f257a4c261156b28406b2165bd4ecba5e1cc4843a7882738480295105385db8",
         "warmup_time": -1
     },
     "hdk.benchmarks.TimeBinaryOpDataFrame.time_mul_dataframes": {
-        "code": "class TimeBinaryOpDataFrame:\n    def time_mul_dataframes(self, shape, binary_op):\n        execute(self.op(self.df1))\n\n    def setup(self, shape, binary_op):\n        self.df1 = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df1)\n        self.op = getattr(self.df1, binary_op)",
+        "code": "class TimeBinaryOpDataFrame:\n    def time_mul_dataframes(self, shape, binary_op):\n        execute(self.op(self.df1))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeBinaryOpDataFrame:\n    def setup(self, shape, binary_op):\n        self.df1 = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df1)\n        self.op = getattr(self.df1, binary_op)",
         "min_run_count": 2,
         "name": "hdk.benchmarks.TimeBinaryOpDataFrame.time_mul_dataframes",
         "number": 0,
@@ -3172,11 +3172,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "81baa78efbdc45bf02538ea22218bf33cfc52b6f41d7c01720a969fd988297e1",
+        "version": "f4dc9c40209e2526208bd1f3299af33320d09dfe20cbd6e1752155a290916fe8",
         "warmup_time": -1
     },
     "hdk.benchmarks.TimeBinaryOpDataFrame.time_mul_scalar": {
-        "code": "class TimeBinaryOpDataFrame:\n    def time_mul_scalar(self, shape, binary_op):\n        execute(self.op(2))\n\n    def setup(self, shape, binary_op):\n        self.df1 = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df1)\n        self.op = getattr(self.df1, binary_op)",
+        "code": "class TimeBinaryOpDataFrame:\n    def time_mul_scalar(self, shape, binary_op):\n        execute(self.op(2))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeBinaryOpDataFrame:\n    def setup(self, shape, binary_op):\n        self.df1 = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df1)\n        self.op = getattr(self.df1, binary_op)",
         "min_run_count": 2,
         "name": "hdk.benchmarks.TimeBinaryOpDataFrame.time_mul_scalar",
         "number": 0,
@@ -3198,11 +3198,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "d7edfdde93db03c9df899f4d268bca8997418dd5df67f0ac2000955d705c3c2e",
+        "version": "028182ae66f5c1ce132b8787a1c0436bfbb7dd65cfa4b694e7db63125e026400",
         "warmup_time": -1
     },
     "hdk.benchmarks.TimeBinaryOpSeries.time_mul_series": {
-        "code": "class TimeBinaryOpSeries:\n    def time_mul_series(self, shape, binary_op):\n        execute(self.op(self.series))\n\n    def setup(self, shape, binary_op):\n        self.series = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)[\"col0\"]\n        trigger_import(self.series)\n        self.op = getattr(self.series, binary_op)",
+        "code": "class TimeBinaryOpSeries:\n    def time_mul_series(self, shape, binary_op):\n        execute(self.op(self.series))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeBinaryOpSeries:\n    def setup(self, shape, binary_op):\n        self.series = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)[\"col0\"]\n        trigger_import(self.series)\n        self.op = getattr(self.series, binary_op)",
         "min_run_count": 2,
         "name": "hdk.benchmarks.TimeBinaryOpSeries.time_mul_series",
         "number": 0,
@@ -3224,11 +3224,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "e90b9091848a468d0e25be32398226b0be07c94c0741cc20a192bad271ec06da",
+        "version": "4441b5302c1eaa5db669863d779e8f6f6c6f6320b80b99a8d7f54369138a82a6",
         "warmup_time": -1
     },
     "hdk.benchmarks.TimeDescribe.time_describe": {
-        "code": "class TimeDescribe:\n    def time_describe(self, shape):\n        execute(self.df.describe())\n\n    def setup(self, shape):\n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)",
+        "code": "class TimeDescribe:\n    def time_describe(self, shape):\n        execute(self.df.describe())\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeDescribe:\n    def setup(self, shape):\n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)",
         "min_run_count": 2,
         "name": "hdk.benchmarks.TimeDescribe.time_describe",
         "number": 0,
@@ -3246,11 +3246,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "7f4a6c93dc4546fff3a32c451246cb29727f9cc27a3029df68c54f1c30528b06",
+        "version": "9b190a25b1da35fca69d122a63211594ce69d1bcfafec4230f6d3beea0305cd1",
         "warmup_time": -1
     },
     "hdk.benchmarks.TimeDrop.time_drop": {
-        "code": "class TimeDrop:\n    def time_drop(self, shape, drop_ncols):\n        execute(self.df.drop(self.labels, axis=1))\n\n    def setup(self, shape, drop_ncols):\n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)\n        drop_count = (\n            int(len(self.df.axes[1]) * drop_ncols)\n            if isinstance(drop_ncols, float)\n            else drop_ncols\n        )\n        self.labels = self.df.axes[1][:drop_count]",
+        "code": "class TimeDrop:\n    def time_drop(self, shape, drop_ncols):\n        execute(self.df.drop(self.labels, axis=1))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeDrop:\n    def setup(self, shape, drop_ncols):\n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)\n        drop_count = (\n            int(len(self.df.axes[1]) * drop_ncols)\n            if isinstance(drop_ncols, float)\n            else drop_ncols\n        )\n        self.labels = self.df.axes[1][:drop_count]",
         "min_run_count": 2,
         "name": "hdk.benchmarks.TimeDrop.time_drop",
         "number": 0,
@@ -3273,11 +3273,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "6c029b580c3c1b3127bf16edb1c652e9c68b1b98f27737035ba6d05b67debc6d",
+        "version": "a999fb9a91e81ba5b7463620d6d3cd025ac2a331f28875faf6d8a92192e462bc",
         "warmup_time": -1
     },
     "hdk.benchmarks.TimeFillna.time_fillna": {
-        "code": "class TimeFillna:\n    def time_fillna(self, value_type, shape, limit):\n        execute(self.df.fillna(**self.kw))\n\n    def setup(self, value_type, shape, limit):\n        self.df = gen_nan_data(*shape)\n        columns = self.df.columns\n        trigger_import(self.df)\n    \n        value = self.create_fillna_value(value_type, columns)\n        limit = int(limit * shape[0]) if limit else None\n        self.kw = {\"value\": value, \"limit\": limit}",
+        "code": "class TimeFillna:\n    def time_fillna(self, value_type, shape, limit):\n        execute(self.df.fillna(**self.kw))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeFillna:\n    def setup(self, value_type, shape, limit):\n        self.df = gen_nan_data(*shape)\n        columns = self.df.columns\n        trigger_import(self.df)\n    \n        value = self.create_fillna_value(value_type, columns)\n        limit = int(limit * shape[0]) if limit else None\n        self.kw = {\"value\": value, \"limit\": limit}",
         "min_run_count": 2,
         "name": "hdk.benchmarks.TimeFillna.time_fillna",
         "number": 0,
@@ -3304,11 +3304,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "cec49e9f2ea305342be06a191ed412dec0ec0d71531ad452e00cfdcbe5c473c5",
+        "version": "36da668c6bdb220c85073c4572ed56566899b7a0802d796016aec58b588ff888",
         "warmup_time": -1
     },
     "hdk.benchmarks.TimeGroupByDefaultAggregations.time_groupby_count": {
-        "code": "class TimeGroupByDefaultAggregations:\n    def time_groupby_count(self, *args, **kwargs):\n        execute(self.df.groupby(by=self.groupby_columns).count())\n\nclass BaseTimeGroupBy:\n    def setup(self, shape, ngroups=5, groupby_ncols=1):\n        ngroups = translator_groupby_ngroups(ngroups, shape)\n        self.df, self.groupby_columns = generate_dataframe(\n            \"int\",\n            *shape,\n            RAND_LOW,\n            RAND_HIGH,\n            groupby_ncols,\n            count_groups=ngroups,\n        )\n        # correct while we use 'col*' like name for non-groupby columns\n        # and 'groupby_col*' like name for groupby columns\n        self.non_groupby_columns = self.df.columns[:-groupby_ncols]\n        trigger_import(self.df)",
+        "code": "class TimeGroupByDefaultAggregations:\n    def time_groupby_count(self, *args, **kwargs):\n        execute(self.df.groupby(by=self.groupby_columns).count())\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass BaseTimeGroupBy:\n    def setup(self, shape, ngroups=5, groupby_ncols=1):\n        ngroups = translator_groupby_ngroups(ngroups, shape)\n        self.df, self.groupby_columns = generate_dataframe(\n            \"int\",\n            *shape,\n            RAND_LOW,\n            RAND_HIGH,\n            groupby_ncols,\n            count_groups=ngroups,\n        )\n        # correct while we use 'col*' like name for non-groupby columns\n        # and 'groupby_col*' like name for groupby columns\n        self.non_groupby_columns = self.df.columns[:-groupby_ncols]\n        trigger_import(self.df)",
         "min_run_count": 2,
         "name": "hdk.benchmarks.TimeGroupByDefaultAggregations.time_groupby_count",
         "number": 0,
@@ -3331,11 +3331,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "15914b0be23e820273cec1b62dcdb6fa54322cb33c3c4ac749f237bdd0cc5527",
+        "version": "2ad2bc3fcbb6b7ca471bf5c29034d89f851272efc7be139202d4f922bf95806b",
         "warmup_time": -1
     },
     "hdk.benchmarks.TimeGroupByDefaultAggregations.time_groupby_sum": {
-        "code": "class TimeGroupByDefaultAggregations:\n    def time_groupby_sum(self, *args, **kwargs):\n        execute(self.df.groupby(by=self.groupby_columns).sum())\n\nclass BaseTimeGroupBy:\n    def setup(self, shape, ngroups=5, groupby_ncols=1):\n        ngroups = translator_groupby_ngroups(ngroups, shape)\n        self.df, self.groupby_columns = generate_dataframe(\n            \"int\",\n            *shape,\n            RAND_LOW,\n            RAND_HIGH,\n            groupby_ncols,\n            count_groups=ngroups,\n        )\n        # correct while we use 'col*' like name for non-groupby columns\n        # and 'groupby_col*' like name for groupby columns\n        self.non_groupby_columns = self.df.columns[:-groupby_ncols]\n        trigger_import(self.df)",
+        "code": "class TimeGroupByDefaultAggregations:\n    def time_groupby_sum(self, *args, **kwargs):\n        execute(self.df.groupby(by=self.groupby_columns).sum())\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass BaseTimeGroupBy:\n    def setup(self, shape, ngroups=5, groupby_ncols=1):\n        ngroups = translator_groupby_ngroups(ngroups, shape)\n        self.df, self.groupby_columns = generate_dataframe(\n            \"int\",\n            *shape,\n            RAND_LOW,\n            RAND_HIGH,\n            groupby_ncols,\n            count_groups=ngroups,\n        )\n        # correct while we use 'col*' like name for non-groupby columns\n        # and 'groupby_col*' like name for groupby columns\n        self.non_groupby_columns = self.df.columns[:-groupby_ncols]\n        trigger_import(self.df)",
         "min_run_count": 2,
         "name": "hdk.benchmarks.TimeGroupByDefaultAggregations.time_groupby_sum",
         "number": 0,
@@ -3358,11 +3358,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "121c334f6e5244634d9ef10f2332b4ba35c4c8bf837bc64b3d68f0826cbedffb",
+        "version": "17c0fe0db9dfb0ca92d8a4706b525b43c013058bc595d8c5b62f603f19d6317b",
         "warmup_time": -1
     },
     "hdk.benchmarks.TimeGroupByMultiColumn.time_groupby_agg_mean": {
-        "code": "class TimeGroupByMultiColumn:\n    def time_groupby_agg_mean(self, *args, **kwargs):\n        execute(self.df.groupby(by=self.groupby_columns).agg(\"mean\"))\n\nclass BaseTimeGroupBy:\n    def setup(self, shape, ngroups=5, groupby_ncols=1):\n        ngroups = translator_groupby_ngroups(ngroups, shape)\n        self.df, self.groupby_columns = generate_dataframe(\n            \"int\",\n            *shape,\n            RAND_LOW,\n            RAND_HIGH,\n            groupby_ncols,\n            count_groups=ngroups,\n        )\n        # correct while we use 'col*' like name for non-groupby columns\n        # and 'groupby_col*' like name for groupby columns\n        self.non_groupby_columns = self.df.columns[:-groupby_ncols]\n        trigger_import(self.df)",
+        "code": "class TimeGroupByMultiColumn:\n    def time_groupby_agg_mean(self, *args, **kwargs):\n        execute(self.df.groupby(by=self.groupby_columns).agg(\"mean\"))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass BaseTimeGroupBy:\n    def setup(self, shape, ngroups=5, groupby_ncols=1):\n        ngroups = translator_groupby_ngroups(ngroups, shape)\n        self.df, self.groupby_columns = generate_dataframe(\n            \"int\",\n            *shape,\n            RAND_LOW,\n            RAND_HIGH,\n            groupby_ncols,\n            count_groups=ngroups,\n        )\n        # correct while we use 'col*' like name for non-groupby columns\n        # and 'groupby_col*' like name for groupby columns\n        self.non_groupby_columns = self.df.columns[:-groupby_ncols]\n        trigger_import(self.df)",
         "min_run_count": 2,
         "name": "hdk.benchmarks.TimeGroupByMultiColumn.time_groupby_agg_mean",
         "number": 0,
@@ -3389,11 +3389,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "fcc2e5acf59ef8be0cdbd65aa7b3a77b14bed4b5a721790a284b33f33f6cc9d9",
+        "version": "32221f0d71e2c1905ab9fedeceb83ab06cb59c2c5ebf908296a7acc6ba5ab30d",
         "warmup_time": -1
     },
     "hdk.benchmarks.TimeGroupByMultiColumn.time_groupby_agg_mean_dict": {
-        "code": "class TimeGroupByMultiColumn:\n    def time_groupby_agg_mean_dict(self, *args, **kwargs):\n        execute(\n            self.df.groupby(by=self.groupby_columns).agg(\n                {col: \"mean\" for col in self.non_groupby_columns}\n            )\n        )\n\nclass BaseTimeGroupBy:\n    def setup(self, shape, ngroups=5, groupby_ncols=1):\n        ngroups = translator_groupby_ngroups(ngroups, shape)\n        self.df, self.groupby_columns = generate_dataframe(\n            \"int\",\n            *shape,\n            RAND_LOW,\n            RAND_HIGH,\n            groupby_ncols,\n            count_groups=ngroups,\n        )\n        # correct while we use 'col*' like name for non-groupby columns\n        # and 'groupby_col*' like name for groupby columns\n        self.non_groupby_columns = self.df.columns[:-groupby_ncols]\n        trigger_import(self.df)",
+        "code": "class TimeGroupByMultiColumn:\n    def time_groupby_agg_mean_dict(self, *args, **kwargs):\n        execute(\n            self.df.groupby(by=self.groupby_columns).agg(\n                {col: \"mean\" for col in self.non_groupby_columns}\n            )\n        )\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass BaseTimeGroupBy:\n    def setup(self, shape, ngroups=5, groupby_ncols=1):\n        ngroups = translator_groupby_ngroups(ngroups, shape)\n        self.df, self.groupby_columns = generate_dataframe(\n            \"int\",\n            *shape,\n            RAND_LOW,\n            RAND_HIGH,\n            groupby_ncols,\n            count_groups=ngroups,\n        )\n        # correct while we use 'col*' like name for non-groupby columns\n        # and 'groupby_col*' like name for groupby columns\n        self.non_groupby_columns = self.df.columns[:-groupby_ncols]\n        trigger_import(self.df)",
         "min_run_count": 2,
         "name": "hdk.benchmarks.TimeGroupByMultiColumn.time_groupby_agg_mean_dict",
         "number": 0,
@@ -3420,11 +3420,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "f2d76d36962269f3de3ad5130f469d2ae74bd71599c247c0667e0916c6462c42",
+        "version": "5bf19e5b6346fafe9eaa1bb80dc7178d6dff91e6cc9b255a67655716289b442e",
         "warmup_time": -1
     },
     "hdk.benchmarks.TimeGroupByMultiColumn.time_groupby_agg_nunique": {
-        "code": "class TimeGroupByMultiColumn:\n    def time_groupby_agg_nunique(self, *args, **kwargs):\n        execute(self.df.groupby(by=self.groupby_columns).agg(\"nunique\"))\n\nclass BaseTimeGroupBy:\n    def setup(self, shape, ngroups=5, groupby_ncols=1):\n        ngroups = translator_groupby_ngroups(ngroups, shape)\n        self.df, self.groupby_columns = generate_dataframe(\n            \"int\",\n            *shape,\n            RAND_LOW,\n            RAND_HIGH,\n            groupby_ncols,\n            count_groups=ngroups,\n        )\n        # correct while we use 'col*' like name for non-groupby columns\n        # and 'groupby_col*' like name for groupby columns\n        self.non_groupby_columns = self.df.columns[:-groupby_ncols]\n        trigger_import(self.df)",
+        "code": "class TimeGroupByMultiColumn:\n    def time_groupby_agg_nunique(self, *args, **kwargs):\n        execute(self.df.groupby(by=self.groupby_columns).agg(\"nunique\"))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass BaseTimeGroupBy:\n    def setup(self, shape, ngroups=5, groupby_ncols=1):\n        ngroups = translator_groupby_ngroups(ngroups, shape)\n        self.df, self.groupby_columns = generate_dataframe(\n            \"int\",\n            *shape,\n            RAND_LOW,\n            RAND_HIGH,\n            groupby_ncols,\n            count_groups=ngroups,\n        )\n        # correct while we use 'col*' like name for non-groupby columns\n        # and 'groupby_col*' like name for groupby columns\n        self.non_groupby_columns = self.df.columns[:-groupby_ncols]\n        trigger_import(self.df)",
         "min_run_count": 2,
         "name": "hdk.benchmarks.TimeGroupByMultiColumn.time_groupby_agg_nunique",
         "number": 0,
@@ -3451,11 +3451,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "b0e807026c13cefed783abf9e4063abe1482967b27bc03351360e280a1144b48",
+        "version": "7d4630a3372e5722b96624ab801ef929c45dad6072d066cfa84f2d497ccd5025",
         "warmup_time": -1
     },
     "hdk.benchmarks.TimeGroupByMultiColumn.time_groupby_sum": {
-        "code": "class TimeGroupByMultiColumn:\n    def time_groupby_sum(self, *args, **kwargs):\n        execute(self.df.groupby(by=self.groupby_columns).sum())\n\nclass BaseTimeGroupBy:\n    def setup(self, shape, ngroups=5, groupby_ncols=1):\n        ngroups = translator_groupby_ngroups(ngroups, shape)\n        self.df, self.groupby_columns = generate_dataframe(\n            \"int\",\n            *shape,\n            RAND_LOW,\n            RAND_HIGH,\n            groupby_ncols,\n            count_groups=ngroups,\n        )\n        # correct while we use 'col*' like name for non-groupby columns\n        # and 'groupby_col*' like name for groupby columns\n        self.non_groupby_columns = self.df.columns[:-groupby_ncols]\n        trigger_import(self.df)",
+        "code": "class TimeGroupByMultiColumn:\n    def time_groupby_sum(self, *args, **kwargs):\n        execute(self.df.groupby(by=self.groupby_columns).sum())\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass BaseTimeGroupBy:\n    def setup(self, shape, ngroups=5, groupby_ncols=1):\n        ngroups = translator_groupby_ngroups(ngroups, shape)\n        self.df, self.groupby_columns = generate_dataframe(\n            \"int\",\n            *shape,\n            RAND_LOW,\n            RAND_HIGH,\n            groupby_ncols,\n            count_groups=ngroups,\n        )\n        # correct while we use 'col*' like name for non-groupby columns\n        # and 'groupby_col*' like name for groupby columns\n        self.non_groupby_columns = self.df.columns[:-groupby_ncols]\n        trigger_import(self.df)",
         "min_run_count": 2,
         "name": "hdk.benchmarks.TimeGroupByMultiColumn.time_groupby_sum",
         "number": 0,
@@ -3482,11 +3482,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "40140eb8860732e39573e7dccd5449cca445aeb1b8a00bdb56b58d58533b9c85",
+        "version": "2ad87433ff94236cb8e04c0532eb596d020d32abcc79271fca9b8275a934d721",
         "warmup_time": -1
     },
     "hdk.benchmarks.TimeHead.time_head": {
-        "code": "class TimeHead:\n    def time_head(self, shape, head_count):\n        execute(self.df.head(self.head_count))\n\n    def setup(self, shape, head_count):\n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)\n        self.head_count = (\n            int(head_count * len(self.df.index))\n            if isinstance(head_count, float)\n            else head_count\n        )",
+        "code": "class TimeHead:\n    def time_head(self, shape, head_count):\n        execute(self.df.head(self.head_count))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeHead:\n    def setup(self, shape, head_count):\n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)\n        self.head_count = (\n            int(head_count * len(self.df.index))\n            if isinstance(head_count, float)\n            else head_count\n        )",
         "min_run_count": 2,
         "name": "hdk.benchmarks.TimeHead.time_head",
         "number": 0,
@@ -3509,11 +3509,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "e3cbe98fd7c00b6ccea309f1b0e8ac2d8aab7a8e28911502757000bd43662cb9",
+        "version": "f88c9c20524e658a234c88203bbc65e3885bf866d0f7d73b37766f92746c3d61",
         "warmup_time": -1
     },
     "hdk.benchmarks.TimeIndexing.time_iloc": {
-        "code": "class TimeIndexing:\n    def time_iloc(self, shape, indexer_type):\n        # Pandas doesn't implement `df.iloc[series boolean_mask]` and raises an exception on it.\n        # Replacing this with the semantically equivalent construction:\n        if indexer_type != \"bool_series\":\n            execute(self.df.iloc[self.indexer])\n        else:\n            execute(self.df[self.indexer])\n\n    def setup(self, shape, indexer_type):\n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)\n    \n        self.indexer = self.indexer_getters[indexer_type](self.df)\n        if isinstance(self.indexer, (IMPL.Series, IMPL.DataFrame)):\n            # HACK: Triggering `dtypes` meta-data computation in advance,\n            # so it won't affect the `loc/iloc` time:\n            self.indexer.dtypes",
+        "code": "class TimeIndexing:\n    def time_iloc(self, shape, indexer_type):\n        # Pandas doesn't implement `df.iloc[series boolean_mask]` and raises an exception on it.\n        # Replacing this with the semantically equivalent construction:\n        if indexer_type != \"bool_series\":\n            execute(self.df.iloc[self.indexer])\n        else:\n            execute(self.df[self.indexer])\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeIndexing:\n    def setup(self, shape, indexer_type):\n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)\n    \n        self.indexer = self.indexer_getters[indexer_type](self.df)\n        if isinstance(self.indexer, (IMPL.Series, IMPL.DataFrame)):\n            # HACK: Triggering `dtypes` meta-data computation in advance,\n            # so it won't affect the `loc/iloc` time:\n            self.indexer.dtypes",
         "min_run_count": 2,
         "name": "hdk.benchmarks.TimeIndexing.time_iloc",
         "number": 0,
@@ -3542,11 +3542,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "7b73f9643fa771d31cbaccfd55da0c6b6d8b7f67f2252ba5f17ed73350a54288",
+        "version": "57f6902544078f7caed1f63dd8d1b4f89a94d5f1168e40f907418ac476d32aec",
         "warmup_time": -1
     },
     "hdk.benchmarks.TimeIndexing.time_loc": {
-        "code": "class TimeIndexing:\n    def time_loc(self, shape, indexer_type):\n        execute(self.df.loc[self.indexer])\n\n    def setup(self, shape, indexer_type):\n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)\n    \n        self.indexer = self.indexer_getters[indexer_type](self.df)\n        if isinstance(self.indexer, (IMPL.Series, IMPL.DataFrame)):\n            # HACK: Triggering `dtypes` meta-data computation in advance,\n            # so it won't affect the `loc/iloc` time:\n            self.indexer.dtypes",
+        "code": "class TimeIndexing:\n    def time_loc(self, shape, indexer_type):\n        execute(self.df.loc[self.indexer])\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeIndexing:\n    def setup(self, shape, indexer_type):\n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)\n    \n        self.indexer = self.indexer_getters[indexer_type](self.df)\n        if isinstance(self.indexer, (IMPL.Series, IMPL.DataFrame)):\n            # HACK: Triggering `dtypes` meta-data computation in advance,\n            # so it won't affect the `loc/iloc` time:\n            self.indexer.dtypes",
         "min_run_count": 2,
         "name": "hdk.benchmarks.TimeIndexing.time_loc",
         "number": 0,
@@ -3575,11 +3575,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "822e648264a13f7e22816c17b42e9d47753fbcb058fcd3885ec93872245c4290",
+        "version": "5c867ac6c039472986054638ee75133c203afee997e4c97cf6dd60eda7378c53",
         "warmup_time": -1
     },
     "hdk.benchmarks.TimeIndexingColumns.time___getitem__": {
-        "code": "class TimeIndexingColumns:\n    def time___getitem__(self, shape):\n        execute(self.df[self.labels_indexer])\n\n    def setup(self, shape):\n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)\n        self.numeric_indexer = [0, 1]\n        self.labels_indexer = self.df.columns[self.numeric_indexer].tolist()",
+        "code": "class TimeIndexingColumns:\n    def time___getitem__(self, shape):\n        execute(self.df[self.labels_indexer])\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeIndexingColumns:\n    def setup(self, shape):\n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)\n        self.numeric_indexer = [0, 1]\n        self.labels_indexer = self.df.columns[self.numeric_indexer].tolist()",
         "min_run_count": 2,
         "name": "hdk.benchmarks.TimeIndexingColumns.time___getitem__",
         "number": 0,
@@ -3597,11 +3597,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "6fa82daf47b740e60aad7b96fd846c6a92b09b84143fc302aef64690219c9b35",
+        "version": "61bf3c3ef0919a675ba355715ab9cd8be47a30e20e2341f2430927076aec7810",
         "warmup_time": -1
     },
     "hdk.benchmarks.TimeIndexingColumns.time_iloc": {
-        "code": "class TimeIndexingColumns:\n    def time_iloc(self, shape):\n        execute(self.df.iloc[:, self.numeric_indexer])\n\n    def setup(self, shape):\n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)\n        self.numeric_indexer = [0, 1]\n        self.labels_indexer = self.df.columns[self.numeric_indexer].tolist()",
+        "code": "class TimeIndexingColumns:\n    def time_iloc(self, shape):\n        execute(self.df.iloc[:, self.numeric_indexer])\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeIndexingColumns:\n    def setup(self, shape):\n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)\n        self.numeric_indexer = [0, 1]\n        self.labels_indexer = self.df.columns[self.numeric_indexer].tolist()",
         "min_run_count": 2,
         "name": "hdk.benchmarks.TimeIndexingColumns.time_iloc",
         "number": 0,
@@ -3619,11 +3619,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "5bb0aafeffe2a1aeb522c1fd1d12dd0e71c4b31ede8e2b6eff891ef79a0af478",
+        "version": "1e414daf610131f4ade7d17d2e78e7977fe95e7a21d473d0e6eec947a35d1e34",
         "warmup_time": -1
     },
     "hdk.benchmarks.TimeIndexingColumns.time_loc": {
-        "code": "class TimeIndexingColumns:\n    def time_loc(self, shape):\n        execute(self.df.loc[:, self.labels_indexer])\n\n    def setup(self, shape):\n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)\n        self.numeric_indexer = [0, 1]\n        self.labels_indexer = self.df.columns[self.numeric_indexer].tolist()",
+        "code": "class TimeIndexingColumns:\n    def time_loc(self, shape):\n        execute(self.df.loc[:, self.labels_indexer])\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeIndexingColumns:\n    def setup(self, shape):\n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)\n        self.numeric_indexer = [0, 1]\n        self.labels_indexer = self.df.columns[self.numeric_indexer].tolist()",
         "min_run_count": 2,
         "name": "hdk.benchmarks.TimeIndexingColumns.time_loc",
         "number": 0,
@@ -3641,11 +3641,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "b4304883d436bf17c07ce9b7ff3e7ff1cda770f40a7860d94de51f65d417717f",
+        "version": "2f1e02a867fc8a474e83e1c01096fd1a1c7478695d03717506c6be36acfb8708",
         "warmup_time": -1
     },
     "hdk.benchmarks.TimeJoin.time_join": {
-        "code": "class TimeJoin:\n    def time_join(self, shape, how, is_equal_keys):\n        # join dataframes on index to get the predictable shape\n        execute(self.df1.join(self.df2, how=how, lsuffix=\"left_\"))\n\n    def setup(self, shape, how, is_equal_keys):\n        self.df1, self.df2 = (\n            generate_dataframe(\n                \"int\",\n                *frame_shape,\n                RAND_LOW,\n                RAND_HIGH,\n                cache_prefix=f\"{i}-th_frame_to_join\",\n            )\n            for i, frame_shape in enumerate((shape, shape))\n        )\n    \n        if is_equal_keys:\n            # When the frames have default indices to join on: RangeIndex(frame_length),\n            # HDK backend performs join on the internal meta-column called 'rowid'.\n            # There is a bug in the engine that makes such joins fail. To avoid joining\n            # on the meta-column we explicitly specify a non-default index to join on.\n            # https://github.com/modin-project/modin/issues/3740\n            # Generating a new object for every index to avoid shared index objects:\n            self.df1.index = pandas.RangeIndex(1, len(self.df1) + 1)\n            self.df2.index = pandas.RangeIndex(1, len(self.df2) + 1)\n        else:\n            # Intersection rate indicates how many common join-keys `self.df1`\n            # and `self.df2` have in terms of percentage.\n            indices_intersection_rate = 0.5\n    \n            frame_length = len(self.df1)\n            intersect_size = int(frame_length * indices_intersection_rate)\n    \n            intersect_part = random_state.choice(\n                self.df1.index, size=intersect_size, replace=False\n            )\n            non_intersect_part = np.arange(\n                start=frame_length, stop=frame_length + (frame_length - intersect_size)\n            )\n            new_index = np.concatenate([intersect_part, non_intersect_part])\n    \n            random_state.shuffle(new_index)\n            self.df1.index = new_index\n    \n        trigger_import(self.df1, self.df2)",
+        "code": "class TimeJoin:\n    def time_join(self, shape, how, is_equal_keys):\n        # join dataframes on index to get the predictable shape\n        execute(self.df1.join(self.df2, how=how, lsuffix=\"left_\"))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeJoin:\n    def setup(self, shape, how, is_equal_keys):\n        self.df1, self.df2 = (\n            generate_dataframe(\n                \"int\",\n                *frame_shape,\n                RAND_LOW,\n                RAND_HIGH,\n                cache_prefix=f\"{i}-th_frame_to_join\",\n            )\n            for i, frame_shape in enumerate((shape, shape))\n        )\n    \n        if is_equal_keys:\n            # When the frames have default indices to join on: RangeIndex(frame_length),\n            # HDK backend performs join on the internal meta-column called 'rowid'.\n            # There is a bug in the engine that makes such joins fail. To avoid joining\n            # on the meta-column we explicitly specify a non-default index to join on.\n            # https://github.com/modin-project/modin/issues/3740\n            # Generating a new object for every index to avoid shared index objects:\n            self.df1.index = pandas.RangeIndex(1, len(self.df1) + 1)\n            self.df2.index = pandas.RangeIndex(1, len(self.df2) + 1)\n        else:\n            # Intersection rate indicates how many common join-keys `self.df1`\n            # and `self.df2` have in terms of percentage.\n            indices_intersection_rate = 0.5\n    \n            frame_length = len(self.df1)\n            intersect_size = int(frame_length * indices_intersection_rate)\n    \n            intersect_part = np.random.choice(\n                self.df1.index, size=intersect_size, replace=False\n            )\n            non_intersect_part = np.arange(\n                start=frame_length, stop=frame_length + (frame_length - intersect_size)\n            )\n            new_index = np.concatenate([intersect_part, non_intersect_part])\n    \n            np.random.shuffle(new_index)\n            self.df1.index = new_index\n    \n        trigger_import(self.df1, self.df2)",
         "min_run_count": 2,
         "name": "hdk.benchmarks.TimeJoin.time_join",
         "number": 0,
@@ -3673,11 +3673,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "5cce63d6993b32a8fd278660bd619406eff0bc774cddfc9fca64fb23a79cb76f",
+        "version": "22fa3e5baad70edd15f0ce0f4aa07f74667441e476d27de38e1162f1084c8fba",
         "warmup_time": -1
     },
     "hdk.benchmarks.TimeMerge.time_merge": {
-        "code": "class TimeMerge:\n    def time_merge(self, shapes, how):\n        # merging dataframes by index is not supported, therefore we merge by column\n        # with arbitrary values, which leads to an unpredictable form of the operation result;\n        # it's need to get the predictable shape to get consistent performance results\n        execute(\n            self.dfs[0].merge(\n                self.dfs[1], on=\"col1\", how=how, suffixes=(\"left_\", \"right_\")\n            )\n        )\n\n    def setup(self, shapes, how):\n        gen_unique_key = how == \"inner\"\n        self.dfs = []\n        for i, shape in enumerate(shapes):\n            self.dfs.append(\n                generate_dataframe(\n                    \"int\",\n                    *shape,\n                    RAND_LOW,\n                    RAND_HIGH,\n                    gen_unique_key=gen_unique_key,\n                    cache_prefix=f\"{i}-th_frame_to_merge\",\n                )\n            )\n        trigger_import(*self.dfs)",
+        "code": "class TimeMerge:\n    def time_merge(self, shapes, how):\n        # merging dataframes by index is not supported, therefore we merge by column\n        # with arbitrary values, which leads to an unpredictable form of the operation result;\n        # it's need to get the predictable shape to get consistent performance results\n        execute(\n            self.dfs[0].merge(\n                self.dfs[1], on=\"col1\", how=how, suffixes=(\"left_\", \"right_\")\n            )\n        )\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeMerge:\n    def setup(self, shapes, how):\n        gen_unique_key = how == \"inner\"\n        self.dfs = []\n        for i, shape in enumerate(shapes):\n            self.dfs.append(\n                generate_dataframe(\n                    \"int\",\n                    *shape,\n                    RAND_LOW,\n                    RAND_HIGH,\n                    gen_unique_key=gen_unique_key,\n                    cache_prefix=f\"{i}-th_frame_to_merge\",\n                )\n            )\n        trigger_import(*self.dfs)",
         "min_run_count": 2,
         "name": "hdk.benchmarks.TimeMerge.time_merge",
         "number": 0,
@@ -3700,11 +3700,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "72f155ffa902af3d474557429591d191946e29199d2a4d2520d301d7d8986236",
+        "version": "baf50e6d991a51a08e0d0e83dbc30584e569c2ef2c9cf399f36b9d6d46593147",
         "warmup_time": -1
     },
     "hdk.benchmarks.TimeProperties.time_columns": {
-        "code": "class TimeProperties:\n    def time_columns(self, shape):\n        return self.df.columns\n\n    def setup(self, shape):\n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)",
+        "code": "class TimeProperties:\n    def time_columns(self, shape):\n        return self.df.columns\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeProperties:\n    def setup(self, shape):\n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)",
         "min_run_count": 2,
         "name": "hdk.benchmarks.TimeProperties.time_columns",
         "number": 0,
@@ -3722,11 +3722,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "79ef769f7de5176d7b49b1bda2b9e052cf185dc6e8ea6fa84b9d43d94774f3e4",
+        "version": "def92c6433d8652e7c5022c058155150081d386e7c692f65b6f628e710d44159",
         "warmup_time": -1
     },
     "hdk.benchmarks.TimeProperties.time_index": {
-        "code": "class TimeProperties:\n    def time_index(self, shape):\n        return self.df.index\n\n    def setup(self, shape):\n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)",
+        "code": "class TimeProperties:\n    def time_index(self, shape):\n        return self.df.index\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeProperties:\n    def setup(self, shape):\n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)",
         "min_run_count": 2,
         "name": "hdk.benchmarks.TimeProperties.time_index",
         "number": 0,
@@ -3744,11 +3744,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "71e5b478474dc50db09ac8449a19db3e194d492428268f5bb44a62a90e39b89c",
+        "version": "ad35ec24c6c6c51454c0ed84c2aa6c1e6ffba247f79e5854c0256d1b358aa3ff",
         "warmup_time": -1
     },
     "hdk.benchmarks.TimeProperties.time_shape": {
-        "code": "class TimeProperties:\n    def time_shape(self, shape):\n        return self.df.shape\n\n    def setup(self, shape):\n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)",
+        "code": "class TimeProperties:\n    def time_shape(self, shape):\n        return self.df.shape\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeProperties:\n    def setup(self, shape):\n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)",
         "min_run_count": 2,
         "name": "hdk.benchmarks.TimeProperties.time_shape",
         "number": 0,
@@ -3766,11 +3766,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "224f83c17301535d4a5d3726ab1eebd5ecaa4a4720187f36831467262069fe7a",
+        "version": "f359c027a523cb57d6e82f543d5bc2d79b52433fd747fe6fac1f56c0d0aeabcc",
         "warmup_time": -1
     },
     "hdk.benchmarks.TimeResetIndex.time_reset_index": {
-        "code": "class TimeResetIndex:\n    def time_reset_index(self, shape, drop, level):\n        execute(self.df.reset_index(drop=drop, level=level))\n\n    def setup(self, shape, drop, level):\n        if not drop or level == \"level_1\":\n            raise NotImplementedError\n    \n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n        if level:\n            index = IMPL.MultiIndex.from_product(\n                [self.df.index[: shape[0] // 2], [\"bar\", \"foo\"]],\n                names=[\"level_1\", \"level_2\"],\n            )\n            self.df.index = index\n        trigger_import(self.df)",
+        "code": "class TimeResetIndex:\n    def time_reset_index(self, shape, drop, level):\n        execute(self.df.reset_index(drop=drop, level=level))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeResetIndex:\n    def setup(self, shape, drop, level):\n        if not drop or level == \"level_1\":\n            raise NotImplementedError\n    \n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n        if level:\n            index = IMPL.MultiIndex.from_product(\n                [self.df.index[: shape[0] // 2], [\"bar\", \"foo\"]],\n                names=[\"level_1\", \"level_2\"],\n            )\n            self.df.index = index\n        trigger_import(self.df)",
         "min_run_count": 2,
         "name": "hdk.benchmarks.TimeResetIndex.time_reset_index",
         "number": 0,
@@ -3798,11 +3798,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "c83ec8e909012cee872aaab93da9884d02bd99fe5c09711ae72b02f63af3e76f",
+        "version": "907a2fa12a55209112fe37020cb952a63430a502dfe5d89942aa57fc6efaed8b",
         "warmup_time": -1
     },
     "hdk.benchmarks.TimeSortValues.time_sort_values": {
-        "code": "class TimeSortValues:\n    def time_sort_values(self, shape, columns_number, ascending_list):\n        execute(self.df.sort_values(self.columns, ascending=self.ascending))\n\n    def setup(self, shape, columns_number, ascending_list):\n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)\n        self.columns = random_columns(self.df.columns, columns_number)\n        self.ascending = (\n            random_booleans(columns_number)\n            if ascending_list\n            else bool(random_booleans(1)[0])\n        )",
+        "code": "class TimeSortValues:\n    def time_sort_values(self, shape, columns_number, ascending_list):\n        execute(self.df.sort_values(self.columns, ascending=self.ascending))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeSortValues:\n    def setup(self, shape, columns_number, ascending_list):\n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n        trigger_import(self.df)\n        self.columns = random_columns(self.df.columns, columns_number)\n        self.ascending = (\n            random_booleans(columns_number)\n            if ascending_list\n            else bool(random_booleans(1)[0])\n        )",
         "min_run_count": 2,
         "name": "hdk.benchmarks.TimeSortValues.time_sort_values",
         "number": 0,
@@ -3830,11 +3830,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "8344c06c681d6e0bfdcf6288dbb6b2105dceaf4ea1d6024b4be3dbd3d3932e2e",
+        "version": "ef60d3dd2d0da7a5358081b73e3360f99178627b94bb20d830d27c17b69c6e5c",
         "warmup_time": -1
     },
     "hdk.benchmarks.TimeValueCountsDataFrame.time_value_counts": {
-        "code": "class TimeValueCountsDataFrame:\n    def time_value_counts(self, *args, **kwargs):\n        execute(self.df.value_counts(subset=self.subset))\n\nclass BaseTimeValueCounts:\n    def setup(self, shape, ngroups=5, subset=1):\n        ngroups = translator_groupby_ngroups(ngroups, shape)\n        self.df, self.subset = generate_dataframe(\n            \"int\",\n            *shape,\n            RAND_LOW,\n            RAND_HIGH,\n            groupby_ncols=subset,\n            count_groups=ngroups,\n        )\n        trigger_import(self.df)",
+        "code": "class TimeValueCountsDataFrame:\n    def time_value_counts(self, *args, **kwargs):\n        execute(self.df.value_counts(subset=self.subset))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass BaseTimeValueCounts:\n    def setup(self, shape, ngroups=5, subset=1):\n        ngroups = translator_groupby_ngroups(ngroups, shape)\n        self.df, self.subset = generate_dataframe(\n            \"int\",\n            *shape,\n            RAND_LOW,\n            RAND_HIGH,\n            groupby_ncols=subset,\n            count_groups=ngroups,\n        )\n        trigger_import(self.df)",
         "min_run_count": 2,
         "name": "hdk.benchmarks.TimeValueCountsDataFrame.time_value_counts",
         "number": 0,
@@ -3862,11 +3862,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "f5809ce427e28d849989d0a53fbdf7cd8701e5b2262062aaffbbca77e36cb37d",
+        "version": "82caed32547f94da3af98988de9137573d9148fcb3c88255ce983ec9968b0e6f",
         "warmup_time": -1
     },
     "hdk.benchmarks.TimeValueCountsSeries.time_value_counts": {
-        "code": "class TimeValueCountsSeries:\n    def time_value_counts(self, shape, ngroups):\n        execute(self.series.value_counts())\n\n    def setup(self, shape, ngroups):\n        super().setup(shape, ngroups, subset=1)\n        self.series = self.df[self.subset[0]]\n        trigger_import(self.series)",
+        "code": "class TimeValueCountsSeries:\n    def time_value_counts(self, shape, ngroups):\n        execute(self.series.value_counts())\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeValueCountsSeries:\n    def setup(self, shape, ngroups):\n        super().setup(shape, ngroups, subset=1)\n        self.series = self.df[self.subset[0]]\n        trigger_import(self.series)",
         "min_run_count": 2,
         "name": "hdk.benchmarks.TimeValueCountsSeries.time_value_counts",
         "number": 0,
@@ -3889,11 +3889,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "50d039f809a57224798f163963708292724bc1f840d29c56433f0628d90b683b",
+        "version": "5f58a3119566a3dbc456145f9b1c2f27daa5c94e49c1ccef404fc8d1e2c2dcfa",
         "warmup_time": -1
     },
     "hdk.io.TimeReadCsvNames.time_read_csv_names": {
-        "code": "class TimeReadCsvNames:\n    def time_read_csv_names(self, cache, shape):\n        df = IMPL.read_csv(\n            self.filename,\n            names=self.names,\n            header=0,\n            dtype=self.dtype,\n        )\n        trigger_import(df)\n\n    def setup(self, cache, shape):\n        # ray init\n        if ASV_USE_IMPL == \"modin\":\n            IMPL.DataFrame([])\n        file_id = get_shape_id(shape)\n        self.filename, self.names, self.dtype = cache[file_id]\n\n    def setup_cache(self, test_filename=\"io_test_file_csv_names\"):\n        # filenames with a metadata of saved dataframes\n        cache = {}\n        for shape in self.shapes:\n            df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH, impl=\"pandas\")\n            file_id = get_shape_id(shape)\n            cache[file_id] = (\n                f\"{test_filename}_{file_id}.csv\",\n                df.columns.to_list(),\n                df.dtypes.to_dict(),\n            )\n            df.to_csv(cache[file_id][0], index=False)\n        return cache",
+        "code": "class TimeReadCsvNames:\n    def time_read_csv_names(self, cache, shape):\n        df = IMPL.read_csv(\n            self.filename,\n            names=self.names,\n            header=0,\n            dtype=self.dtype,\n        )\n        trigger_import(df)\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeReadCsvNames:\n    def setup(self, cache, shape):\n        # ray init\n        if ASV_USE_IMPL == \"modin\":\n            IMPL.DataFrame([])\n        file_id = get_shape_id(shape)\n        self.filename, self.names, self.dtype = cache[file_id]\n\n    def setup_cache(self, test_filename=\"io_test_file_csv_names\"):\n        # filenames with a metadata of saved dataframes\n        cache = {}\n        for shape in self.shapes:\n            df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH, impl=\"pandas\")\n            file_id = get_shape_id(shape)\n            cache[file_id] = (\n                f\"{test_filename}_{file_id}.csv\",\n                df.columns.to_list(),\n                df.dtypes.to_dict(),\n            )\n            df.to_csv(cache[file_id][0], index=False)\n        return cache",
         "min_run_count": 2,
         "name": "hdk.io.TimeReadCsvNames.time_read_csv_names",
         "number": 0,
@@ -3912,11 +3912,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "fcb6bccb6607d1e89e8d031640af59b1853b751ffa88e558fe346a5b599f1d69",
+        "version": "53b319ab483ac55c90e190b263bdea70b60e5c42c1539da40b67526d12f44c32",
         "warmup_time": -1
     },
     "hdk.io.TimeReadCsvTrueFalseValues.time_true_false_values": {
-        "code": "class TimeReadCsvTrueFalseValues:\n    def time_true_false_values(self, test_filenames, shape):\n        execute(\n            IMPL.read_csv(\n                test_filenames[self.shape_id],\n                true_values=[\"Yes\", \"true\"],\n                false_values=[\"No\", \"false\"],\n            ),\n            trigger_hdk_import=ASV_USE_STORAGE_FORMAT == \"hdk\",\n        )\n\nclass BaseReadCsv:\n    def setup(self, test_filenames, shape, *args, **kwargs):\n        # ray init\n        if ASV_USE_IMPL == \"modin\":\n            IMPL.DataFrame([])\n        self.shape_id = get_shape_id(shape)\n\n    def setup_cache(self, test_filename=\"io_test_file\"):\n        test_filenames = prepare_io_data(\n            test_filename, self.data_type, get_benchmark_shapes(self.__class__.__name__)\n        )\n        return test_filenames",
+        "code": "class TimeReadCsvTrueFalseValues:\n    def time_true_false_values(self, test_filenames, shape):\n        execute(\n            IMPL.read_csv(\n                test_filenames[self.shape_id],\n                true_values=[\"Yes\", \"true\"],\n                false_values=[\"No\", \"false\"],\n            ),\n            trigger_hdk_import=ASV_USE_STORAGE_FORMAT == \"hdk\",\n        )\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass BaseReadCsv:\n    def setup(self, test_filenames, shape, *args, **kwargs):\n        # ray init\n        if ASV_USE_IMPL == \"modin\":\n            IMPL.DataFrame([])\n        self.shape_id = get_shape_id(shape)\n\n    def setup_cache(self, test_filename=\"io_test_file\"):\n        test_filenames = prepare_io_data(\n            test_filename, self.data_type, get_benchmark_shapes(self.__class__.__name__)\n        )\n        return test_filenames",
         "min_run_count": 2,
         "name": "hdk.io.TimeReadCsvTrueFalseValues.time_true_false_values",
         "number": 0,
@@ -3936,11 +3936,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "b83cec19138a00f15f7a014d3fccb511e85353a6968fa8a05285213c403d214d",
+        "version": "cc000dfefa3f885b9a82ba9ce6f623160e909cd43de7f2297c1e87ee37930633",
         "warmup_time": -1
     },
     "io.csv.TimeReadCsvNamesDtype.time_read_csv_names_dtype": {
-        "code": "class TimeReadCsvNamesDtype:\n    def time_read_csv_names_dtype(self, cache, shape, names, dtype):\n        execute(\n            IMPL.read_csv(\n                self.filename,\n                names=self.names,\n                header=0,\n                dtype=self.dtype,\n                parse_dates=self.parse_dates,\n            )\n        )\n\n    def setup(self, cache, shape, names, dtype):\n        # ray init\n        if ASV_USE_IMPL == \"modin\":\n            IMPL.DataFrame([])\n        file_id = self._get_file_id(shape, dtype)\n        self.filename, self.names, self.dtype = cache[file_id]\n    \n        self.parse_dates = None\n        if dtype == \"Int64_Timestamp\":\n            # cached version of dtype should not change\n            self.dtype = self.dtype.copy()\n            for col in self._timestamp_columns:\n                del self.dtype[col]\n            self.parse_dates = self._timestamp_columns\n\n    def setup_cache(self, test_filename=\"io_test_file_csv_names_dtype\"):\n        # filenames with a metadata of saved dataframes\n        cache = {}\n        for shape in self.shapes:\n            for dtype in self._dtypes_params:\n                df = generate_dataframe(\n                    \"int\", *shape, RAND_LOW, RAND_HIGH, impl=\"pandas\"\n                )\n                if dtype == \"Int64_Timestamp\":\n                    df = self._add_timestamp_columns(df)\n    \n                file_id = self._get_file_id(shape, dtype)\n                cache[file_id] = (\n                    f\"{test_filename}_{file_id}.csv\",\n                    df.columns.to_list(),\n                    df.dtypes.to_dict(),\n                )\n                df.to_csv(cache[file_id][0], index=False)\n        return cache",
+        "code": "class TimeReadCsvNamesDtype:\n    def time_read_csv_names_dtype(self, cache, shape, names, dtype):\n        execute(\n            IMPL.read_csv(\n                self.filename,\n                names=self.names,\n                header=0,\n                dtype=self.dtype,\n                parse_dates=self.parse_dates,\n            )\n        )\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeReadCsvNamesDtype:\n    def setup(self, cache, shape, names, dtype):\n        # ray init\n        if ASV_USE_IMPL == \"modin\":\n            IMPL.DataFrame([])\n        file_id = self._get_file_id(shape, dtype)\n        self.filename, self.names, self.dtype = cache[file_id]\n    \n        self.parse_dates = None\n        if dtype == \"Int64_Timestamp\":\n            # cached version of dtype should not change\n            self.dtype = self.dtype.copy()\n            for col in self._timestamp_columns:\n                del self.dtype[col]\n            self.parse_dates = self._timestamp_columns\n\n    def setup_cache(self, test_filename=\"io_test_file_csv_names_dtype\"):\n        # filenames with a metadata of saved dataframes\n        cache = {}\n        for shape in self.shapes:\n            for dtype in self._dtypes_params:\n                df = generate_dataframe(\n                    \"int\", *shape, RAND_LOW, RAND_HIGH, impl=\"pandas\"\n                )\n                if dtype == \"Int64_Timestamp\":\n                    df = self._add_timestamp_columns(df)\n    \n                file_id = self._get_file_id(shape, dtype)\n                cache[file_id] = (\n                    f\"{test_filename}_{file_id}.csv\",\n                    df.columns.to_list(),\n                    df.dtypes.to_dict(),\n                )\n                df.to_csv(cache[file_id][0], index=False)\n        return cache",
         "min_run_count": 2,
         "name": "io.csv.TimeReadCsvNamesDtype.time_read_csv_names_dtype",
         "number": 0,
@@ -3969,11 +3969,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "3a38aa8596d6086419b2a97a392ad457fb7876350a14b7ef5857ab5d7ea0105b",
+        "version": "5f57e0f0d83d6b0a2d773a9bf6fea419365945008c417adca4f55f260f01c87a",
         "warmup_time": -1
     },
     "io.csv.TimeReadCsvSkiprows.time_skiprows": {
-        "code": "class TimeReadCsvSkiprows:\n    def time_skiprows(self, test_filenames, shape, skiprows):\n        execute(IMPL.read_csv(test_filenames[self.shape_id], skiprows=self.skiprows))\n\n    def setup(self, test_filenames, shape, skiprows):\n        super().setup(test_filenames, shape, skiprows)\n        self.skiprows = self.skiprows_mapping[skiprows] if skiprows else None\n\nclass BaseReadCsv:\n    def setup_cache(self, test_filename=\"io_test_file\"):\n        test_filenames = prepare_io_data(\n            test_filename, self.data_type, get_benchmark_shapes(self.__class__.__name__)\n        )\n        return test_filenames",
+        "code": "class TimeReadCsvSkiprows:\n    def time_skiprows(self, test_filenames, shape, skiprows):\n        execute(IMPL.read_csv(test_filenames[self.shape_id], skiprows=self.skiprows))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeReadCsvSkiprows:\n    def setup(self, test_filenames, shape, skiprows):\n        super().setup(test_filenames, shape, skiprows)\n        self.skiprows = self.skiprows_mapping[skiprows] if skiprows else None\n\nclass BaseReadCsv:\n    def setup_cache(self, test_filename=\"io_test_file\"):\n        test_filenames = prepare_io_data(\n            test_filename, self.data_type, get_benchmark_shapes(self.__class__.__name__)\n        )\n        return test_filenames",
         "min_run_count": 2,
         "name": "io.csv.TimeReadCsvSkiprows.time_skiprows",
         "number": 0,
@@ -4000,11 +4000,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "3557c0f933d3d081b6c179b59f000645bac0817d77ef5d1d67e7bb0ed039ff57",
+        "version": "6206ec5eac92df41ca0ee650780a2b3c8e4f3aa5c588f17526f1db5e14c2183d",
         "warmup_time": -1
     },
     "io.csv.TimeReadCsvTrueFalseValues.time_true_false_values": {
-        "code": "class TimeReadCsvTrueFalseValues:\n    def time_true_false_values(self, test_filenames, shape):\n        execute(\n            IMPL.read_csv(\n                test_filenames[self.shape_id],\n                true_values=[\"Yes\", \"true\"],\n                false_values=[\"No\", \"false\"],\n            ),\n            trigger_hdk_import=ASV_USE_STORAGE_FORMAT == \"hdk\",\n        )\n\nclass BaseReadCsv:\n    def setup(self, test_filenames, shape, *args, **kwargs):\n        # ray init\n        if ASV_USE_IMPL == \"modin\":\n            IMPL.DataFrame([])\n        self.shape_id = get_shape_id(shape)\n\n    def setup_cache(self, test_filename=\"io_test_file\"):\n        test_filenames = prepare_io_data(\n            test_filename, self.data_type, get_benchmark_shapes(self.__class__.__name__)\n        )\n        return test_filenames",
+        "code": "class TimeReadCsvTrueFalseValues:\n    def time_true_false_values(self, test_filenames, shape):\n        execute(\n            IMPL.read_csv(\n                test_filenames[self.shape_id],\n                true_values=[\"Yes\", \"true\"],\n                false_values=[\"No\", \"false\"],\n            ),\n            trigger_hdk_import=ASV_USE_STORAGE_FORMAT == \"hdk\",\n        )\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass BaseReadCsv:\n    def setup(self, test_filenames, shape, *args, **kwargs):\n        # ray init\n        if ASV_USE_IMPL == \"modin\":\n            IMPL.DataFrame([])\n        self.shape_id = get_shape_id(shape)\n\n    def setup_cache(self, test_filename=\"io_test_file\"):\n        test_filenames = prepare_io_data(\n            test_filename, self.data_type, get_benchmark_shapes(self.__class__.__name__)\n        )\n        return test_filenames",
         "min_run_count": 2,
         "name": "io.csv.TimeReadCsvTrueFalseValues.time_true_false_values",
         "number": 0,
@@ -4024,11 +4024,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "b83cec19138a00f15f7a014d3fccb511e85353a6968fa8a05285213c403d214d",
+        "version": "cc000dfefa3f885b9a82ba9ce6f623160e909cd43de7f2297c1e87ee37930633",
         "warmup_time": -1
     },
     "io.parquet.TimeReadParquet.time_read_parquet": {
-        "code": "class TimeReadParquet:\n    def time_read_parquet(self, test_filenames, shape):\n        execute(\n            IMPL.read_parquet(\n                test_filenames[self.shape_id],\n            )\n        )\n\n    def setup(self, test_filenames, shape):\n        # ray init\n        if ASV_USE_IMPL == \"modin\":\n            IMPL.DataFrame([])\n        self.shape_id = get_shape_id(shape)\n\n    def setup_cache(self, test_filename=\"io_test_file\"):\n        test_filenames = prepare_io_data_parquet(\n            test_filename, self.data_type, get_benchmark_shapes(self.__class__.__name__)\n        )\n        return test_filenames",
+        "code": "class TimeReadParquet:\n    def time_read_parquet(self, test_filenames, shape):\n        execute(\n            IMPL.read_parquet(\n                test_filenames[self.shape_id],\n            )\n        )\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeReadParquet:\n    def setup(self, test_filenames, shape):\n        # ray init\n        if ASV_USE_IMPL == \"modin\":\n            IMPL.DataFrame([])\n        self.shape_id = get_shape_id(shape)\n\n    def setup_cache(self, test_filename=\"io_test_file\"):\n        test_filenames = prepare_io_data_parquet(\n            test_filename, self.data_type, get_benchmark_shapes(self.__class__.__name__)\n        )\n        return test_filenames",
         "min_run_count": 2,
         "name": "io.parquet.TimeReadParquet.time_read_parquet",
         "number": 0,
@@ -4048,11 +4048,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "3147afada63eff0525fac21ceffae7c023662b4786918548b83b70a5b9702a95",
+        "version": "de50ba59789f18dda27856d0d9eaa8cfeb5e2f6619377876592c8bc3504a38f0",
         "warmup_time": -1
     },
     "scalability.scalability_benchmarks.TimeFromPandas.time_from_pandas": {
-        "code": "class TimeFromPandas:\n    def time_from_pandas(self, shape, cpus):\n        execute(from_pandas(self.data))\n\n    def setup(self, shape, cpus):\n        self.data = pandas.DataFrame(gen_data(\"int\", *shape, RAND_LOW, RAND_HIGH))\n        from modin.config import NPartitions\n    \n        NPartitions.get = lambda: cpus\n        # trigger ray init\n        pd.DataFrame([])",
+        "code": "class TimeFromPandas:\n    def time_from_pandas(self, shape, cpus):\n        execute(from_pandas(self.data))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeFromPandas:\n    def setup(self, shape, cpus):\n        self.data = pandas.DataFrame(gen_data(\"int\", *shape, RAND_LOW, RAND_HIGH))\n        from modin.config import NPartitions\n    \n        NPartitions.get = lambda: cpus\n        # trigger ray init\n        pd.DataFrame([])",
         "min_run_count": 2,
         "name": "scalability.scalability_benchmarks.TimeFromPandas.time_from_pandas",
         "number": 0,
@@ -4077,11 +4077,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "8af06db97bd87859b17230125772585ddc3fe0c5e23426aca77776870540eab1",
+        "version": "cc4a5ca812efd1c279310fbcb293956ebf4e6849157d69c0c18294a2c08e5e0c",
         "warmup_time": -1
     },
     "scalability.scalability_benchmarks.TimeToPandas.time_to_pandas": {
-        "code": "class TimeToPandas:\n    def time_to_pandas(self, shape, cpus):\n        # to_pandas is already synchronous\n        to_pandas(self.data)\n\n    def setup(self, shape, cpus):\n        from modin.config import NPartitions\n    \n        NPartitions.get = lambda: cpus\n        self.data = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH, impl=\"modin\")",
+        "code": "class TimeToPandas:\n    def time_to_pandas(self, shape, cpus):\n        # to_pandas is already synchronous\n        to_pandas(self.data)\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeToPandas:\n    def setup(self, shape, cpus):\n        from modin.config import NPartitions\n    \n        NPartitions.get = lambda: cpus\n        self.data = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH, impl=\"modin\")",
         "min_run_count": 2,
         "name": "scalability.scalability_benchmarks.TimeToPandas.time_to_pandas",
         "number": 0,
@@ -4106,7 +4106,7 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "ad500febb53cf2ef08d60cf0308189ac64a9d4428f672364ecda97dae1a04869",
+        "version": "3106eca659203ee5866be4aacad2009994788a3c1f5b76095d01819300a82a46",
         "warmup_time": -1
     },
     "version": 2
