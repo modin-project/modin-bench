@@ -1,32 +1,4 @@
 {
-    "benchmarks.TimeAppend.time_append": {
-        "code": "class TimeAppend:\n    def time_append(self, shapes, sort):\n        execute(self.df1.append(self.df2, sort=sort))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeAppend:\n    def setup(self, shapes, sort):\n        self.df1 = generate_dataframe(\"int\", *shapes[0], RAND_LOW, RAND_HIGH)\n        self.df2 = generate_dataframe(\"int\", *shapes[1], RAND_LOW, RAND_HIGH)\n        if sort:\n            self.df1.columns = self.df1.columns[::-1]",
-        "min_run_count": 2,
-        "name": "benchmarks.TimeAppend.time_append",
-        "number": 0,
-        "param_names": [
-            "shapes",
-            "sort"
-        ],
-        "params": [
-            [
-                "[[5000, 5000], [5000, 5000]]",
-                "[[500000, 20], [1000000, 10]]"
-            ],
-            [
-                "False",
-                "True"
-            ]
-        ],
-        "repeat": 0,
-        "rounds": 2,
-        "sample_time": 0.01,
-        "timeout": 60.0,
-        "type": "time",
-        "unit": "seconds",
-        "version": "515a0eaec657496c5d6d77ec8c7bd44744516e9a29c9dc5ec87be1c140d322c7",
-        "warmup_time": -1
-    },
     "benchmarks.TimeArithmetic.time_abs": {
         "code": "class TimeArithmetic:\n    def time_abs(self, shape, axis):\n        execute(self.df.abs())\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeArithmetic:\n    def setup(self, shape, axis):\n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)",
         "min_run_count": 2,
@@ -639,7 +611,7 @@
         "warmup_time": -1
     },
     "benchmarks.TimeDrop.time_drop": {
-        "code": "class TimeDrop:\n    def time_drop(self, shape, axis, drop_ncols):\n        execute(self.df.drop(self.labels, axis))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeDrop:\n    def setup(self, shape, axis, drop_ncols):\n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n        drop_count = (\n            int(len(self.df.axes[axis]) * drop_ncols)\n            if isinstance(drop_ncols, float)\n            else drop_ncols\n        )\n        self.labels = self.df.axes[axis][:drop_count]",
+        "code": "class TimeDrop:\n    def time_drop(self, shape, axis, drop_ncols):\n        execute(self.df.drop(self.labels, axis=axis))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeDrop:\n    def setup(self, shape, axis, drop_ncols):\n        self.df = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH)\n        drop_count = (\n            int(len(self.df.axes[axis]) * drop_ncols)\n            if isinstance(drop_ncols, float)\n            else drop_ncols\n        )\n        self.labels = self.df.axes[axis][:drop_count]",
         "min_run_count": 2,
         "name": "benchmarks.TimeDrop.time_drop",
         "number": 0,
@@ -668,7 +640,7 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "98b4265684fad1fbfdb0e570c030fa704996b9590c29f57fc6ba3a89b6eefc2b",
+        "version": "3458015b4c521ad198646945b5db521c7d1465dc099f2f10f2d6ce057fcf73a8",
         "warmup_time": -1
     },
     "benchmarks.TimeDropDuplicatesDataframe.time_drop_dups": {
@@ -2984,28 +2956,6 @@
         "type": "time",
         "unit": "seconds",
         "version": "91e55f80ee2b104afa9f4f5b0c4b8704371280dee0f720f23f864eb93d443544",
-        "warmup_time": -1
-    },
-    "hdk.benchmarks.TimeAppend.time_append": {
-        "code": "class TimeAppend:\n    def time_append(self, shapes):\n        execute(self.df1.append(self.df2))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeAppend:\n    def setup(self, shapes):\n        self.df1, self.df2 = (\n            generate_dataframe(\n                \"int\",\n                *shape,\n                RAND_LOW,\n                RAND_HIGH,\n                cache_prefix=f\"{i}-th_frame_to_append\",\n            )\n            for i, shape in enumerate(shapes)\n        )\n        trigger_import(self.df1, self.df2)",
-        "min_run_count": 2,
-        "name": "hdk.benchmarks.TimeAppend.time_append",
-        "number": 0,
-        "param_names": [
-            "shapes"
-        ],
-        "params": [
-            [
-                "[[500000, 20], [1000000, 10]]"
-            ]
-        ],
-        "repeat": 0,
-        "rounds": 2,
-        "sample_time": 0.01,
-        "timeout": 60.0,
-        "type": "time",
-        "unit": "seconds",
-        "version": "498be33e0cdd1eae6b22e175ab430dbde0f3e82010068b40fc3358c9c859135c",
         "warmup_time": -1
     },
     "hdk.benchmarks.TimeArithmetic.time_apply": {
