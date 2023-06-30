@@ -4030,6 +4030,35 @@
         "version": "cc4a5ca812efd1c279310fbcb293956ebf4e6849157d69c0c18294a2c08e5e0c",
         "warmup_time": -1
     },
+    "scalability.scalability_benchmarks.TimeToNumPy.time_to_numpy": {
+        "code": "class TimeToNumPy:\n    def time_to_numpy(self, shape, cpus):\n        # to_numpy is already synchronous\n        to_numpy(self.data)\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeToNumPy:\n    def setup(self, shape, cpus):\n        from modin.config import NPartitions\n    \n        NPartitions.get = lambda: cpus\n        self.data = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH, impl=\"modin\")",
+        "min_run_count": 2,
+        "name": "scalability.scalability_benchmarks.TimeToNumPy.time_to_numpy",
+        "number": 0,
+        "param_names": [
+            "shape",
+            "cpus"
+        ],
+        "params": [
+            [
+                "[5000, 5000]",
+                "[1000000, 10]"
+            ],
+            [
+                "4",
+                "16",
+                "32"
+            ]
+        ],
+        "repeat": 0,
+        "rounds": 2,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "b5b0f6c460786e04f50e1eda2f7205b9230c6ef27c63a60a16c0e1087e177305",
+        "warmup_time": -1
+    },
     "scalability.scalability_benchmarks.TimeToPandas.time_to_pandas": {
         "code": "class TimeToPandas:\n    def time_to_pandas(self, shape, cpus):\n        # to_pandas is already synchronous\n        to_pandas(self.data)\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeToPandas:\n    def setup(self, shape, cpus):\n        from modin.config import NPartitions\n    \n        NPartitions.get = lambda: cpus\n        self.data = generate_dataframe(\"int\", *shape, RAND_LOW, RAND_HIGH, impl=\"modin\")",
         "min_run_count": 2,
