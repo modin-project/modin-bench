@@ -3858,7 +3858,7 @@
         "repeat": 0,
         "rounds": 2,
         "sample_time": 0.01,
-        "setup_cache_key": "hdk.io:35",
+        "setup_cache_key": "hdk.io:34",
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
