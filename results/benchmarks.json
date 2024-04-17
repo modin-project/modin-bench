@@ -644,7 +644,7 @@
         "warmup_time": -1
     },
     "benchmarks.TimeDropDuplicatesDataframe.time_drop_dups": {
-        "code": "class TimeDropDuplicatesDataframe:\n    def time_drop_dups(self, shape):\n        execute(self.df.drop_duplicates(self.df.columns[:-1]))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeDropDuplicatesDataframe:\n    def setup(self, shape):\n        from pandas import DataFrame\n    \n        rows, cols = shape\n        N = rows // 10\n        K = 10\n        # Assigning a large number of columns - inefficient in Modin, so use pandas\n        temp_df = DataFrame()\n        # dataframe would  have cols-1 keys(strings) and one value(int) column\n        for col in range(cols - 1):\n            temp_df[\"key\" + str(col + 1)] = IMPL.Index(\n                [f\"i-{i}\" for i in range(N)], dtype=object\n            ).values.repeat(K)\n        self.df = IMPL.DataFrame(temp_df)\n        self.df[\"value\"] = np.random.randn(N * K)\n        execute(self.df)",
+        "code": "class TimeDropDuplicatesDataframe:\n    def time_drop_dups(self, shape):\n        execute(self.df.drop_duplicates(self.df.columns[:-1]))\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeDropDuplicatesDataframe:\n    def setup(self, shape):\n        rows, cols = shape\n        N = rows // 10\n        K = 10\n        data = {}\n        # dataframe would have cols-1 keys(strings) and one value(int) column\n        for col in range(cols - 1):\n            data[\"key\" + str(col + 1)] = IMPL.Index(\n                [f\"i-{i}\" for i in range(N)], dtype=object\n            ).values.repeat(K)\n        data[\"value\"] = np.random.randn(N * K)\n        self.df = IMPL.DataFrame(data)\n        execute(self.df)",
         "min_run_count": 2,
         "name": "benchmarks.TimeDropDuplicatesDataframe.time_drop_dups",
         "number": 0,
@@ -663,11 +663,11 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "2dd9fa86c76284aa338b82caba90c3c3e4c2d593168bd81e9d6179c767cecb29",
+        "version": "4165eea0402be5ac7ae6a8c218a0d80090a46d3fdefd7dcffeadaa2c47e7e1ad",
         "warmup_time": -1
     },
     "benchmarks.TimeDropDuplicatesDataframe.time_drop_dups_inplace": {
-        "code": "class TimeDropDuplicatesDataframe:\n    def time_drop_dups_inplace(self, shape):\n        self.df.drop_duplicates(self.df.columns[:-1], inplace=True)\n        execute(self.df)\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeDropDuplicatesDataframe:\n    def setup(self, shape):\n        from pandas import DataFrame\n    \n        rows, cols = shape\n        N = rows // 10\n        K = 10\n        # Assigning a large number of columns - inefficient in Modin, so use pandas\n        temp_df = DataFrame()\n        # dataframe would  have cols-1 keys(strings) and one value(int) column\n        for col in range(cols - 1):\n            temp_df[\"key\" + str(col + 1)] = IMPL.Index(\n                [f\"i-{i}\" for i in range(N)], dtype=object\n            ).values.repeat(K)\n        self.df = IMPL.DataFrame(temp_df)\n        self.df[\"value\"] = np.random.randn(N * K)\n        execute(self.df)",
+        "code": "class TimeDropDuplicatesDataframe:\n    def time_drop_dups_inplace(self, shape):\n        self.df.drop_duplicates(self.df.columns[:-1], inplace=True)\n        execute(self.df)\n\ndef setup(*args, **kwargs):  # noqa: GL08\n    # This function just needs to be imported into each benchmark file to\n    # set up the random seed before each function. ASV run it automatically.\n    # https://asv.readthedocs.io/en/latest/writing_benchmarks.html\n    np.random.seed(42)\n\nclass TimeDropDuplicatesDataframe:\n    def setup(self, shape):\n        rows, cols = shape\n        N = rows // 10\n        K = 10\n        data = {}\n        # dataframe would have cols-1 keys(strings) and one value(int) column\n        for col in range(cols - 1):\n            data[\"key\" + str(col + 1)] = IMPL.Index(\n                [f\"i-{i}\" for i in range(N)], dtype=object\n            ).values.repeat(K)\n        data[\"value\"] = np.random.randn(N * K)\n        self.df = IMPL.DataFrame(data)\n        execute(self.df)",
         "min_run_count": 2,
         "name": "benchmarks.TimeDropDuplicatesDataframe.time_drop_dups_inplace",
         "number": 0,
@@ -686,7 +686,7 @@
         "timeout": 60.0,
         "type": "time",
         "unit": "seconds",
-        "version": "e2c32e555b3249e1cbb6cda1ec833a9b4cf59ccb59cb186833240054af3cb95d",
+        "version": "ea9970b769aa77f9708a7eec8a1c585f0d0704869dccb5aca701f23487c6ddb6",
         "warmup_time": -1
     },
     "benchmarks.TimeDropDuplicatesSeries.time_drop_dups": {
